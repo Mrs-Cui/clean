@@ -4,6 +4,8 @@
 from tornado import ioloop
 from tornado import httpserver
 
+from typing import Union
+
 from new_tornado.wsgi import WSGIContainer
 
 def simple_app(environ, start_response):
