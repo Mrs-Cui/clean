@@ -8,6 +8,7 @@ import contextvars
 import time
 from threading import local
 import sys
+from copy import copy, deepcopy
 from concurrent.futures import ThreadPoolExecutor
 import dataclasses
 context = contextvars.ContextVar('var', default=-1)

@@ -87,7 +87,7 @@ import requests
 
 async def request(url):
 	return requests.get(url, proxies={'http': 'socks5://192.168.2.244:9091',
-                                                      'https': 'socks5://192.168.2.244:9091'})
+									  'https': 'socks5://192.168.2.244:9091'})
 
 
 async def spider(url):
@@ -102,5 +102,25 @@ def run_spider():
 	except StopIteration as e:
 		print(e.value)
 
+
+async def factorial(name, number):
+	f = 1
+	for i in range(2, number + 1):
+		print(f"Task {name}: Compute factorial({i})...")
+		await asyncio.sleep(1)
+		f *= i
+	print(f"Task {name}: factorial({number}) = {f}")
+	return name
+
+async def run_factorial():
+	# Schedule three calls *concurrently*:
+	return await asyncio.gather(
+		factorial("A", 2),
+		factorial("B", 3),
+		factorial("C", 4),
+	)
+
+
 if __name__ == "__main__":
-	run_spider()
+	results = asyncio.run(run_factorial())
+	print(results)
