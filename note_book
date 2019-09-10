@@ -1,0 +1,31 @@
+
+Data structure is king!
+
+笔记：
+    UDP / TCP:
+        1. TCP socket makefile 与 socket 套接子的关系:
+            用 makefile 创建文件描述符 就可以用文件描述符来操作
+            代码如下:
+                s, addrinfo = sock.accept()
+                f = s.makefile(mode='rw')
+
+                while True:
+                    line = f.readline()  # read(10) 文本使用readline
+                    logging.info(line)
+
+                    if line.strip() == 'quit':
+                        break
+
+                    msg = "Your msg = {}. ack".format(line)
+                    f.write(msg)
+                    f.flush()
+                f.close()
+                sock.close()
+            当 文件描述符关闭时，套接字不一定关闭， 除非调用套接字close 方法。
+        2 listen backlog 可以指定TcpServer 同时接受客户端连接申请的数量, TcpServer 尽管可以接受N个客户端连接, 但是只能和网络栈第一个客户端
+            进行通信。其余处于等待状态。
+
+
+
+    数据结构:
+        1. 树:
