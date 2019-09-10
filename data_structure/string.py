@@ -50,10 +50,40 @@ def pattern(string, pattern_str):
 def BM(string, pattern_str):
     length = len(string)
     pattern_len = len(pattern_str)
-    
+    len_index = 0
+    pattern_index = list(range(pattern_len))
+    pattern_index.reverse()
+
+    while len_index < length:
+
+        for pos in pattern_index:
+            if pattern_index[pos] != string[len_index + pos]:
+                # 坏字符原则
+                if pos == pattern_len - 1:
+                    temp_len = pattern_len - 1
+                    while temp_len > 0:
+                        if string[len_index + temp_len] == pattern_str[temp_len]:
+                            break
+                        else:
+                            temp_len -= 1
+                    len_index += temp_len
+                # 好后缀原则
+                else:
+                    try:
+                        index = pattern_str[:pos].index(pattern_str[pos])
+                    except ValueError as e:
+                        index = -1
+                    if index != -1:
+                        len_index += (pos + 1 - index)
+                    else:
+                        pass
+                break
+
+        if pos == 0:
+            break
+
+
+
 
 if __name__ == '__main__':
-    main_string = 'ABCKAAAAABCDABDAKC'
-    string = 'AAAAABCDABD'
-    print pattern(main_string, string)
-
+    pass
