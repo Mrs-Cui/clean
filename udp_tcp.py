@@ -74,8 +74,8 @@ def all_listen_event(poll):
 
 def server(listen):
     sockets = {listen.fileno(): listen}
-    recieve = ''
-    send = ''
+    receive = {}
+    send = {}
     poll = select.poll()
     poll.register(listen, select.POLLIN)
     for fd, event in all_listen_event(poll):
@@ -88,9 +88,28 @@ def server(listen):
             del sockets[fd]
         elif sock is listen:
             client_sock, address = sock.accept()
+            client_sock.setblocking(False)
+            sockets[client_sock.fileno] = client_sock
+            poll.register(client_sock, client_sock.POOLIN)
 
-
-
+        elif event and event.POOLIN:
+            more_data = sock.recv(4096)
+            if not more_data:
+                sock.close()
+                continue
+            data = receive.pop(sock, b'') + more_data
+            if more_data.endwith(b'?'):
+                send[sock] = utils.get_answer(data)
+                poll.modify(sock, sock.POLLOUT)
+            else:
+                receive[sock] = data
+        elif event and event.POOLOUT:
+            data = send.pop(sock, b'')
+            n = sock.send(data)
+            if n < len(data):
+                send[sock] = data[n+1:]
+            else:
+                poll.modify(sock, sock.POLLIN)
 
 if __name__ == '__main__':
     pass
