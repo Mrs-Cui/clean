@@ -32,9 +32,9 @@ def handle_connection(sock, address):
     try:
         handle_request(sock)
     except EOFError as e:
-        print e
+        print(e)
     except Exception as e:
-        print e
+        print(e)
     finally:
         sock.close()
 def handle_request(sock):

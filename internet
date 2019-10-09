@@ -1,0 +1,91 @@
+TSL/ SSL 详解:
+    加密方式:
+    1. 共享密钥加密方式 == 对称加密 == 处理速度快  客户端与服务端使用统一密钥
+    2. 公开密钥加密方式 == 非对称加密 == 处理速度慢
+
+    共享密钥方式加密只要密钥ok就足够安全，服务器只要把密钥交给客户端，然后通信过程中和客户端使用同一把密钥进行加密解密即可。
+    毕竟是HTTP通信过程肯定是需要速度尽量快才是最好。
+
+    Q1：但是共享密钥如何安全地递交给对方？比如服务端如何把共享密钥安全交给客户端？
+    这时候就需要使用公开密钥方式加密。
+    发送方使用接收方的公钥对数据进行加密，然后接收方收到密文后使用密钥对数据进行解密。
+    接上一个问题：通信双方持有对方的公钥，发送共享密钥时使用公钥加密，就不怕共享密钥被获取了。
+
+    Q2：公钥毕竟是要发放出去的，如何证明发给客户端的过程中，公钥没有被替换掉呢？假如公钥被替换掉，伪冒者就可以假装成服务端和用户进行通信。
+
+    接下来就是数字证书认证机构出场。
+    HTTPS中，服务端将公钥发给数字证书认证机构进行安全认证并对公钥进行数字签名，完成后公钥和签名组合成数字证书。
+    在和客户端通信时，服务端将数字证书发给客户端，客户端通过第三方安全认证机构发布的公钥（一般会在浏览器开发时，内置在浏览器中）
+    对数字证书上的签名进行验证，假如验证通过，则能证明以下事实：
+    1.认证该服务器的公钥的机构是真实有效的数字证书认证机构
+    2.该服务器发过来的公钥是值得信赖的
+
+TCP 状态:
+    SYN表示建立连接，
+    FIN表示关闭连接，
+    ACK表示响应，
+    PSH表示有 DATA数据传输，
+    RST表示连接重置。
+
+HTTP 与 HTTPS 的三次握手与四次挥手:
+
+    TCP的三次握手:
+        client ——————> syn=1, seq=client 随即数 ————> server
+        client <—————— syn=1, seq=server 随即数, ack=client 随即数 +1 ————> server
+        client ——————> syn=1, ack= server 随即数 + 1, seq=client 随即数 ————> server
+
+    TLS/SSL的三次握手:
+        client ——————> client hello ————> server
+        client <—————— server hello <———— server
+        client <—————— certificate  <———— server
+        client <—————— server key exchange <———— server
+        client <—————— server hello done <———— server
+        client ——————> client key exchange ————> server
+        client ——————> ChangeCipherSpec ————> server
+        client ——————> finished ————> server
+        client <—————— ChangeCipherSpec <———— server
+        client <—————— finished <———— server
+        client ——————> http request ————> server
+        client <—————— http response <———— server
+        client ——————> close notify ————> server
+
+        ClientHello：包含支持的TLS最高版本、随机数、加密组件（cipher suites）列表、支持的压缩方法
+        ServerHello：根据ClientHello选择的TLS版本号、加密组件、压缩方法，以及随机数。
+        假如连接需要从异常关闭中恢复，还会发送一个Session id。
+        Certificate：包含公钥证书。（该次报文也可能不发送，取决于加密组件的选择）
+        ServerKeyExchange：取决于加密组件，所有DHE 和 DH_anon 加密组件都会发送该报文。
+        但google已经弃用DHE加密组件了，所以该报文在《图解HTTP》一书中甚至没有提及。
+        ServerHelloDone：通知客户端，最初阶段的握手协商完成了。
+        ClientKeyExchange：可能包含称为PreMasterSecret的 随机密码串、公钥 (共享密钥)或者啥都不包含（取决于使用的加密组件），
+        其中PreMasterSecret会使用Certificate报文中的数字证书中的公钥进行加密。
+        ChangeCipherSpec：告诉服务端，从现在起所有我发的信息都会经过认证了！
+        Finished：该报文起就已经是加密认证过的报文了，其中包含了握手至今全部报文的整体散列值hash和MAC（Message Authentication Code）。
+        服务端会试图解密该报文并验证hash和MAC。如果验证失败，这次握手就失败了，关闭。
+        ChangeCipherSpec：告诉客户端，从现在起所有我发的信息都会经过认证了！
+        Finished：客户端同样去解密该报文并校验。解密校验失败，一样会关闭握手。
+        HTTP request/response：接下来就可以进行HTTP的请求了。
+        close_notify：最后由客户端通知服务端进行关闭，发送close_notify报文。当然此时关闭的是TLS连接，继续下一层TCP的四次挥手依旧会进行。
+
+    四次挥手过程:
+        sender ——————> fin=1, seq=随即数 ————> receive
+        sender <—————— ack=随机数+1, seq=随机数 <———— receive
+        sender <—————— fin=1, seq=随机数 <———— receive
+        sender ——————> ack=随机数+1, seq=随机数 ————> receive
+    为什么要4次挥手？
+
+    确保数据能够完整传输。
+    当被动方收到主动方的FIN报文通知时，它仅仅表示主动方没有数据再发送给被动方了。
+    但未必被动方所有的数据都完整的发送给了主动方，所以被动方不会马上关闭SOCKET,它可能还需要发送一些数据给主动方后，
+    再发送FIN报文给主动方，告诉主动方同意关闭连接，所以这里的ACK报文和FIN报文多数情况下都是分开发送的。
+
+协议层模型:
+    应用层:
+        pass
+    传输层:
+        pass
+    网络层:
+        pass
+
+
+WSGI 协议:
+    这里就涉及到 web服务端 与 业务处理服务端 之间的一个协议了，这个业界内通用的协议就是 WSGI协议。

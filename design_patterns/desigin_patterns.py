@@ -60,5 +60,41 @@ class DataBase(object):
 class ReflexDataBase(object):
     pass
 
+
+
+
+# 观察者模式
+
+class FrontDesk(object):
+
+    def __init__(self):
+        self.status = -1
+        self.family_people = []
+
+    def add_people(self, oj):
+        self.family_people.append(oj)
+
+    def notify(self, message):
+        for people in self.family_people:
+            print people.name, message
+
+class Colleague(object):
+
+    def __init__(self, name, oj):
+        self.name = name
+        self.notify_oj = oj
+
+    def work(self):
+        print '开始工作'
+
+# 实例模式
+
+class Instance(object):
+
+    def __init__(self):
+        super(Instance, self).__init__()
+
+    def __new__(cls, *args, **kwargs):
+        return super(Instance, cls).__new__(*args, **kwargs)
 if __name__ == '__main__':
     pass
