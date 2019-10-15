@@ -20,5 +20,7 @@ if __name__ == '__main__':
 	container = WSGIContainer(simple_app)
 	server = httpserver.HTTPServer(container)
 	server.bind(8888)
-	ioloop.IOLoop.current().start()
+	loop = ioloop.IOLoop.instance()
+	print(type(loop))
+	loop.start()
 	print('end !!!!')
