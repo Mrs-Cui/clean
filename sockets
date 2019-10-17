@@ -1,0 +1,22 @@
+
+BSD 与 linux3.9 关于 SO_REUSEPORT 与 SO_REUSEADDR 的对比:
+文章链接: https://www.jb51.net/article/139134.htm
+
+linux3.9 之前:
+    有两个重要的区别:
+        1. 一个处于监听状态的 TCP socket 绑定了通配符IP和端口号，  不管有没有设置SO_REUSEADDR， 其他socket 不能在
+        绑定到相同端口下。
+        2. 对于UDP socket来说，SO_REUSEADDR的作用和BSD中SO_REUSEPORT完全相同。
+        所以两个UDP socket如果都设置了SO_REUSEADDR的话，它们就可以被绑定在一组完全相同的地址端口对上。
+
+linux3.9 之后:
+    加入了 SO_REUSEPORT。
+    1. 只要所有socket（包括第一个）在绑定地址前设置了这个选项，两个或多个，
+    TCP或UDP，监听（服务器）或非监听（客户）socket就可以被绑定在完全相同的地址端口组合下。
+    同时，为了防止端口劫持（port hijacking），还有一个特别的限制：所有试图绑定在相同的地址端口组合的socket必须属于拥有相同用户ID的进程。
+    所以一个用户无法从另一个用户那里“偷窃”端口。
+    2. 对于设置了SO_REUSEPORT选项的socket，Linux kernel还会执行一些别的系统所没有的特别的操作：
+    对于绑定于同一地址端口组合上的UDP socket，kernel尝试在它们之间平均分配收到的数据包；
+    对于绑定于同一地址端口组合上的TCP监听socket，kernel尝试在它们之间平均分配收到的连接请求（调用accept()方法所得到的请求）。
+    这意味着相比于其他允许地址复用但随机将收到的数据包或者连接请求分配给连接在同一地址端口组合上的socket的系统而言，Linux尝试了进行流量分配上的优化。
+    比如一个简单的服务器进程的几个不同实例可以方便地使用SO_REUSEPORT来实现一个简单的负载均衡，而且这个负载均衡有kernel负责， 对程序来说完全免费！

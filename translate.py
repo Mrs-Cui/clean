@@ -95,7 +95,7 @@ import requests
 def request_func():
     url = "https://api.payoneer.com/v2/programs/100121170/payees/123456/status"
     response = requests.get(url, auth=('Yepop1170', 'meetstar123'))
-    print response.text
+    print(response.text)
 if __name__ == '__main__':
     # string = "Your account has been frozen for 4 hours for inappropriate contents. Your account will be unblocked after the countdown ends."
     # string = "Your account has been blocked for inappropriate behaviors."

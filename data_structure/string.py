@@ -83,7 +83,93 @@ def BM(string, pattern_str):
             break
 
 
+def max_len_subsequence(str_1, str_2):
+    """
+        最长公共子序列
+    :param str_1:
+    :param str_2:
+    :return:
+    """
+    row, col = len(str_1), len(str_2)
+    dp = []
+    for i in range(row + 1):
+        dp.append([0 for i in range(col + 1)])
+    for i in range(row + 1):
+        print(dp[i])
+    print('*' * 10)
+    for i in range(row):
+        for j in range(col):
+            if str_1[i] == str_2[j]:
+                dp[i+1][j+1] = dp[i][j] + 1
+            else:
+                dp[i+1][j+1] = max(dp[i][j+1], dp[i+1][j])
+    for i in range(row + 1):
+        print(dp[i])
+    return dp[row][col]
 
+
+def max_len_substr(str_1, str_2):
+    """
+        最长公共子串
+    :param str_1:
+    :param str_2:
+    :return:
+    """
+    row, col = len(str_1), len(str_2)
+    dp = []
+    for i in range(row + 1):
+        dp.append([0 for i in range(col + 1)])
+    for i in range(row + 1):
+        print(dp[i])
+    print('*' * 10)
+    result = 0
+    for i in range(row):
+        for j in range(col):
+            if str_1[i] == str_2[j]:
+                dp[i + 1][j + 1] = dp[i][j] + 1
+            else:
+                dp[i + 1][j + 1] = 0
+            result = max(result, dp[i+1][j+1])
+    for i in range(row + 1):
+        print(dp[i])
+    return dp[row][col]
+
+
+def look_for_change(money, aim):
+    """
+        动态规划找零钱问题
+    :param money:
+    :param aim:
+    :return:
+    """
+    dp = []
+    if len(money) == 0 or aim == 0:
+        return 0
+    for i in range(len(money) + 1):
+        dp.append([0 for i in range(aim + 1)])
+    for i in range(len(money) + 1):
+        dp[i][0] = 1 if i != 0 else 0
+
+    for i in range(aim + 1):
+        for j in range(aim + 1):
+            if i != 0 and i == j * money[0]:
+                dp[1][i] = 1
+    for i in range(len(money) + 1):
+        print(dp[i])
+
+    for i in range(2, len(money) + 1):
+        for j in range(1, aim+1):
+            dp[i][j] = dp[i-1][j]
+            if money[i-1] > j:
+                continue
+            for z in range(1, aim + 1):
+                if money[i-1] * z <= j:
+                    dp[i][j] += dp[i-1][j-money[i-1] * z]
+                else:
+                    break
+
+    for i in range(len(money) + 1):
+        print(dp[i])
 
 if __name__ == '__main__':
-    pass
+    look_for_change([5, 2, 3, 4, 8], 8)

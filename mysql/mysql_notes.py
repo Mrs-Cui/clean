@@ -20,3 +20,12 @@
     SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCK_WAITS;
 
 """
+
+"""
+    mysql where 与 having 的区别:
+    where 作用与 表和视图， 用来控制进入聚集函数的行。where 子句中不包含聚集函数。
+    having 在分组和聚集函数后选取行。
+    
+    group by: 
+        当 聚集函数在 select 中时，先执行 group by, 在执行聚集函数。
+"""
