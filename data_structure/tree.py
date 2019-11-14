@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import random
+import array
 
 # 树
 """
@@ -128,22 +129,119 @@ def huffman_tree(trees, root):
     return root
 
 """
-    线段树: 
+    线段树: 求区间和问题
 """
+
+
+
+
+
+
+def line_segment_tree(root ,arr, left, right, line_segment):
+    print(root, left, right, arr[left])
+    if left == right:
+        line_segment[root][1] = arr[left]
+        line_segment[root][0] = left
+        line_segment[root][2] = right
+    else:
+        mid = (left + right) / 2
+        line_segment_tree(2 * root + 1, arr, left, mid, line_segment)
+        line_segment_tree(2 * root + 2, arr, mid + 1, right, line_segment)
+        line_segment[root][1] = sum([line_segment[2 * root + 1][1], line_segment[2 * root + 2][1]])
+        line_segment[root][0] = line_segment[2 * root + 1][0]
+        line_segment[root][2] = line_segment[2 * root + 2][2]
+
+
+def query_segment_tree(root, interval, line_segment):
+    if [line_segment[root][0], line_segment[root][2]] == interval:
+        return line_segment[root][1]
+    else:
+        if interval[0] >= line_segment[root][0] and interval[1] <= line_segment[root][2]:
+            pass
+
+
+
+
+
+
 
 
 """
     平衡二叉树:
 """
+class BalanceTree(object):
+
+    def __init__(self, data):
+        self.lchild = None
+        self.rchild = None
+        self.data = data
+        self.height = 1
+
+
+def height(root):
+    if not root:
+        return 0
+    else:
+        return root.height
+
+def lrchild(root):
+    child = root.lchild
+    root.lchild = rrchild(child)
+    return llchild(root)
+
+
+def llchild(root):
+
+    child = root.lchild
+    root.lchild = child.rchild
+    child.rchild = root
+    root.height = max(height(root.lchild), height(root.rchild)) + 1
+    child.height = max(height(child.lchild), height(child.rchild)) + 1
+    return child
+
+def rlchild(root):
+    child = root.rchild
+    root.rchild = llchild(child)
+    return rrchild(root)
+
+def rrchild(root):
+    child = root.rchild
+    root.rchild = child.lchild
+    child.lchild = root
+    root.height = max(height(root.lchild), height(root.rchild)) + 1
+    child.height = max(height(child.lchild), height(child.rchild)) + 1
+
+    return child
+
 
 def balance_tree(node, root):
-    pass
+    if not root:
+        root = BalanceTree(node)
+    else:
+        if node <= root.data:
+            root.lchild = balance_tree(node, root.lchild)
+        else:
+            root.rchild = balance_tree(node, root.rchild)
+
+        if height(root.lchild) - height(root.rchild) >= 2:
+            if node <= root.data:
+                root = llchild(root)
+            else:
+                root = lrchild(root)
+        elif height(root.rchild) - height(root.lchild) >= 2:
+            if node <= root.data:
+                root = rlchild(root)
+            else:
+                root = rrchild(root)
+    print(root.data, node)
+    return root
+
 if __name__ == '__main__':
     front_str = 'GDAFEMHZ'
     mid_str = 'ADEFGHMZ'
     # root = tree_prefix(front_str, mid_str)
     # mid_tree(root, [None, ])
-    nodes = random.sample(range(2, 10), 8)
+    nodes = random.sample(range(1, 10), 7)
     # trees = []
     # root = None
     # for node in nodes:
@@ -153,5 +251,11 @@ if __name__ == '__main__':
     # root = huffman_tree(trees, root)
     # print root.data, root.lchild.data, root.rchild.data
     root = None
-    for node in nodes:
-        root = balance_tree(node, root)
+    print(nodes)
+    # for node in nodes:
+    #     root = balance_tree(node, root)
+    line_segment = []
+    for i in range(len(nodes) * 4):
+        line_segment.append([-1, -1, -1])
+    line_segment_tree(0, nodes, 0, len(nodes)-1, line_segment)
+    print line_segment

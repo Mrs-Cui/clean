@@ -34,6 +34,21 @@ def max_value(array, n):
     return max_value
 
 
+"""
+    给定两个数A、B（0，100000），求 A^B 中最后三位数是多少
+"""
+def mantissa(a, b):
+
+    if b == 0:
+        return 1
+    if a <= 1 or b == 1:
+        return a % 1000
+    if b == 2:
+        return a * a % 1000
+    if b % 2 == 1:
+        return mantissa(mantissa(a, b//2), 2) * a % 1000
+    else:
+        return mantissa(mantissa(a, b//2) % 1000, 2) % 1000
 
 if __name__ == '__main__':
-    pass
+    print(mantissa(11, 5))

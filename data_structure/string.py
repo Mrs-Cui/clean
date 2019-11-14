@@ -171,5 +171,55 @@ def look_for_change(money, aim):
     for i in range(len(money) + 1):
         print(dp[i])
 
+"""
+    现在给出一个数字序列，允许使用一种转换操作：
+    选择任意两个相邻的数，然后从序列移除这两个数，并用这两个数字的和插入到这两个数之前的位置(只插入一个和)。
+    思路:
+        从最外层进行头尾比较，如果相等则进入内层，否则就进行操作(将小的放在前面，然后进行相邻数相加)。
+"""
+
+
+def back_to_text(arr):
+    start_index, end_index = 0, len(arr) - 1
+    count = 0
+    while(start_index < end_index):
+        if arr[start_index] == arr[end_index]:
+            start_index += 1
+            end_index -= 1
+        else:
+            if arr[start_index] > arr[end_index]:
+                arr[start_index], arr[end_index] = arr[end_index], arr[start_index]
+            arr[start_index] += arr[start_index + 1]
+            del arr[start_index + 1]
+            end_index -= 1
+            count += 1
+    return arr, count
+
+"""
+一种双核CPU的两个核能够同时的处理任务，现在有n个已知数据量的任务需要交给CPU处理，
+假设已知CPU的每个核1秒可以处理1kb，每个核同时只能处理一项任务。
+n个任务可以按照任意顺序放入CPU进行处理，现在需要设计一个方案让CPU处理完这批任务所需的时间最少，求这个最小的时间
+"""
+
+
+def max_execute_time(arr):
+
+    sum = 0
+    for pos, item in enumerate(arr):
+        arr[pos] = item / 1024
+        sum += arr[pos]
+    half = sum / 2
+    best_time = [0, ] * (half + 1)
+    value = [i for i in range(half + 1)]
+    value.reverse()
+    for i in range(len(arr)):
+        for j in value:
+            if j < arr[i]:
+                break
+            best_time[j] = max(best_time[j], best_time[j-arr[i]] + arr[i])
+    print((sum - best_time[-1]) * 1024)
+
+
+
 if __name__ == '__main__':
-    look_for_change([5, 2, 3, 4, 8], 8)
+    max_execute_time([3072, 3072, 7168, 3072, 1024])

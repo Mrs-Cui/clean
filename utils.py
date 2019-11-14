@@ -45,4 +45,6 @@ def get_answer(data):
     pass
 
 
+if __name__ == '__main__':
+    pass
 
