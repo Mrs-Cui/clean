@@ -138,7 +138,6 @@ def huffman_tree(trees, root):
 
 
 def line_segment_tree(root ,arr, left, right, line_segment):
-    print(root, left, right, arr[left])
     if left == right:
         line_segment[root][1] = arr[left]
         line_segment[root][0] = left
@@ -152,13 +151,57 @@ def line_segment_tree(root ,arr, left, right, line_segment):
         line_segment[root][2] = line_segment[2 * root + 2][2]
 
 
-def query_segment_tree(root, interval, line_segment):
-    if [line_segment[root][0], line_segment[root][2]] == interval:
-        return line_segment[root][1]
-    else:
-        if interval[0] >= line_segment[root][0] and interval[1] <= line_segment[root][2]:
-            pass
 
+def push_down(root, line_segment):
+    if (line_segment[root][3]):
+        line_segment[2 * root + 1][3] += line_segment[root][3]
+        line_segment[2 * root + 2][3] += line_segment[root][3]
+        # line_segment[2 * root + 1][1] += line_segment[root][3] * (line_segment[2 * root + 1][2] - line_segment[2 * root + 1][0] + 1)
+        # line_segment[2 * root + 2][1] += line_segment[root][3] * (line_segment[2 * root + 2][2] - line_segment[2 * root + 2][0] + 1)
+        line_segment[root][3] = 0
+
+
+def update(root, left, right, add, line_segment):
+    """
+        目标的更新区间为[left,right]
+        显然如果没交集就不管他。
+       如果二者区间有交集我们再详细处理
+       如果当前查找的区间是我们目标区间的其中一个子区间，自然直接返回即可。
+    """
+    if left > line_segment[root][2] or right < line_segment[root][0]:
+        return
+    elif left <= line_segment[root][0] and line_segment[root][2] <= right:
+        line_segment[root][3] += add
+        line_segment[root][1] += add * (line_segment[root][2] - line_segment[root][0] + 1)
+        return
+    push_down(root, line_segment)
+    mid = (line_segment[root][0] + line_segment[root][2]) / 2
+    if left <= mid:
+        update(root * 2 + 1, left, mid, add, line_segment)
+    if mid + 1 <= right:
+        update(root * 2 + 2, mid+1, right, add, line_segment)
+    line_segment[root][1] = line_segment[2 * root + 1][1] + line_segment[2 * root + 2][1]
+
+
+def query_line_segment(root, left, right, line_segment):
+    left_value = right_value = 0
+
+    if left > line_segment[root][2] or right < line_segment[root][0]:
+        return 0
+    elif left <= line_segment[root][0] and line_segment[root][2] <= right:
+        return line_segment[root][1]
+    mid = (line_segment[root][0] + line_segment[root][2]) / 2
+    if right <= mid:
+        left_value = query_line_segment(root * 2 + 1, left, right, line_segment)
+    elif mid + 1 <= left:
+        right_value = query_line_segment(root * 2 + 2, left, right, line_segment)
+    else:
+        left_value = query_line_segment(root * 2 + 1, left, mid, line_segment)
+        right_value = query_line_segment(root * 2 + 2, mid + 1, right, line_segment)
+
+    print(root, left, right, line_segment[root][0], line_segment[root][2], left_value, right_value)
+
+    return left_value + right_value
 
 
 
@@ -241,7 +284,7 @@ if __name__ == '__main__':
     mid_str = 'ADEFGHMZ'
     # root = tree_prefix(front_str, mid_str)
     # mid_tree(root, [None, ])
-    nodes = random.sample(range(1, 10), 7)
+    nodes = random.sample(range(1, 20), 15)
     # trees = []
     # root = None
     # for node in nodes:
@@ -256,6 +299,6 @@ if __name__ == '__main__':
     #     root = balance_tree(node, root)
     line_segment = []
     for i in range(len(nodes) * 4):
-        line_segment.append([-1, -1, -1])
+        line_segment.append([-1, -1, -1, 0])
     line_segment_tree(0, nodes, 0, len(nodes)-1, line_segment)
-    print line_segment
+    print query_line_segment(0, 3, 8, line_segment)
