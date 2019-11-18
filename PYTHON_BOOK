@@ -1,0 +1,23 @@
+1. python 位操作 |, &与 ^:
+    1) 按位与操作，只有 1 &1 为1，其他情况为0.
+    2) |：按位或操作，只有 0|0为0，其他情况为1.
+    3) ~：逐位取反。
+    4) ^：异或，相同为0，相异为1。可用于加操作（不包括进位项）
+2. python 进制表示:
+    bin()  转2进制方法
+    int()   转10进制方法
+    oct()  转8进制方法
+    hex()  转16进制方法
+    1) 二进制: 0b
+    2) 八进制: 0o
+    3) 十六进制: 0x
+
+3. fcntl:
+    fcntl是计算机中的一种函数，通过fcntl可以改变已打开的文件性质。fcntl针对描述符提供控制。
+    参数fd是被参数cmd操作的描述符。针对cmd的值，fcntl能够接受第三个参数int arg。
+    fcntl的返回值与命令有关。如果出错，所有命令都返回－1，如果成功则返回某个其他值。
+    int fcntl(int fd, int cmd);
+　　 int fcntl(int fd, int cmd, long arg);
+　　 int fcntl(int fd, int cmd, struct flock *lock);
+    fcntl()针对(文件)描述符提供控制.参数fd 是被参数cmd操作(如下面的描述)的描述符.
+　　 针对cmd的值,fcntl能够接受第三个参数int arg
