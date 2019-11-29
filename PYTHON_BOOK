@@ -21,3 +21,12 @@
 　　 int fcntl(int fd, int cmd, struct flock *lock);
     fcntl()针对(文件)描述符提供控制.参数fd 是被参数cmd操作(如下面的描述)的描述符.
 　　 针对cmd的值,fcntl能够接受第三个参数int arg
+
+
+python 命令参数详解:
+    1. -b: 发出有关将bytearray与unicode比较的警告
+    2. -B:
+    3. -m: 将安装的第三方模块当作脚本来执行.
+    4. -d:
+    5. -E: 忽略PYTHON*等系统环境变量.
+    6. -s: 不将当前目录加入到 sys.path

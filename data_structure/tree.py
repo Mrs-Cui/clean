@@ -133,10 +133,6 @@ def huffman_tree(trees, root):
 """
 
 
-
-
-
-
 def line_segment_tree(root ,arr, left, right, line_segment):
     if left == right:
         line_segment[root][1] = arr[left]
@@ -176,10 +172,14 @@ def update(root, left, right, add, line_segment):
         return
     push_down(root, line_segment)
     mid = (line_segment[root][0] + line_segment[root][2]) / 2
-    if left <= mid:
+    if right <= mid:
+        update(root * 2 + 1, left, right, add, line_segment)
+    elif mid + 1 <= left:
+        update(root * 2 + 2, left, right, add, line_segment)
+    else:
         update(root * 2 + 1, left, mid, add, line_segment)
-    if mid + 1 <= right:
-        update(root * 2 + 2, mid+1, right, add, line_segment)
+        update(root * 2 + 2, mid + 1, right, add, line_segment)
+
     line_segment[root][1] = line_segment[2 * root + 1][1] + line_segment[2 * root + 2][1]
 
 

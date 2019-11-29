@@ -7,6 +7,7 @@
 
 import array
 
+
 # KMP 算法
 
 def kmp(pattern_array):
@@ -44,6 +45,7 @@ def pattern(string, pattern_str):
         return len_index - pattern_len
     else:
         return -1
+
 
 # BM算法
 
@@ -100,9 +102,9 @@ def max_len_subsequence(str_1, str_2):
     for i in range(row):
         for j in range(col):
             if str_1[i] == str_2[j]:
-                dp[i+1][j+1] = dp[i][j] + 1
+                dp[i + 1][j + 1] = dp[i][j] + 1
             else:
-                dp[i+1][j+1] = max(dp[i][j+1], dp[i+1][j])
+                dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j])
     for i in range(row + 1):
         print(dp[i])
     return dp[row][col]
@@ -129,7 +131,7 @@ def max_len_substr(str_1, str_2):
                 dp[i + 1][j + 1] = dp[i][j] + 1
             else:
                 dp[i + 1][j + 1] = 0
-            result = max(result, dp[i+1][j+1])
+            result = max(result, dp[i + 1][j + 1])
     for i in range(row + 1):
         print(dp[i])
     return dp[row][col]
@@ -158,18 +160,19 @@ def look_for_change(money, aim):
         print(dp[i])
 
     for i in range(2, len(money) + 1):
-        for j in range(1, aim+1):
-            dp[i][j] = dp[i-1][j]
-            if money[i-1] > j:
+        for j in range(1, aim + 1):
+            dp[i][j] = dp[i - 1][j]
+            if money[i - 1] > j:
                 continue
             for z in range(1, aim + 1):
-                if money[i-1] * z <= j:
-                    dp[i][j] += dp[i-1][j-money[i-1] * z]
+                if money[i - 1] * z <= j:
+                    dp[i][j] += dp[i - 1][j - money[i - 1] * z]
                 else:
                     break
 
     for i in range(len(money) + 1):
         print(dp[i])
+
 
 """
     现在给出一个数字序列，允许使用一种转换操作：
@@ -182,7 +185,7 @@ def look_for_change(money, aim):
 def back_to_text(arr):
     start_index, end_index = 0, len(arr) - 1
     count = 0
-    while(start_index < end_index):
+    while (start_index < end_index):
         if arr[start_index] == arr[end_index]:
             start_index += 1
             end_index -= 1
@@ -195,6 +198,7 @@ def back_to_text(arr):
             count += 1
     return arr, count
 
+
 """
 一种双核CPU的两个核能够同时的处理任务，现在有n个已知数据量的任务需要交给CPU处理，
 假设已知CPU的每个核1秒可以处理1kb，每个核同时只能处理一项任务。
@@ -203,7 +207,6 @@ n个任务可以按照任意顺序放入CPU进行处理，现在需要设计一�
 
 
 def max_execute_time(arr):
-
     sum = 0
     for pos, item in enumerate(arr):
         arr[pos] = item / 1024
@@ -216,10 +219,44 @@ def max_execute_time(arr):
         for j in value:
             if j < arr[i]:
                 break
-            best_time[j] = max(best_time[j], best_time[j-arr[i]] + arr[i])
+            best_time[j] = max(best_time[j], best_time[j - arr[i]] + arr[i])
     print((sum - best_time[-1]) * 1024)
 
 
+"""
+    你面前有一栋从 1 到N共N层的楼，然后给你K个鸡蛋（K至少为 1）。现在确定这栋楼存在楼层0 <= F <= N，在这层楼将鸡蛋扔下去，
+    鸡蛋恰好没摔碎（高于F的楼层都会碎，低于F的楼层都不会碎）。现在问你，最坏情况下，你至少要扔几次鸡蛋，才能确定这个楼层F呢？
+"""
+
+
+def superEggDrop(K: int, start: int, end: int):
+    memo = dict()
+
+    def dp(K, start, end) -> int:
+        print(K, start, end)
+        # base case
+        if K == 1: return end - start
+        if start > end: return 0
+        # 避免重复计算
+        if (K, start) in memo:
+            return memo[(K, start)]
+
+        res = float('INF')
+        # 穷举所有可能的选择
+        # for i in range(1, N + 1):
+        i = (start + end) // 2
+        res = min(res,
+                  max(
+                      dp(K, i + 1, end),
+                      dp(K - 1, start, i - 1)
+                  ) + 1
+                  )
+        # 记入备忘录
+        memo[(K, start)] = res
+        return res
+
+    return dp(K, start, end)
+
 
 if __name__ == '__main__':
-    max_execute_time([3072, 3072, 7168, 3072, 1024])
+    print(superEggDrop(4, 1, 200))

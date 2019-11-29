@@ -1,0 +1,21 @@
+代理服务器:
+    根据代理服务器端的配置不同，导致其向目标地址发送请求时，REMOTE_ADDR， HTTP_VIA，HTTP_X_FORWARDED_FOR三个变量不同:
+    1. 透明代理:
+        REMOTE_ADDR = Proxy IP
+        HTTP_VIA = Proxy IP
+        HTTP_X_FORWARDED_FOR = Your IP
+
+    2. 匿名代理:
+        REMOTE_ADDR = proxy IP
+        HTTP_VIA = proxy IP
+        HTTP_X_FORWARDED_FOR = proxy IP
+
+    3. 混淆代理:
+        REMOTE_ADDR = Proxy IP
+        HTTP_VIA = Proxy IP
+        HTTP_X_FORWARDED_FOR = Random IP address
+
+    4. 高匿代理:
+        REMOTE_ADDR = Proxy IP
+        HTTP_VIA = not determined
+        HTTP_X_FORWARDED_FOR = not determined
