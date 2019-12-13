@@ -18,11 +18,12 @@ def traceback_test():
         traceback.print_exception(exc_type, exc_value, exc_traceback, limit=1, file=sys.stdout)
 
 class MainHandler(web.RequestHandler):
+    @web.asynchronous
+    @gen.engine
     def get(self):
         self.write('Hello, world')
 
 class TestFutureHandler(web.RequestHandler):
-    @gen.coroutine  # 可以把 queue_size 改为 -1测试`queue full`
     def get(self):
         return str([time.sleep(5), 'test'])
 

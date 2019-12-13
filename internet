@@ -95,3 +95,26 @@ HTTP 状态码:
     303	    See Other(http1.1,符合1.0版本时，浏览器对于302状态码的实际实现。无论请求方法是get或者post，遇到303都直接重定向。)
     304	    Not Modified(304表示用户查找的资源存在，但是不满足请求需要的条件。一般出现304的情况，请求首部中包含if-xxx这样的条件请求，当判断条件为假的时候就会返回304。)
     307	    Temporary Redirect(http1.1,符合1.0版本时，协议对302状态码的纸面规定。当请求方法是post方法的时候，需要用户确认才可以重定向到新的uri)
+
+UDP / TCP:
+        1. TCP socket makefile 与 socket 套接子的关系:
+            用 makefile 创建文件描述符 就可以用文件描述符来操作
+            代码如下:
+                s, addrinfo = sock.accept()
+                f = s.makefile(mode='rw')
+
+                while True:
+                    line = f.readline()  # read(10) 文本使用readline
+                    logging.info(line)
+
+                    if line.strip() == 'quit':
+                        break
+
+                    msg = "Your msg = {}. ack".format(line)
+                    f.write(msg)
+                    f.flush()
+                f.close()
+                sock.close()
+            当 文件描述符关闭时，套接字不一定关闭， 除非调用套接字close 方法。
+        2 listen backlog 可以指定TcpServer 同时接受客户端连接申请的数量, TcpServer 尽管可以接受N个客户端连接, 但是只能和网络栈第一个客户端
+            进行通信。其余处于等待状态。

@@ -44,11 +44,11 @@
     请求锁模式
        是否兼容
     当前锁模式
-        X	IX	S	IS
-    X	冲突	冲突	冲突	冲突
-    IX	冲突	兼容	冲突	兼容
-    S	冲突	冲突	兼容	兼容
-    IS	冲突	兼容	兼容	兼容
+            X	IX	S	IS
+        X	冲突	冲突	冲突	冲突
+        IX	冲突	兼容	冲突	兼容
+        S	冲突	冲突	兼容	兼容
+        IS	冲突	兼容	兼容	兼容
 """
 
 """
@@ -125,4 +125,29 @@ mysql 主从多线程复制:
               虽然MySQL 5.6已经引入了binary log group commit，但是没有将可以并发执行的事务标记出来。
               MySQL5.7引入 binlog_group_commit_sync_delay和 binlog_group_commit_sync_no_delay_count参数即提高binary log组提交并发数量。
               MySQL等待binlog_group_commit_sync_delay毫秒的时间直到binlog_group_commit_sync_no_delay_count个事务数时，将进行一次组提交。
+"""
+
+"""
+    链接: https://developer.aliyun.com/article/731666?spm=a2c6h.12873581.0.0.795e6bf44hrzO1&groupCode=database
+    mysql 优化:
+    
+
+"""
+
+"""
+    mysql 支持表间关联关系 这就是嵌套循环, 关联表的数据量越大, 查询效率越低.
+    mysql 对 join 嵌套循环的优化:
+    Nested Loop Join算法:
+        NLJ 算法:将驱动表/外部表的结果集作为循环基础数据. 普通Nested-Loop一次只将一行传入内层循环, 所以外层循环(的结果集)有多少行, 
+        内存循环便要执行多少次.在内部表的连接上有索引的情况下，其扫描成本为O(Rn),若没有索引,则扫描成本为O(Rn*Sn)
+    Block Nested-Loop Join算法:
+        将外部循环的结果集放入 JOIN BUFFER中, 内层循环与整个JOIN BUFFER中的数据做比较, 减少循环次数.
+    MySQL使用Join Buffer有以下要点:
+      1. join_buffer_size变量决定buffer大小。
+      2. 只有在join类型为all, index, range的时候才可以使用join buffer。
+      3. 能够被buffer的每一个join都会分配一个buffer, 也就是说一个query最终可能会使用多个join buffer。
+      4. 第一个nonconst table不会分配join buffer, 即便其扫描类型是all或者index。
+      5. 在join之前就会分配join buffer, 在query执行完毕即释放。
+      6. join buffer中只会保存参与join的列, 并非整个数据行。
+
 """

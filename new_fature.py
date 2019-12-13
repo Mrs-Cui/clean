@@ -1,10 +1,10 @@
 #! /usr/bin/env python
 # -*- coding:utf-8 -*-
-
+import os
 import socket
 from selectors import EVENT_WRITE, EVENT_READ
 import selectors
-
+from  concurrent.futures import ThreadPoolExecutor
 selector = selectors.EpollSelector()
 
 class Future(object):
@@ -60,4 +60,22 @@ class Crawler(object):
 
 
 if __name__ == '__main__':
-    pass
+    import time
+    import sys
+    from threadpool import ThreadPool
+    def a(i):
+        time.sleep(i)
+        print(os.getpid(), os.getppid())
+        # print(sys.stdout)
+        return i
+    # pool = ThreadPoolExecutor(10)
+    # queue = []
+    # for i in pool.map(a, [i for i in range(10)],timeout=10):
+    #     print(i)
+    from multiprocessing import Pool, Process
+    pool = Pool(10)
+    for i in range(10):
+        pool.apply_async(a, (i,))
+    pool.close()
+    pool.join()
+

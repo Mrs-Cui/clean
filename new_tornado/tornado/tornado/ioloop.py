@@ -829,7 +829,7 @@ class PollIOLoop(IOLoop):
                         self._cancellations = 0
                         self._timeouts = [x for x in self._timeouts
                                           if x.callback is not None]
-                        heapq.heapify(self._timeouts)
+                        heapq.heapify(self._timeouts)  # 创建最小堆
 
                 for i in range(ncallbacks):
                     self._run_callback(self._callbacks.popleft())
@@ -875,7 +875,7 @@ class PollIOLoop(IOLoop):
                     else:
                         raise
                 print('event_pairs', event_pairs)
-                if self._blocking_signal_threshold is not None:
+                if self._blocking_signal_threshold is not None:  # 设置该信号的意义
                     signal.setitimer(signal.ITIMER_REAL,
                                      self._blocking_signal_threshold, 0)
 

@@ -7,7 +7,7 @@ import sys
 import itertools
 import time
 from tornado import netutil, process
-from tornado import httpserver, ioloop, gen, web
+from new_tornado.tornado.tornado import httpserver, ioloop, gen, web
 def traceback_test():
     try:
         raise IndexError()
@@ -26,16 +26,20 @@ class MainHandler(web.RequestHandler):
 class TestFutureHandler(web.RequestHandler):
 
     def get(self):
-        print('request', self.request, type(self.request))
+        print('request', type(self.request), self.request.body, self.request.arguments)
         self.write('how are you?')
         self.finish()
+
+    def post(self, *args, **kwargs):
+        print('post', self.request.body, type(self.request))
+        self.finish(chunk="welcome to")
 
 def tornado_test():
     application = web.Application([
         # (r'/', MainHandler),
         (r'/test', TestFutureHandler),
     ])
-    sockets = netutil.bind_sockets(6667, address='0.0.0.0')
+    sockets = netutil.bind_sockets(6668)
     process.fork_processes(1)
     server = httpserver.HTTPServer(application)
     server.add_sockets(sockets)
@@ -48,7 +52,23 @@ def decorate_test():
         a = yield 'hello world'
         b = yield 'welcome to '
         return a, b
+
+from tornado.gen import YieldPoint, Callback
+
+@gen.coroutine
+def gen_coroutine_test():
+    print('bbbbbbbbbb')
+    a = yield Callback('10')
+    return 'hello world'
+
+def gen_coroutine_main():
+    a = gen_coroutine_test()
+
+    print('a', a)
+    return a
+
 if __name__ == '__main__':
     import requests
     tornado_test()
 
+from weakref import WeakKeyDictionary
