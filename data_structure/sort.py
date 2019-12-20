@@ -139,5 +139,34 @@ def and_check():
 
     items = [i for i in range(20)]
 
+
+"""
+    给定一组 N 人（编号为 1, 2, ..., N）， 我们想把每个人分进任意大小的两组。
+    每个人都可能不喜欢其他人，那么他们不应该属于同一组。
+    形式上，如果 dislikes[i] = [a, b]，表示不允许将编号为 a 和 b 的人归入同一组。
+    当可以用这种方法将每个人分进两组时，返回 true；否则返回 false。
+"""
+
+def like_group(array):
+    people_queue = dict()
+
+    def search(root, queue):
+        son = root
+        while root != queue.get(root, root):
+            root = queue[root]
+        while son != root:
+            temp = queue.get(son, son)
+            queue[temp] = root
+            son = temp
+        return root
+
+    for people in array:
+        parent_1 = search(people[0], people_queue)
+        parent_2 = search(people[1], people_queue)
+        if parent_1 != parent_2:
+            people_queue[people[1]] = parent_1
+    print(people_queue)
+
 if __name__ == '__main__':
-    priority_queue()
+    array = [[1,2],[1,3],[2,4]]
+    like_group(array)
