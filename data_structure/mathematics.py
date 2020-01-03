@@ -50,5 +50,7 @@ def mantissa(a, b):
     else:
         return mantissa(mantissa(a, b//2) % 1000, 2) % 1000
 
+
+
 if __name__ == '__main__':
     print(mantissa(11, 5))

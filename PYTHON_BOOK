@@ -21,7 +21,11 @@
 　　 int fcntl(int fd, int cmd, struct flock *lock);
     fcntl()针对(文件)描述符提供控制.参数fd 是被参数cmd操作(如下面的描述)的描述符.
 　　 针对cmd的值,fcntl能够接受第三个参数int arg
-
+    fcntl.FD_CLOEXEC:
+        描述符设置了FD_CLOEXEC，使用execl执行的程序里，此描述符被关闭，不能再使用它，
+        但是在使用fork调用的子进程中，此描述符并不关闭，仍可使用。
+4. execl 执行程序:
+    就是进程ID不变, 完全用另一个进程来替换当前进程.
 
 python 命令参数详解:
     1. -b: 发出有关将bytearray与unicode比较的警告
@@ -33,6 +37,8 @@ python 命令参数详解:
 
 
 参考: http://baijiahao.baidu.com/s?id=1598055189738381758&wfr=spider&for=pc
+    不过要明确一点，GIL不是Python的特性，它是Python的C解释器在实现的时候引入的特性，
+    不是说我们的Python代码写出来就自带了GIL，而是在执行时，CPython解释器在解释多线程程序时会受到GIL锁的影响。
     python 全局性解释锁:
         1. GIL 解决了 python 中的什么问题?
             在多线程中对于跨线程分享的数据添加 GIL锁, 防止不一致的修改, 同时保证了数据的引用计数变量的安全。
@@ -55,3 +61,44 @@ python 命令参数详解:
         5. python3 中 GIL 为什么没有被移除?
 
         6. 如何处理 python 中的 GIL?
+
+
+python 线程锁:
+    1. Lock:
+        又叫原始锁, 只能获取锁一次, 但是允许在不同线程内释放锁.
+    2. RLock:
+        重用锁, 获取锁和释放锁必须成对出现, 而且必须在同一线程内进行获取和释放锁.
+
+python 特殊方法:
+
+    1. __getattribute__:
+        实例调用属性时, 会调用该方法.
+        当该方法与 __getattr__ 同时存在时, 只会调用__getattribute__, 除非该方法抛出异常,
+        才会调用 __getattr__.
+
+    2. __get__, __set__, __delete__:
+        当一个类定义了 这三个中的任意一个就被称为数据描述符.
+        定义了 __get__, __set__ 称为数据描述符.
+        只定义了 __get__ 称为非数据描述符.
+        属性查找优先级: 数据描述符 > dict > 非数据描述符
+        当类中定义了 __setattr__, __setitem__, __getattribute__ 描述符类属性就失效了
+
+
+unicode 编码:
+    1. unicode 是一种字符集, 用码点来表示字符, 每个字符有唯一码点, 码点用十六进制表示.
+    utf-8, utf-16, utf-32 在表示字符时采用的字节不同
+    utf-32: 所有字符均采用4个字节.
+    utf-16:
+        编码有17个平面组成.
+        第一平面区间范围: 0x0000 - 0xFFFF. 大部分常用字符都在该区间, 为二字节.
+        剩余16个平面是由代理区间扩展来的, 采用 四字节:
+        高代理区: D800-DBFF, 低代理区: DC00-DFFF
+        代理区间由高代理区的头加上低代理区的尾组成.
+
+    utf-8: 是一种变长编码方案, 有1, 2, 3,4四种字节组合.
+        组合方式:
+        0XXXXXXX:  一字节,
+        110XXXXX 10XXXXXX: 二字节,
+        1110XXXX 10XXXXXX 10XXXXXX: 三字节,
+        11110XXX 10XXXXXX 10XXXXXX 10XXXXXX: 四字节
+        通过字节最高位就能判断出属于哪个字节, 就能采用相应的字节模版.

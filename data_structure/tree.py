@@ -67,7 +67,7 @@ def front_tree(root):
         return
     front_tree(root.lchild)
     front_tree(root.rchild)
-    print root.data
+    print(root.data)
 
 # 线索二叉树
 """
@@ -79,7 +79,7 @@ def mid_tree(root, pre):
 
     if root:
         mid_tree(root.lchild, pre)
-        print root.data,   pre[0].data if pre[0] else None, 'first'
+        print(root.data,   pre[0].data if pre[0] else None, 'first')
 
         if not root.lchild:
             root.lchild = pre[0]
@@ -123,7 +123,7 @@ def huffman_tree(trees, root):
     root.lchild, root.rchild = lchild, rchild
     if trees:
         pos = find_pos(trees, root, 0, len(trees) - 1)
-        print pos, root.data
+        print(pos, root.data)
         trees.insert(pos, root)
     root = huffman_tree(trees, root)
     return root
@@ -279,10 +279,35 @@ def balance_tree(node, root):
     print(root.data, node)
     return root
 
+
+"""
+知道先序和中序,建立二叉树
+"""
+
+
+def rebuild_tree(adv_array, mid_array, start, end, root):
+    if start > end:
+        return None
+    pos = mid_array.find(adv_array[root.pos])
+    print(start, end, pos, root.pos)
+
+    tree = Tree(mid_array[pos])
+    root.pos += 1
+    tree.lchild = rebuild_tree(adv_array, mid_array, start, pos-1, root)
+    tree.rchild = rebuild_tree(adv_array, mid_array, pos+1, end, root)
+
+    return tree
+
+"""
+    最小生成树
+"""
+
 if __name__ == '__main__':
     front_str = 'GDAFEMHZ'
     mid_str = 'ADEFGHMZ'
-    # root = tree_prefix(front_str, mid_str)
+    index = Index(0)
+    root = rebuild_tree(front_str, mid_str, 0, len(front_str)-1, index)
+    print(root.lchild.data, root.rchild.data)
     # mid_tree(root, [None, ])
     nodes = random.sample(range(1, 20), 15)
     # trees = []
@@ -293,12 +318,4 @@ if __name__ == '__main__':
     #
     # root = huffman_tree(trees, root)
     # print root.data, root.lchild.data, root.rchild.data
-    root = None
-    print(nodes)
-    # for node in nodes:
-    #     root = balance_tree(node, root)
-    line_segment = []
-    for i in range(len(nodes) * 4):
-        line_segment.append([-1, -1, -1, 0])
-    line_segment_tree(0, nodes, 0, len(nodes)-1, line_segment)
-    print query_line_segment(0, 3, 8, line_segment)
+
