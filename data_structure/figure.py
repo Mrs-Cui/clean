@@ -74,6 +74,55 @@ def mini_span_tree_2(weight_map):
             weight.append(nodes)
     print(weight)
 
+
+"""
+    图的存储方式-> 十字链表
+"""
+
+class Figure(object):
+    start_node = None
+    end_node = None
+    head_link = None
+    tail_link = None
+
+    def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
+
+class CrossLinkNode(object):
+    weight = None
+    first_in = None
+    first_out = None
+
+    def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
+
+def figure_cache(weight_map):
+    figure_map = {}
+    for key, value in weight_map.items():
+        figure_map[key] = CrossLinkNode(first_in=Figure(), first_out=Figure())
+
+    for start_node, end_nodes in weight_map.items():
+
+        for end_node, weight in end_nodes.items():
+
+            node = Figure(start_node=start_node, end_node=end_node)
+            node.head_link = figure_map[end_node].first_in
+            node.tail_link = figure_map[start_node].first_out
+
+            figure_map[end_node].first_in = node
+            figure_map[start_node].first_out = node
+    return figure_map
+
+
+"""
+    最短路径
+"""
+
+
 if __name__ == '__main__':
     weight_map = {
         'A': {
@@ -81,13 +130,11 @@ if __name__ == '__main__':
             'C': 3
         },
         'B': {
-            'A': 6,
             'C': 4,
             'D': 2,
             'F': 3,
         },
         'C': {
-            'A': 3,
             'B': 4,
             'F': 7,
             'E': 8

@@ -39,8 +39,49 @@
 """
 
 
+from queue import Queue
 
 
+def snake(array):
+    path = []
+    pos = list(range(len(array)))
+    pos.reverse()
+    flag = False if pos[0] % 2 else True
+    for i in pos:
+        if flag:
+            if i % 2 == 0:
+                path.extend(array[i])
+            else:
+                path.extend(array[i][::-1])
+        if not flag:
+            if i % 2 != 0:
+                path.extend(array[i])
+            else:
+                path.extend(array[i][::-1])
+
+    queue = Queue(20 * 20)
+    queue.put(path[0])
+    length = len(path)
+    walk_path = {0: True, }
+    count = 0
+    index = 0
+    while index < length:
+        while path[index] == -1:
+            index += 1
+            if index >= length:
+                count += 1
+                return count
+        if walk_path.get(path[index]):
+            break
+        else:
+            walk_path[path[index]] = True
+        count += 1
+        index = path[index]
+    return -1
+
+if __name__ == '__main__':
+    array = [[2,-1,-1],[2,2,2],[-1,2,7]]
+    print(snake(array))
 
 
 
