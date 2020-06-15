@@ -229,33 +229,33 @@ def max_execute_time(arr):
 """
 
 
-def superEggDrop(K: int, start: int, end: int):
-    memo = dict()
-
-    def dp(K, start, end) -> int:
-        print(K, start, end)
-        # base case
-        if K == 1: return end - start
-        if start > end: return 0
-        # 避免重复计算
-        if (K, start) in memo:
-            return memo[(K, start)]
-
-        res = float('INF')
-        # 穷举所有可能的选择
-        # for i in range(1, N + 1):
-        i = (start + end) // 2
-        res = min(res,
-                  max(
-                      dp(K, i + 1, end),
-                      dp(K - 1, start, i - 1)
-                  ) + 1
-                  )
-        # 记入备忘录
-        memo[(K, start)] = res
-        return res
-
-    return dp(K, start, end)
+# def superEggDrop(K: int, start: int, end: int):
+#     memo = dict()
+#
+#     def dp(K, start, end) -> int:
+#         print(K, start, end)
+#         # base case
+#         if K == 1: return end - start
+#         if start > end: return 0
+#         # 避免重复计算
+#         if (K, start) in memo:
+#             return memo[(K, start)]
+#
+#         res = float('INF')
+#         # 穷举所有可能的选择
+#         # for i in range(1, N + 1):
+#         i = (start + end) // 2
+#         res = min(res,
+#                   max(
+#                       dp(K, i + 1, end),
+#                       dp(K - 1, start, i - 1)
+#                   ) + 1
+#                   )
+#         # 记入备忘录
+#         memo[(K, start)] = res
+#         return res
+#
+#     return dp(K, start, end)
 
 
 if __name__ == '__main__':
