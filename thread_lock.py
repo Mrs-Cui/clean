@@ -44,23 +44,22 @@ import threading
 def semaphore_test():
 
     # 生成一个锁对象
-    semaphore = threading.Semaphore(1)  # 创建信号量对象，5个线程并发
+    semaphore = threading.Semaphore(5)  # 创建信号量对象，5个线程并发
     lock = threading.Lock()
 
     def func():
         nonlocal num  # 全局变量
-        lock.acquire()  # 获得锁，加锁
+        semaphore.acquire()  # 获得锁，加锁
         num1 = num
         time.sleep(0.1)
         num = num1 - 1
         semaphore.release()  # 释放锁，解锁
-        time.sleep(2)
 
 
     num = 100
     l = []
-
-    for i in range(100):  # 开启100个线程
+    print(num)
+    for i in range(10):  # 开启100个线程
         t = threading.Thread(target=func, args=())
         t.start()
         l.append(t)
@@ -189,6 +188,4 @@ class PythonFeature(object):
         print('hello world')
 
 if __name__ == '__main__':
-    p = PythonFeature(11, 12)
-    print(type(p.math), dir(p.math))
-    print(p.math)
+    semaphore_test()

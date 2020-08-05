@@ -9,6 +9,7 @@ import time
 from tornado import netutil, process
 from tornado import httpserver, ioloop, gen, web
 from tornado import concurrent
+from tornado.template import Template
 def traceback_test():
     try:
         raise IndexError()
@@ -68,4 +69,29 @@ def read_message():
 
 if __name__ == '__main__':
     import requests
-    tornado_test()
+    # tornado_test()
+    from abc import ABCMeta, abstractmethod
+
+
+    class Hashable(metaclass=ABCMeta):
+
+        __slots__ = ()
+
+        @abstractmethod
+        def __hash__(self):
+            return 0
+
+        @classmethod
+        def __subclasshook__(cls, C):
+            print(cls, C)
+            if cls is Hashable:
+                for B in C.__mro__:
+                    if "__hash__" in B.__dict__:
+                        if B.__dict__["__hash__"]:
+                            return True
+                        break
+            return NotImplemented
+
+    print(issubclass(list, object))
+    print(issubclass(object, Hashable))
+    print(issubclass(list, Hashable))
