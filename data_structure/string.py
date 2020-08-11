@@ -9,6 +9,8 @@ import array
 
 
 # KMP 算法
+import time
+
 
 def kmp(pattern_array):
     length = len(pattern_array)
@@ -258,5 +260,714 @@ def max_execute_time(arr):
 #     return dp(K, start, end)
 
 
+# 字符串匹配算法-> 正则表达式匹配
+
+# input:  a -> [a-z] / ''
+#         b　-> [a-z.*] / ''
+
+# output: true/false
+
+
+def regex_match(origin_str, pattern_str):
+    pattern_len = len(pattern_str)
+    origin_len = len(origin_str)
+    i = j = 0
+    pd = [[[-1, -1]for j in range(pattern_len)] for i in range(origin_len)]
+    while i < pattern_len:
+        if i == 0:
+            if pattern_str[i] == '*':
+                return False
+            elif pattern_str[i] == '.':
+                pd[i][j][0] = 0
+            else:
+                if pattern_str[i] != origin_str[j]:
+                    return False
+                else:
+                    pd[i][j][0] = 0
+            i += 1
+            j += 1
+            continue
+        while j < origin_len:
+            pass
+
+        else:
+            return True
+
+
+class LRUCache(object):
+    pass
+
+
+class MinStack(object):
+
+    def __init__(self):
+        self.min = []
+        self.stack = []
+
+    def push(self, value):
+        pos = 0
+        if not self.min:
+            self.min.append(value)
+        else:
+            for pos, item in enumerate(self.min):
+                if item >= value:
+                    self.min.insert(pos, value)
+                    break
+            else:
+                pos = pos + 1
+                self.min.insert(pos, value)
+        self.stack.append((pos, value))
+
+    def top(self):
+        return self.stack[-1][1]
+
+    def pop(self):
+        pos, value = self.stack.pop(-1)
+        self.min.pop(pos)
+
+    def getMin(self):
+        if self.min:
+            return self.min[0]
+        else:
+            return None
+
+class ListNode(object):
+    def __init__(self, value, next=None):
+        self.val = value
+        self.next = next
+
+class Chain(object):
+
+
+    def addTwoNumbers(self, l1, l2):
+        head = ListNode(0, None)
+        head1 = head
+        front = None
+        while l1 or l2:
+            num = carry = 0
+            if l1:
+                num += l1.val
+                l1 = l1.next
+            if l2:
+                num += l2.val
+                l2 = l2.next
+            num = head1.val + num
+            if num >= 10:
+                carry = num / 10
+                num = num % 10
+                carry = int(carry)
+            head1.val = num
+            t = ListNode(carry, None)
+            head1.next = t
+            front = head1
+            head1 = t
+        else:
+            if front.next.val == 0:
+                front.next = None
+            if front.val >= 10:
+                node = ListNode(0, None)
+                node.val = int(front.val / 10)
+                front.val = int(front.val % 10)
+                front.next = node
+        while head:
+            print(head.val)
+            head = head.next
+        return head
+
+    def reverseList(self, head):
+        if not head:
+            return None
+        else:
+            new_head = self.reverseList(head.next)
+            if not new_head:
+                new_head = head
+                new_head.tail = head
+            else:
+                new_tail = new_head.tail
+                new_tail.next = head
+                new_tail = new_tail.next
+                new_tail.next = None
+                new_head.tail = new_tail
+            return new_head
+
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        data_map = {}
+        for list_node in lists:
+            while list_node:
+                if data_map.get(list_node.val):
+                    tail = data_map[list_node.val]['tail']
+                    tail.next = list_node
+                    tail = tail.next
+                    data_map[list_node.val]['tail'] = tail
+                else:
+                    data_map[list_node.val] = {}
+                    data_map[list_node.val]['node'] = list_node
+                    data_map[list_node.val]['tail'] = list_node
+                    tail = list_node
+                list_node = list_node.next
+                tail.next = None
+        values = list(data_map.keys())
+        values.sort()
+        head = None
+        for value in values:
+            if not head:
+                head = data_map[value]['node']
+                tail = data_map[value]['tail']
+            else:
+                tail.next = data_map[value]['node']
+                tail = data_map[value]['tail']
+        return head
+
+    def get_mid(self, head):
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
+
+    def merge_sort(self, first, second):
+        head = head1 = None
+        while first or second:
+            mid = float('inf')
+            if not head:
+                if first.val <= second.val:
+                    head = head1 = first
+                    first = first.next
+                else:
+                    head = head1 = second
+                    second = second.next
+            else:
+                if first and head1.val <= first.val:
+                    mid = first.val
+                    if not second:
+                        head1.next = first
+                        break
+                if second and head1.val <= second.val:
+                    if not first:
+                        head1.next = second
+                        break
+                    if second.val < mid:
+                        head1.next = second
+                        head1 = head1.next
+                        second = second.next
+                        head1.next = None
+                    else:
+                        head1.next = first
+                        head1 = head1.next
+                        first = first.next
+                        head1.next = None
+        return head
+
+    def sortList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if not head:
+            return head
+        mid = self.get_mid(head)
+        if not mid or not mid.next:
+            return mid
+        first = head
+        second = mid.next
+        mid.next = None
+        first = self.sortList(first)
+        second = self.sortList(second)
+        return self.merge_sort(first, second)
+
+    def detectCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        head = head1 = None
+        first, second = l1, l2
+        while first or second:
+            mid = float('inf')
+            if not head:
+                if not first and not second:
+                    return None
+                if not first:
+                    return second
+                if not second:
+                    return first
+                else:
+                    if first and first.val <= second.val:
+                        head = head1 = first
+                        first = first.next
+                    elif second and second.val:
+                        head = head1 = second
+                        second = second.next
+                    head1.next = None
+            else:
+                if first and head1.val <= first.val:
+                    mid = first.val
+                    if not second:
+                        head1.next = first
+                        break
+                if second and head1.val <= second.val:
+                    if not first:
+                        head1.next = second
+                        break
+                    if second.val < mid:
+                        head1.next = second
+                        head1 = head1.next
+                        second = second.next
+                        head1.next = None
+                    else:
+                        head1.next = first
+                        head1 = head1.next
+                        first = first.next
+                        head1.next = None
+        return head
+
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        root1 = root
+        path_p = []
+        path_q = []
+        self.find_path(root1, p, path_p)
+        self.find_path(root, q, path_q)
+        path_p = {item: pos for pos, item in enumerate(path_p)}
+        index = -1
+        value = 0
+        for item in path_q:
+            if path_p.get(item) and path_p[item] >= index:
+                index = path_p[item]
+                value = item
+        return TreeNode(value)
+
+
+    def find_path(self, root, value, path):
+        if not root:
+            return False
+        if root.val == value:
+            return True
+        path.append(root.val)
+        flag = self.find_path(root.left, value, path)
+        if flag:
+            return flag
+        flag = self.find_path(root.right, value, path)
+        if flag:
+            return flag
+        else:
+            path.pop(-1)
+            return False
+
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        length = 0
+        hash_data = {}
+        for pos, item in enumerate(s, 1):
+            if not hash_data.get(item):
+                hash_data[item] = pos
+            else:
+                child_length = pos - hash_data[item]
+                if child_length == 1:
+                    hash_len = len(hash_data)
+                    if hash_len != 1:
+                        length = max(length, hash_len)
+                    hash_data = {item: pos}
+                else:
+                    length = max(length, len(hash_data))
+                    pre_pos = hash_data[item]
+                    remove_list = []
+                    for key, value in hash_data.items():
+                        if value < pre_pos:
+                            remove_list.append(key)
+                    for remove in remove_list:
+                        hash_data.pop(remove)
+                    hash_data[item] = pos
+                    length = max(length, len(hash_data))
+        length = max(length, len(hash_data))
+        return length
+
+    def checkInclusion(self, s1, s2):
+        """
+        :type s1: str
+        :type s2: str
+        :rtype: bool
+        """
+        if len(s1) > len(s2):
+            return False
+        pattern_map = {}
+        match_map = {}
+        diff_map = {}
+        new_start = start = end = 0
+        for item in s1:
+            end += 1
+            pattern_map[item] = pattern_map.get(item, 0) + 1
+        while new_start <= end - 1:
+            match_map[s2[new_start]] = match_map.get(s2[new_start], 0) + 1
+            new_start += 1
+        if cmp(pattern_map, match_map) == 0:
+            return True
+        for key in match_map:
+            if match_map[key] != pattern_map.get(key):
+                diff_map[key] = True
+        match_start = end
+        while True:
+            try:
+                item = s2[match_start]
+            except IndexError:
+                return False
+            match_map[item] = match_map.get(item, 0) + 1
+            match_map[s2[start]] -= 1
+            print(pattern_map, match_map, diff_map, match_start, start, item)
+            if match_map[s2[start]] == 0:
+                if diff_map.get(s2[start]):
+                    del diff_map[s2[start]]
+                del match_map[s2[start]]
+            else:
+                if match_map[s2[start]] == pattern_map.get(s2[start]):
+                    if diff_map.get(s2[start]):
+                        del diff_map[s2[start]]
+                else:
+                    diff_map[s2[start]] = True
+            if match_map[item] != pattern_map.get(item):
+                diff_map[item] = True
+            else:
+                if diff_map.get(item):
+                    del diff_map[item]
+            print(pattern_map, match_map, diff_map, match_start, start, item)
+            if not diff_map:
+                return True
+            start += 1
+            match_start += 1
+
+    def multiply(self, num1, num2):
+        """
+        :type num1: str
+        :type num2: str
+        :rtype: str
+        """
+        length_1 = len(num1)
+        length_2 = len(num2)
+        result = [0] * (length_1 + length_2)
+        num1 = num1[::-1]
+        num2 = num2[::-1]
+        if length_1 < length_2:
+            num1, num2 = num2, num1
+        for pos_1, item_1 in enumerate(num1, 1):
+            for pos_2, item_2 in enumerate(num2, 0):
+                value = int(item_1) * int(item_2)
+                index = pos_2 + pos_1 - 1
+                result[index] += value
+                if result[index] >= 10:
+                    self.handle_carry(index, result)
+        result = ''.join([str(i) for i in result])
+        result = result.rstrip('0')
+        if not result:
+            return '0'
+        return result[::-1]
+
+    def handle_carry(self, index, result):
+        temp = result[index]
+        result[index] = temp % 10
+        result[index + 1] += temp / 10
+        if result[index + 1] >= 10:
+            self.handle_carry(index + 1, result)
+
+    def simplifyPath(self, path):
+        """
+        :type path: str
+        :rtype: str
+        """
+        stack = []
+        dot_num = 0
+        length = 0
+        for item in path:
+            print(stack, item, dot_num)
+            if not stack:
+                stack.append(item)
+                length += 1
+            else:
+                if item == '.':
+                    if stack[-1] == '/':
+                        dot_num += 1
+                        stack.append(item)
+                        length += 1
+                    elif stack[-1] == '.':
+                        if dot_num != 0:
+                            dot_num += 1
+                            stack.append(item)
+                            length += 1
+                    elif stack[-1] != '.' and stack[-1] != '/':
+                        stack[-1] += item
+                elif item == '/':
+                    if dot_num == 2:
+                        while dot_num > 0:
+                            stack.pop(-1)
+                            length -= 1
+                            dot_num -= 1
+                        if length > 1:
+                            if stack[-1] != '/':
+                                stack.pop(-1)
+                                length -= 1
+                            else:
+                                stack.pop(-1)
+                                stack.pop(-1)
+                                length -= 2
+                        dot_num = 0
+                    elif dot_num == 1:
+                        stack.pop(-1)
+                        length -= 1
+                        dot_num = 0
+                    elif dot_num == 0:
+                        if stack[-1] != '/':
+                            stack.append(item)
+                            length += 1
+                    else:
+                        _ = []
+                        while dot_num > 0:
+                            _.append(stack.pop(-1))
+                            length -= 1
+                            dot_num -= 1
+                        stack.append(''.join(_))
+                        stack.append(item)
+                        length += 2
+                else:
+                    if stack[-1] != '/':
+                        if dot_num != 0:
+                            _ = []
+                            while dot_num > 0:
+                                _.append(stack.pop(-1))
+                                length -= 1
+                                dot_num -= 1
+                            _.append(item)
+                            stack.append(''.join(_))
+                            length += 1
+                        else:
+                            stack[-1] += item
+                    else:
+                        stack.append(item)
+                        length += 1
+        else:
+            if dot_num == 2:
+                while dot_num > 0:
+                    stack.pop(-1)
+                    length -= 1
+                    dot_num -= 1
+                if length > 1:
+                    if stack[-1] != '/':
+                        stack.pop(-1)
+                        length -= 1
+                    else:
+                        stack.pop(-1)
+                        stack.pop(-1)
+                        length -= 2
+            elif dot_num == 1:
+                stack.pop(-1)
+                length -= 1
+        if length != 1 and stack[-1] == '/':
+            stack.pop(-1)
+        return ''.join(stack)
+
+    def _restoreIpAddress(self, segment, s, ip_address, path):
+        print(segment, s, ip_address, path)
+        if segment < 0:
+            return
+        if segment == 0 and not s:
+            path.append(ip_address)
+        for pos, item in enumerate(s, 1):
+            if not self.is_num(s[:pos]):
+                break
+            self._restoreIpAddress(segment-1, s[pos:], ip_address + '.' + s[:pos], path)
+
+    def restoreIpAddresses(self, s):
+        """
+        :type s: str
+        :rtype: List[str]
+        """
+        path = []
+        if len(s) > 12 or len(s) < 4 or not s:
+            return path
+        for pos, item in enumerate(s, 1):
+            if not self.is_num(s[:pos]):
+                break
+            self._restoreIpAddress(3, s[pos:], s[:pos], path)
+        return path
+
+    def is_num(self, num):
+        if int(num) >=0 and int(num) <= 255 and str(int(num)) == num:
+            return True
+        return False
+
+    def threeSum(self, nums):
+        results = []
+        nums.sort()
+        length = len(nums)
+        for pos, num in enumerate(nums):
+            if pos > 0 and nums[pos] == nums[pos-1]:
+                continue
+            target = -num
+            start, end = pos + 1, length - 1
+            while start < end:
+                if nums[start] + nums[end] == target:
+                    results.append((num, nums[start], nums[end]))
+                    while start < end and nums[start] == nums[start + 1]:
+                        start += 1
+                    while start < end and nums[end] == nums[end - 1]:
+                        end -= 1
+                    start += 1
+                    end -= 1
+                elif nums[start] + nums[end] < target:
+                    start += 1
+                elif nums[start] + nums[end] > target:
+                    end -= 1
+        return results
+
+    def maxAreaOfIsland(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+        """
+        max_size = 0
+        row_len = len(grid)
+        col_len = len(grid[0])
+        for i, row in enumerate(grid):
+            for j, item in enumerate(row):
+                if grid[i][j]:
+                    size = self.search(grid, i, j, row_len, col_len)
+                    max_size = max(size, max_size)
+        return max_size
+
+    def search(self, grid, i, j, row_len, col_len):
+        if i>=0 and i < row_len and j>=0 and j < col_len and grid[i][j] == 1:
+            grid[i][j] = 0
+            num = 1 + self.search(grid, i-1, j, row_len, col_len) + self.search(grid, i+1, j, row_len, col_len) +\
+            self.search(grid, i, j-1, row_len, col_len) + self.search(grid, i, j+1, row_len, col_len)
+            return num
+        else:
+            return 0
+
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        target_list = nums[:k]
+        target_list.sort()
+        start, end = 0, k-1
+        length = len(nums)
+        while k < length:
+            if nums[k] > target_list[start]:
+                if nums[k] >= target_list[end]:
+                    target_list.append(nums[k])
+                else:
+                    for pos, item in enumerate(target_list):
+                        if nums[k] <= item:
+                            break
+                    target_list.insert(pos, nums[k])
+                start += 1
+                end += 1
+            k += 1
+        return target_list[start]
+
+    def findLengthOfLCIS(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        max_length = 0
+        count = 0
+        for pos, num in enumerate(nums):
+            if pos == 0:
+                count += 1
+            else:
+                if nums[pos] > nums[pos-1]:
+                    count += 1
+                else:
+                    max_length = max(max_length, count)
+                    count = 1
+        max_length = max(max_length, count)
+        return max_length
+
+    def longestConsecutive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        map_data = {}
+        max_length = 0
+        for num in nums:
+            if not map_data.get(num):
+                map_data[num] = 1
+                if map_data.get(num - 1):
+                    map_data[num] += map_data[num - 1]
+                if map_data.get(num + 1):
+                    map_data[num] += map_data[num + 1]
+                target = num - 1
+                while map_data.get(target):
+                    map_data[target] = map_data[num]
+                    target -= 1
+                target = num + 1
+                while map_data.get(target):
+                    map_data[target] = map_data[num]
+                    target += 1
+            else:
+                pass
+            # print(map_data, num)
+            max_length = max(max_length, map_data[num])
+        return max_length
+
+    def findCircleNum(self, M):
+        """
+        :type M: List[List[int]]
+        :rtype: int
+        """
+        friend_map = {}
+        for pos, item in enumerate(M[0]):
+            if M[0][pos]:
+                friend_map[0] = friend_map.get(0, {})
+                friend_map[0].update({pos: True})
+        for i, item in enumerate(M):
+            if i == 0:
+                continue
+            for j, _ in enumerate(item):
+                if M[i][j]:
+                    self.merge_friend(friend_map, i, j)
+
+    def merge_friend(self, friend, i, j):
+        pass
+
+class TreeNode(object):
+
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 if __name__ == '__main__':
-    print(superEggDrop(4, 1, 200))
+    chain = Chain()
+    start = time.time()
+    print(chain.maxAreaOfIsland(
+        [[0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+         [0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+         [0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
+         [0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0],
+         [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]]
+    ))
+    print(time.time() - start)
