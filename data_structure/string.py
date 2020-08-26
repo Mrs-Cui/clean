@@ -294,10 +294,6 @@ def regex_match(origin_str, pattern_str):
             return True
 
 
-class LRUCache(object):
-    pass
-
-
 class MinStack(object):
 
     def __init__(self):
@@ -936,20 +932,147 @@ class Chain(object):
         :type M: List[List[int]]
         :rtype: int
         """
+        if not M:
+            return 0
         friend_map = {}
         for pos, item in enumerate(M[0]):
+            friend_map[pos] = pos
             if M[0][pos]:
-                friend_map[0] = friend_map.get(0, {})
-                friend_map[0].update({pos: True})
+                friend_map[pos] = 0
         for i, item in enumerate(M):
             if i == 0:
                 continue
             for j, _ in enumerate(item):
-                if M[i][j]:
-                    self.merge_friend(friend_map, i, j)
+                if M[i][j] and i != j:
+                    root = self.merge_friend(friend_map, j)
+                    root_1 = self.merge_friend(friend_map, i)
+                    for key, value in friend_map.items():
+                        if value == root_1:
+                            friend_map[key] = root
+        head = []
+        for key, value in friend_map.items():
+            head.append(value)
+        return len(set(head))
 
-    def merge_friend(self, friend, i, j):
-        pass
+
+    def merge_friend(self, friend, i):
+        head = i
+        while head != friend[head]:
+            head = friend[head]
+        return head
+
+    def merge(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[List[int]]
+        """
+
+        intervals = sorted(intervals, key=lambda x: x[0])
+        start, end = 1, len(intervals)
+        while start < end:
+            if intervals[start][0] <= intervals[start-1][1]:
+                if intervals[start][1] > intervals[start-1][1]:
+                    intervals[start-1][1] = intervals[start][1]
+                intervals.pop(start)
+                end -= 1
+            elif intervals[start][0] > intervals[start-1][1]:
+                start += 1
+        return intervals
+
+    def getPermutation(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: str
+        """
+        data = [i+1 for i in range(n)]
+        def handle(n, k, data):
+            step = num = 1
+            if n == 0:
+                return str(data[0])
+            while step <= n:
+                num *= step
+                step += 1
+            if k % num == 0:
+                start = k / num - 1
+            else:
+                if k == num:
+                    start = k / num -1
+                else:
+                    start = k / num
+            pos = k % num
+            result = str(data.pop(start))
+            # print(n, k, start, pos, data, num)
+            result += handle(n-1, pos, data)
+            return result
+        result = handle(n-1, k, data)
+        return result
+
+    def trap(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        end = len(height) - 1
+        start = 0
+        left_height = right_height = 0
+        size = 0
+        while start <= end:
+            if left_height <= right_height:
+                left_height = max(height[start], left_height)
+                size += left_height - height[start]
+                start += 1
+
+            if right_height < left_height:
+                right_height = max(height[end], right_height)
+                size += right_height - height[end]
+                end -= 1
+        return size
+
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        """
+            0: 买，　1: 卖，　2: 啥也不干
+        """
+        sell = 0
+        for pos, price in enumerate(prices):
+            if pos == 0:
+                continue
+            if prices[pos] > prices[pos-1]:
+                sell += prices[pos] - prices[pos-1]
+        return sell
+
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+
+        dp = [0] * len(nums)
+        max_value = float('-inf')
+        for pos, item in enumerate(nums):
+            if pos == 0:
+                dp[pos] = item
+            else:
+                if item > item + dp[pos-1]:
+                    dp[pos] = item
+                else:
+                    dp[pos] = item + dp[pos-1]
+            max_value = max(dp[pos], max_value)
+        return max_value
+
+    def makeGood(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        start, end = 0, len(s) - 1
+        s = list(s)
+        while start < end:
+            pass
 
 class TreeNode(object):
 
@@ -957,17 +1080,178 @@ class TreeNode(object):
         self.val = x
         self.left = None
         self.right = None
+
+class LineNode(object):
+
+    def __init__(self, val, next):
+        self.val = val
+        self.next = next
+
+class LRUCache(object):
+
+    def __init__(self, capacity):
+        """
+        :type capacity: int
+        """
+        self.capacity = capacity
+        self.cache = {}
+        self.current_capacity = 0
+        self.stack = []
+        self.stack_len = 0
+        self.head = ListNode(-1)
+        self.tail = self.head
+
+    def get(self, key):
+        """
+        :type key: int
+        :rtype: int
+        """
+        if self.cache.get(key):
+            pass
+        return -1
+
+    def put(self, key, value):
+        """
+        :type key: int
+        :type value: int
+        :rtype: None
+        """
+        if self.current_capacity < self.capacity:
+            if self.cache.get(key):
+                pass
+            else:
+                pass
+            self.current_capacity += 1
+        else:
+            pass
+
+
+def getResult(n, m):
+    if m < 0 or n < 0:
+        return 0
+    if (m == 1 and n == 0) or (n == 1 and m == 0):
+        return 1
+    return getResult(n, m - 1) + getResult(n - 1, m)
+
+
+def build_head(nums, pos, length):
+    left_pos = 2 * pos + 1
+    right_pos = 2 * pos + 2
+    index = 0
+    if left_pos < length and nums[pos] < nums[left_pos]:
+        nums[pos], nums[left_pos] = nums[left_pos], nums[pos]
+        index = left_pos
+    if right_pos <length and nums[pos] < nums[right_pos]:
+        nums[pos], nums[right_pos] = nums[right_pos], nums[pos]
+        index = right_pos
+    if index != 0:
+        build_head(nums, index, length)
+
+
+
 if __name__ == '__main__':
-    chain = Chain()
-    start = time.time()
-    print(chain.maxAreaOfIsland(
-        [[0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-         [0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-         [0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
-         [0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0],
-         [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]]
-    ))
-    print(time.time() - start)
+    # while True:
+    #     try:
+    #         n, k = (int(i) for i in raw_input().split(' '))
+    #         nums = [int(i) for i in raw_input().split(' ')]
+    #     except EOFError as e:
+    #         break
+    #     k_small = nums[:k]
+    #     middle = k / 2
+    #     while middle >= 0:
+    #         build_head(k_small, middle, k)
+    #         middle -= 1
+    #     length = k
+    #     while k < n:
+    #         if nums[k] < k_small[0]:
+    #             k_small[0] = nums[k]
+    #             build_head(k_small, 0, length)
+    #         k += 1
+    #     end = length - 1
+    #     while end > 0:
+    #         k_small[0], k_small[end] = k_small[end], k_small[0]
+    #         build_head(k_small, 0, end - 1)
+    #         end -= 1
+    #     print(' '.join([str(i) for i in k_small]))
+
+    # while True:
+    #     try:
+    #         password_str = raw_input()
+    #     except EOFError as e:
+    #         break
+    #     flag = [False, ] * 4
+    #     length = 0
+    #     count = 0
+    #     repeat_flag = False
+    #     hash_map = {}
+    #     for pos, item in enumerate(password_str):
+    #         length += 1
+    #         if item >= 'a' and item <= 'z':
+    #             flag[0] = True
+    #         elif item >='A' and item <= 'Z':
+    #             flag[1] = True
+    #         elif item >= '0' and item <= '9':
+    #             flag[2] = True
+    #         else:
+    #             flag[3] = True
+    #         hash_map.setdefault(item, [])
+    #         if hash_map.get(item):
+    #             for index in hash_map[item]:
+    #                 try:
+    #                     if [password_str[index], password_str[index+1], password_str[index+2]] == [
+    #                         password_str[pos], password_str[pos+1], password_str[pos+2]
+    #                     ]:
+    #                         repeat_flag = True
+    #                         break
+    #                 except IndexError as e:
+    #                     break
+    #             hash_map[item].append(pos)
+    #         else:
+    #             hash_map[item].append(pos)
+    #     tmp = 0
+    #     for i in flag:
+    #         if i:
+    #             tmp += 1
+    #     if length > 8 and not repeat_flag and tmp >= 3:
+    #         print('OK')
+    #     else:
+    #         print('NG')
+    numbers_str = raw_input()
+    int_str, dot_str = numbers_str.split('.')
+    cn_numbers = ['', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾']
+    small_carry = ['', '拾', '佰', '仟']
+    big_carry = ['万', '亿']
+    int_list = []
+    int_str = int_str[::-1]
+    int_list.append('元')
+    have_zero = False
+    zero_index = -1
+    for pos, item in enumerate(list(int_str)):
+        if pos % 4 == 0 and pos % 8 != 0 and pos != 0:
+            if int_list[-1] in ['万', '亿']:
+                int_list.pop(-1)
+            int_list.append('万')
+        elif pos % 8 == 0 and pos != 0:
+            if int_list[-1] in ['万', '亿']:
+                int_list.pop(-1)
+            int_list.append('亿')
+        if item == '0':
+            if int_list[-1] != '零':
+                if int_list[-1] not in ['万', '亿']:
+                    int_list.append('零')
+            continue
+        int_list.append(small_carry[pos % 4])
+        int_list.append(cn_numbers[int(item)])
+    if dot_str == '00':
+        dot_str = '整'
+    else:
+        _ = []
+        for pos, i in enumerate(list(dot_str)):
+            if pos == 0:
+                _.extend([cn_numbers[int(dot_str[0])], '角'])
+            elif pos == 1:
+                _.extend([cn_numbers[int(dot_str[1])], '分'])
+        dot_str = ''.join(_)
+    print ''.join(['人民币',''.join(int_list[::-1]),dot_str])
+
+

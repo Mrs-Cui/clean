@@ -167,6 +167,35 @@ def like_group(array):
             people_queue[people[1]] = parent_1
     print(people_queue)
 
+
+# 归并排序
+
+def merge_split(start, end, nums):
+    if start < end:
+        middle = (end - start) / 2 + start
+        left_nums = merge_split(start, middle, nums)
+        right_nums = merge_split(middle+1, end, nums)
+        return merge_sort(left_nums, right_nums)
+    elif start == end:
+        return [nums[start],]
+
+
+def merge_sort(left_nums, right_nums):
+    nums = []
+    while left_nums or right_nums:
+        if left_nums and right_nums:
+            while left_nums and right_nums and left_nums[0] <= right_nums[0]:
+                nums.append(left_nums.pop(0))
+            while left_nums and right_nums and right_nums[0] < left_nums[0]:
+                nums.append(right_nums.pop(0))
+        elif left_nums:
+            nums.extend(left_nums)
+            left_nums = []
+        elif right_nums:
+            nums.extend(right_nums)
+            right_nums = []
+    return nums
+
 if __name__ == '__main__':
-    array = [[1,2],[1,3],[2,4]]
-    like_group(array)
+    array = [8, 9, 10, 4, 8, 7, 3, 0, -1, 7, 6, 5]
+    print(merge_split(0, len(array) - 1, array))
