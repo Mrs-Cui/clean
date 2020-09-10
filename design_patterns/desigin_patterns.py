@@ -128,7 +128,41 @@ class Singleton(object):
         instance.init()
         return instance
 
+# 策略模式
+"""
+    优点: 可以避免if else判断语句, 完美体现了`开闭原则`, 不用修改原有代码.
+    缺点: 必须知道所有的策略.
+"""
 
+class Strategy(object):
+    def __init__(self, strategy):
+        print('bbbbb')
+
+
+class StrategyA(Strategy):
+
+    def __init__(self, strategy):
+        super(StrategyA, self).__init__(strategy)
+
+
+class StrategyB(Strategy):
+    pass
+
+
+class StrategyExecute(object):
+
+    def __init__(self, strategy):
+        print('aaaaaaaa')
+        self.strategy = strategy
+
+    def main(self):
+        pass
+
+    def __new__(cls, *args, **kwargs):
+        strategy_cls = args[0]
+        instance = super(StrategyExecute, cls).__new__(strategy_cls)
+        return instance
 
 if __name__ == '__main__':
-    print(Singleton.instance())
+    execute = StrategyExecute(StrategyA)
+    print(type(execute), type(StrategyA), type(StrategyA('a')))
