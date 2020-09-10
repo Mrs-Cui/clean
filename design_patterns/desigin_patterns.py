@@ -163,6 +163,62 @@ class StrategyExecute(object):
         instance = super(StrategyExecute, cls).__new__(strategy_cls)
         return instance
 
+# 代理模式
+
+
+class RealSubject(object):
+
+    def __new__(cls, *args, **kwargs):
+        instance = super(RealSubject, cls).__new__(cls)
+        return instance
+
+    def execute(self):
+        print('执行逻辑')
+
+
+class Proxy(RealSubject):
+
+    def __new__(cls, *args, **kwargs):
+        instance = super(Proxy, cls).__new__(cls)
+        return instance
+
+
+class Client(object):
+
+    def request(self):
+        pass
+
+
+# 观察者模式
+"""
+    被观察者的行为变化影响到观察者
+"""
+
+
+class Subject(object):
+
+    def __init__(self):
+        self.observer = []
+
+    def add(self, observer):
+        self.observer.append(observer)
+
+    def execute(self):
+        for observer in self.observer:
+            pass
+
+
+class Observer(object):
+    pass
+
+
+class RealObserverA(Observer):
+    pass
+
+
+class RealObserverB(Observer):
+    pass
+
 if __name__ == '__main__':
     execute = StrategyExecute(StrategyA)
     print(type(execute), type(StrategyA), type(StrategyA('a')))
