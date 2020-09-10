@@ -76,7 +76,7 @@ class FrontDesk(object):
 
     def notify(self, message):
         for people in self.family_people:
-            print people.name, message
+            print(people.name, message)
 
 class Colleague(object):
 
@@ -85,7 +85,7 @@ class Colleague(object):
         self.notify_oj = oj
 
     def work(self):
-        print '开始工作'
+        print('开始工作')
 
 # 实例模式
 
@@ -96,5 +96,39 @@ class Instance(object):
 
     def __new__(cls, *args, **kwargs):
         return super(Instance, cls).__new__(*args, **kwargs)
+
+
+# 单例模式
+
+from threading import Lock, local
+
+class Singleton(object):
+    lock = Lock()
+    _current = local()
+
+    def __init__(self, *args, **kwargs):
+        pass
+
+    def make_current(self):
+        self._current.instance = self
+
+    def init(self):
+        self.make_current()
+
+    @classmethod
+    def instance(cls):
+        if not hasattr(Singleton._current, 'instance'):
+            with Singleton.lock:
+                Singleton._current.instance = Singleton()
+        print(Singleton._current)
+        return Singleton._current.instance
+
+    def __new__(cls, *args, **kwargs):
+        instance = super(Singleton, cls).__new__(cls)
+        instance.init()
+        return instance
+
+
+
 if __name__ == '__main__':
-    pass
+    print(Singleton.instance())
