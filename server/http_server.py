@@ -74,11 +74,12 @@ class NewHandleRequest(web.RequestHandler):
             result = client.fetch(request, callback=self.finish_response)
             print('result', result)
             results.append(result)
+        self.finish('hello world')
         print('response results:', results)
         print('post spend time:', time.time() - start)
 
     def finish_response(self, response):
-        self.finish('hello world')
+        pass
 
     @concurrent.run_on_executor()
     def handle(self, request):
