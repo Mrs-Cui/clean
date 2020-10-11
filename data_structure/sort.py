@@ -167,6 +167,92 @@ def like_group(array):
             people_queue[people[1]] = parent_1
     print(people_queue)
 
+
+# 归并排序
+
+def merge_split(start, end, nums):
+    if start < end:
+        middle = (end - start) / 2 + start
+        left_nums = merge_split(start, middle, nums)
+        right_nums = merge_split(middle+1, end, nums)
+        return merge_sort(left_nums, right_nums)
+    elif start == end:
+        return [nums[start],]
+
+
+def merge_sort(left_nums, right_nums):
+    nums = []
+    while left_nums or right_nums:
+        if left_nums and right_nums:
+            while left_nums and right_nums and left_nums[0] <= right_nums[0]:
+                nums.append(left_nums.pop(0))
+            while left_nums and right_nums and right_nums[0] < left_nums[0]:
+                nums.append(right_nums.pop(0))
+        elif left_nums:
+            nums.extend(left_nums)
+            left_nums = []
+        elif right_nums:
+            nums.extend(right_nums)
+            right_nums = []
+    return nums
+
+
+def kmp(origin_str, pattern_str):
+    next = kmp_next(pattern_str)
+    print(next)
+    i = j = 0
+    pattern_length = len(pattern_str)
+    origin_length = len(origin_str)
+    while i < origin_length and j < pattern_length:
+        if j == -1 or origin_str[i] == pattern_str[j]:
+            i += 1
+            j += 1
+        else:
+            j = next[j]
+    print(i, j)
+def kmp_next(pattern_str):
+    length = len(pattern_str)
+    next = [-1] * length
+    i, j = 0, -1
+    while i < length - 1:
+        if j == -1 or pattern_str[i] == pattern_str[j]:
+            i += 1
+            j += 1
+            next[i] = j
+        else:
+            j = next[j]
+    return next
+
+
+def is_pattern(pattern_str, original_str):
+    pattern_len = len(pattern_str)
+    original_len = len(original_str)
+    pattern_start = original_start = 0
+    flag = True
+    while pattern_start < pattern_len:
+        if original_start == original_len:
+            break
+        if pattern_str[pattern_start+1] not in ('*', '?'):
+            if pattern_str[pattern_start] == '.':
+                original_start += 1
+                pattern_start += 1
+            else:
+                if pattern_str[pattern_start] == original_str[original_start]:
+                    original_start += 1
+                    pattern_start += 1
+                else:
+                    flag = False
+                    break
+        else:
+            if pattern_str[pattern_start+1] == '*':
+                if pattern_str[pattern_start+2] == '?':
+                    pass
+                else:
+                    pass
+            elif pattern_str[]:
+                pass
+    print(flag)
+
 if __name__ == '__main__':
-    array = [[1,2],[1,3],[2,4]]
-    like_group(array)
+    array = [8, 9, 10, 4, 8, 7, 3, 0, -1, 7, 6, 5]
+    print(merge_split(0, len(array) - 1, array))
