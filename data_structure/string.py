@@ -259,6 +259,31 @@ def max_execute_time(arr):
 #
 #     return dp(K, start, end)
 
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        length = 0
+        hash_map = {}
+        for pos, item in enumerate(s, 1):
+            if not hash_map.get(item):
+                hash_map[item] = pos
+            else:
+                child_length = pos - hash_map[item]
+                length = max(length, child_length)
+                if child_length == 1:
+                    if len(hash_map) != 1:
+                        length = max(length, len(hash_map))
+                    hash_map = {item: pos}
+                else:
+                    pass
+        length = max(length, len(hash_map))
+        return length
+
+
+
 
 # 字符串匹配算法-> 正则表达式匹配
 
@@ -1253,5 +1278,65 @@ if __name__ == '__main__':
                 _.extend([cn_numbers[int(dot_str[1])], '分'])
         dot_str = ''.join(_)
     print ''.join(['人民币',''.join(int_list[::-1]),dot_str])
+    # n = int(input())
+    # m = int(input())
+    #
+    #
+    # def getResult(n, m):
+    #     n, m = n + 1, m + 1
+    #     dp = [0 for i in range(m)]
+    #     dp[0] = 1
+    #     for row, _ in enumerate(range(n)):
+    #         for col, _ in enumerate(range(m)):
+    #             if col == 0:
+    #                 continue
+    #             dp[col] += dp[col - 1]
+    #     return dp[m - 1]
+    #
+    #
+    # print(getResult(n, m))
+
+    from copy import deepcopy
+
+    n, m = [int(i) for i in input().split(' ')]
+    nums = []
+    for i in range(n):
+        nums.append([int(i) for i in input().split(' ')])
+    path = []
+
+    def find_path(i, j, nums, child_path=None):
+        global path
+        global n
+        global m
+        if 0 <= i < n and 0 <= j < m:
+            if nums[i][j] == 0:
+                child_path.append((int(i), int(j)))
+                if i == n - 1 and j == m - 1:
+                    path.append(child_path)
+                else:
+                    if (i - 1, j) not in child_path:
+                        find_path(i - 1, j, nums, deepcopy(child_path))
+                    if (i + 1, j) not in child_path:
+                        find_path(i + 1, j, nums, deepcopy(child_path))
+                    if (i, j - 1) not in child_path:
+                        find_path(i, j - 1, nums, deepcopy(child_path))
+                    if (i, j + 1) not in child_path:
+                        find_path(i, j + 1, nums, deepcopy(child_path))
+
+    find_path(0, 0, nums, [])
+    length = 0
+    result = []
+    for pos, i in enumerate(path):
+        if pos == 0:
+            length = len(i)
+            result = i
+        else:
+            tmp = len(i)
+            if tmp < length:
+                length = tmp
+                result = i
+    print('aaaaaaa')
+    for i in result:
+        print('({0}, {1})'.format(*i))
 
 

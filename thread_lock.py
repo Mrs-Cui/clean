@@ -187,5 +187,16 @@ class PythonFeature(object):
     def hello(self):
         print('hello world')
 
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        hash_map = {}
+        for item in s:
+            if not hash_map.get(item):
+
+
 if __name__ == '__main__':
     semaphore_test()
