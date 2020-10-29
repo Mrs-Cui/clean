@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-10-29T05:47:35.443Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36" etag="9-h5mPJXesCZAF8AWj_q" version="13.8.6" type="github">
+<mxfile host="app.diagrams.net" modified="2020-10-29T05:51:48.668Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36" etag="pZvLMq4qAavA_dRR3E0U" version="13.8.6" type="github">
   <diagram id="-LImsvj9Mg5DhnSsuSqk" name="Page-1">
     <mxGraphModel dx="2182" dy="806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -109,29 +109,29 @@
         <mxCell id="oEZElPIyusleIOqh8hyz-47" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=1;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="oEZElPIyusleIOqh8hyz-46">
           <mxGeometry y="30" width="1190" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oEZElPIyusleIOqh8hyz-48" value="PK" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;overflow=hidden;" vertex="1" parent="oEZElPIyusleIOqh8hyz-47">
-          <mxGeometry width="30" height="30" as="geometry" />
+        <mxCell id="oEZElPIyusleIOqh8hyz-48" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;overflow=hidden;" vertex="1" parent="oEZElPIyusleIOqh8hyz-47">
+          <mxGeometry width="20" height="30" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-49" value="instance_id                                   name                      instance_type               instance_statue             region_name              enable                       EC2 详情                             查看分配用户(对非autoscaling显示)" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=1;overflow=hidden;verticalAlign=middle;spacing=8;" vertex="1" parent="oEZElPIyusleIOqh8hyz-47">
-          <mxGeometry x="30" width="1160" height="30" as="geometry" />
+          <mxGeometry x="20" width="1170" height="30" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-50" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="oEZElPIyusleIOqh8hyz-46">
           <mxGeometry y="60" width="1190" height="60" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-51" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" vertex="1" parent="oEZElPIyusleIOqh8hyz-50">
-          <mxGeometry width="30" height="60" as="geometry" />
+          <mxGeometry width="20" height="60" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-52" value="i-08369b0b4622daf11          social_turn_7                m5.large                              running                            ap-south-1                         1" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" vertex="1" parent="oEZElPIyusleIOqh8hyz-50">
-          <mxGeometry x="30" width="1160" height="60" as="geometry" />
+          <mxGeometry x="20" width="1170" height="60" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-53" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="oEZElPIyusleIOqh8hyz-46">
           <mxGeometry y="120" width="1190" height="30" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-54" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;" vertex="1" parent="oEZElPIyusleIOqh8hyz-53">
-          <mxGeometry width="30" height="30" as="geometry" />
+          <mxGeometry width="20" height="30" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-55" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" vertex="1" parent="oEZElPIyusleIOqh8hyz-53">
-          <mxGeometry x="30" width="1160" height="30" as="geometry" />
+          <mxGeometry x="20" width="1170" height="30" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-59" value="Region 与 Ec2 的数据通过调用AWS boto3的接口获得, 并存到region表与ec2表.(设置定时任务)" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=left;labelBackgroundColor=#FFFFFF;" vertex="1" parent="1">
           <mxGeometry x="-120" y="120" width="200" height="100" as="geometry" />
@@ -223,7 +223,7 @@
           <mxGeometry x="110" width="130" height="30" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-99" value="         User List" style="shape=table;startSize=60;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=left;resizeLast=1;labelBackgroundColor=#FFFFFF;strokeColor=#000000;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="1090" y="780" width="240" height="235" as="geometry" />
+          <mxGeometry x="1090" y="782.5" width="240" height="235" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-100" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=1;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="oEZElPIyusleIOqh8hyz-99">
           <mxGeometry y="60" width="240" height="30" as="geometry" />
@@ -261,14 +261,14 @@
         <mxCell id="oEZElPIyusleIOqh8hyz-135" value="状态开关" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" vertex="1" parent="oEZElPIyusleIOqh8hyz-133">
           <mxGeometry x="129" width="111" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oEZElPIyusleIOqh8hyz-137" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="oEZElPIyusleIOqh8hyz-112" target="oEZElPIyusleIOqh8hyz-122">
+        <mxCell id="oEZElPIyusleIOqh8hyz-139" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="oEZElPIyusleIOqh8hyz-112" target="oEZElPIyusleIOqh8hyz-122">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-112" value="&lt;b&gt;赋予权限&lt;/b&gt;" style="whiteSpace=wrap;html=1;align=center;labelBackgroundColor=#FFFFFF;strokeColor=#000000;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="1210" y="790" width="100" height="40" as="geometry" />
+          <mxGeometry x="1220" y="785" width="100" height="40" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-116" value="在ex2_and_user表中添加/ 或者删除相应记录, 然后调用&lt;span style=&quot;font-family: inherit ; text-align: left&quot;&gt;lbe_manager_tool脚本&lt;/span&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;labelBackgroundColor=#FFFFFF;strokeColor=#000000;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="1480" y="832.5" width="210" height="100" as="geometry" />
+          <mxGeometry x="1480" y="850" width="210" height="100" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-117" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;endFill=1;startArrow=ERzeroToMany;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="oEZElPIyusleIOqh8hyz-116">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
@@ -277,7 +277,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-118" value="显示实例基本信息" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;labelBackgroundColor=#FFFFFF;strokeColor=#000000;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="1460" y="640" width="140" height="140" as="geometry" />
+          <mxGeometry x="1514" y="690" width="140" height="140" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-124" value="选择赋予权限的用户" style="html=1;labelBackgroundColor=#FFFFFF;strokeColor=#000000;fontSize=14;align=left;" vertex="1" parent="oEZElPIyusleIOqh8hyz-118">
           <mxGeometry y="30" width="140" height="60" as="geometry" />
