@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-10-29T04:25:18.378Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36" etag="T1B7Bc4EGnk0jWuR_KBy" version="13.8.6" type="github">
+<mxfile host="app.diagrams.net" modified="2020-10-29T04:27:08.810Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36" etag="vskQnyu2n60S9KRIo0Ua" version="13.8.6" type="github">
   <diagram id="-LImsvj9Mg5DhnSsuSqk" name="Page-1">
     <mxGraphModel dx="2182" dy="806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -67,7 +67,7 @@
         <mxCell id="oEZElPIyusleIOqh8hyz-32" value="region name" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;overflow=hidden;" vertex="1" parent="oEZElPIyusleIOqh8hyz-31">
           <mxGeometry width="110" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oEZElPIyusleIOqh8hyz-33" value="UniqueID" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=5;overflow=hidden;" vertex="1" parent="oEZElPIyusleIOqh8hyz-31">
+        <mxCell id="oEZElPIyusleIOqh8hyz-33" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=5;overflow=hidden;" vertex="1" parent="oEZElPIyusleIOqh8hyz-31">
           <mxGeometry x="110" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-34" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="oEZElPIyusleIOqh8hyz-30">
@@ -96,12 +96,6 @@
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-42" value="Row 3" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" vertex="1" parent="oEZElPIyusleIOqh8hyz-40">
           <mxGeometry x="110" width="120" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="oEZElPIyusleIOqh8hyz-43" value="&lt;b&gt;取消&lt;/b&gt;" style="whiteSpace=wrap;html=1;align=center;dashed=1;labelBackgroundColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="-130" y="690" width="100" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="oEZElPIyusleIOqh8hyz-44" value="&lt;b&gt;修改&lt;/b&gt;" style="whiteSpace=wrap;html=1;align=center;dashed=1;labelBackgroundColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="-20" y="690" width="100" height="40" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-45" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERoneToMany;exitX=0.983;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="oEZElPIyusleIOqh8hyz-31" target="oEZElPIyusleIOqh8hyz-14">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
@@ -144,7 +138,7 @@
             <mxPoint x="100" y="270" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="oEZElPIyusleIOqh8hyz-59" value="Region 与 Ec2 的数据通过调用AWS boto3的接口获得.(设置定时任务)" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=left;dashed=1;labelBackgroundColor=#FFFFFF;" vertex="1" parent="1">
+        <mxCell id="oEZElPIyusleIOqh8hyz-59" value="Region 与 Ec2 的数据通过调用AWS boto3的接口获得, 并存到region表与ec2表.(设置定时任务)" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=left;dashed=1;labelBackgroundColor=#FFFFFF;" vertex="1" parent="1">
           <mxGeometry x="-120" y="120" width="150" height="100" as="geometry" />
         </mxCell>
         <mxCell id="oEZElPIyusleIOqh8hyz-62" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;添加用户&lt;/b&gt;" style="whiteSpace=wrap;html=1;align=center;labelBackgroundColor=#FFFFFF;fontSize=14;" vertex="1" parent="1">
