@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-10-30T09:03:56.162Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36" etag="miuK7PFk1rxU4BTbEHGF" version="13.8.6" type="github">
+<mxfile host="app.diagrams.net" modified="2020-10-30T09:43:25.592Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36" etag="AoYXB0GQv9rH7zkqlvB3" version="13.8.6" type="github">
   <diagram id="xb1k0XMw8OWnmdpeP3jt" name="Page-1">
     <mxGraphModel dx="2182" dy="806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -55,7 +55,7 @@
         <mxCell id="rSfd8TKQbn5zd6Q2XgyP-42" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;overflow=hidden;" parent="rSfd8TKQbn5zd6Q2XgyP-41" vertex="1">
           <mxGeometry width="20" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="rSfd8TKQbn5zd6Q2XgyP-43" value="autoscaling_name                      region_name           username(usename搜索显示)                     权限分配                      查看Ec2List                     is_enable(username)     is_super()" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=1;overflow=hidden;fontSize=13;" parent="rSfd8TKQbn5zd6Q2XgyP-41" vertex="1">
+        <mxCell id="rSfd8TKQbn5zd6Q2XgyP-43" value="autoscaling_name                      region_name           username(usename搜索显示)                     权限分配                      查看Ec2List                     is_enable(username)     is_super(username)" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=1;overflow=hidden;fontSize=13;" parent="rSfd8TKQbn5zd6Q2XgyP-41" vertex="1">
           <mxGeometry x="20" width="1076" height="40" as="geometry" />
         </mxCell>
         <mxCell id="rSfd8TKQbn5zd6Q2XgyP-44" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="rSfd8TKQbn5zd6Q2XgyP-40" vertex="1">
