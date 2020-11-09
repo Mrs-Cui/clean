@@ -132,13 +132,29 @@ def boomerang(array):
     pass
 
 
+def max_number_of_copy(numbers):
+    """
+        一个数分成几份，可以被 3 整除的最大份数。比如 12345 分成12 3 45 结果为3.
+    """
+    length = len(numbers)
+    left, right = 0, 1
+    result = [0, ]
+    while right <= length:
+        if int(numbers[left: right]) % 3 == 0:
+            print(left, right)
+            result.append(right)
+            left = right
+            right += 1
+        else:
+            right += 1
+    else:
+        if result[-1] != length:
+            result = []
+    print(result)
+
+
+
 if __name__ == '__main__':
     # trees = [random.randint(1, 10) for i in range(3)]
     # print(count_max_height(4, trees))
-    array = [
-        [1, 0, 1, 0, 0],
-        [1, 0, 1, 1, 1],
-        [1, 1, 1, 1, 1],
-        [1, 0, 0, 1, 0],
-    ]
-    max_profit_two([7,1,2,10,4,6])
+    max_number_of_copy('12346')

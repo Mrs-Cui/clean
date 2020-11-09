@@ -302,6 +302,25 @@ def rebuild_tree(adv_array, mid_array, start, end, root):
     最小生成树
 """
 
+def tree_to_chain(root):
+    """
+        将搜索二叉树转换成排序双向链表，　不能新增节点，　只改变指针的指向.
+    """
+
+    def middle_search(root, pre):
+        if not root:
+            return
+        middle_search(root.lchild, pre)
+        if not root.lchild:
+            root.lchild = pre
+        if pre and not pre.rchild:
+            pre.rchild = root
+        pre = root
+        middle_search(root.rchild, pre)
+
+
+    middle_search(root, None)
+
 if __name__ == '__main__':
     front_str = 'GDAFEMHZ'
     mid_str = 'ADEFGHMZ'
@@ -318,4 +337,6 @@ if __name__ == '__main__':
     #
     # root = huffman_tree(trees, root)
     # print root.data, root.lchild.data, root.rchild.data
-
+    from threading import Lock
+    lock = Lock()
+    lock.acquire()

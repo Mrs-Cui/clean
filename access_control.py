@@ -92,33 +92,34 @@ def handel():
         **{
             'host': 'vshow.ciegpdaw3vtl.eu-central-1.rds.amazonaws.com',
             'port': 3306,
-            'db': 'thirdpartyunion',
+            'db': 'social',
             'user': 'http',
             'passwd': 'boUnTNQm',
-            'charset': 'utf8mb4'
+            'charset': 'utf8mb4',
+            'autocommit': True
         }
     )
     sql = """
-        update thirdpartyunion.account_userextra set country=%s, first_language=%s,
-        second_language=%s, third_language=%s, service_language=%s where belong=%s and report_to=%s
+        select user.id as id from component.AnchorList as account left join social.user_info as user on
+  user.id = substr(substring_index(account.jid, '@', 1), 8)
+  where user.report_to = 'Mouhcine'
     """
     cursor = conn.cursor()
-    with open('handle_1.csv', 'r') as file:
-        reader = csv.DictReader(file, fieldnames=[
-            'belong to', 'report to', 'country', 'first', 'second', 'third'
-        ])
-        results = []
-        for row in reader:
-            service_language = [i.strip() for i in [row['first'], row['second'], row['third']] if i.strip() != '/']
-            if row['third'].strip() == '/':
-                row['third'] = ''
-            results.append([
-                row['country'], row['first'].strip(), row['second'].strip(), row['third'].strip(),
-                json.dumps(service_language), row['belong to'].strip(), row['report to'].strip()
-            ])
-    print(results)
-    cursor.executemany(sql, results)
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    results = [item[0] for item in results]
+    print(len(results))
+    sql = "update social.user_info set report_to = 'One' where id = %s"
+    for item in results:
+        print(item)
+        cursor.execute(sql, (item, ))
     conn.commit()
+from threading import local
+
+
+
+
 
 if __name__ == '__main__':
     handel()
+
