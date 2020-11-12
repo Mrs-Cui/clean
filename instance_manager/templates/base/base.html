@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!--meta charset="UTF-8"-->
+  <title>{% block title %}{% endblock %}</title>
+  {% load static %}
+  <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+  <!-- Bootstrap 3.3.2 -->
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}"  type="text/css"/>
+  <!-- Font Awesome Icons -->
+
+  <link rel="stylesheet" href="{% static 'AdminLTE/plugins/font-awesome/css/font-awesome.min.css' %}"
+        type="text/css" />
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}"  type="text/css" />
+  <!-- DATA TABLES -->
+  <link  rel="stylesheet" href="{% static 'AdminLTE/plugins/datatables/dataTables.bootstrap.css' %}"
+        type="text/css"/>
+  <!-- Theme style -->
+  <link type="text/css" href="{% static 'AdminLTE/dist/css/AdminLTE.min.css' %}"   rel="stylesheet"/>
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="{% static 'AdminLTE/dist/css/skins/_all-skins.min.css' %}"   type="text/css" />
+{#  <link href="/zakzak_admin/static/AdminLTE/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css"/>#}
+  {#    <link href="/zakzak_admin/static/css/daterangepicker-bs2.css" rel="stylesheet" type="text/css"/>#}
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>
+
+  <link  rel="stylesheet" href="{% static 'css/select2.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/custom_table.css' %}"  type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/authority-common.css' %}"   type="text/css"/>
+
+  {% block extracss %}{% endblock %}
+  <style>
+    .treeview.anchor-1 .anchor-1,
+    .treeview.anchor-2 .anchor-2,
+    .treeview.anchor-3 .anchor-3,
+    .treeview.anchor-4 .anchor-4,
+    .treeview.anchor-5 .anchor-5,
+    .treeview.qc-1 .qc-1,
+    .treeview.qc-2 .qc-2,
+    .treeview.qc-3 .qc-3,
+    .treeview.qc-4 .qc-4,
+    .treeview.qc-5 .qc-5,
+    .treeview.user-1 .user-1,
+    .treeview.user-2 .user-2,
+    .treeview.user-3 .user-3,
+    .treeview.device-1 .device-1,
+    .treeview.device-2 .device-2,
+    .treeview.game-1 .game-1,
+    .treeview.game-2 .game-2,
+    .treeview.online-1 .online-1,
+    .treeview.online-2 .online-2{
+      background: #58555e;
+    }
+    .treeview .select{
+      background: rgba(84,183,198, 0.1);
+    }
+    .sidebar-menu .menu-open > a > .fa-angle-left,
+    .sidebar-menu .menu-open > a > .pull-right-container > .fa-angle-left {
+      -webkit-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+      -o-transform: rotate(-90deg);
+      transform: rotate(-90deg);
+    }
+  </style>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+  {% csrf_token %}
+  {% include 'base/header.html' %}
+  {% include 'base/sidebar.html' %}
+  {% block content %}{% endblock %}
+  {% include 'base/footer.html' %}
+</div><!-- ./wrapper -->
+<!-- jQuery 2.1.3 -->
+<script src="{% static 'AdminLTE/plugins/jQuery/jQuery-2.1.3.min.js' %}" rel="stylesheet"></script>
+<!-- Bootstrap 3.3.2 JS -->
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}" type="text/javascript" rel="stylesheet"></script>
+<!-- DATA TABES SCRIPT -->
+<script src="{% static 'AdminLTE/plugins/datatables/jquery.dataTables.js' %}" type="text/javascript" rel="stylesheet"></script>
+<script src="{% static 'AdminLTE/plugins/datatables/dataTables.bootstrap.js' %}" type="text/javascript" rel="stylesheet"></script>
+<!-- Slimscroll -->
+<script src="{% static 'AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js' %}" type="text/javascript" rel="stylesheet"></script>
+<!-- FastClick -->
+<script src='{% static "AdminLTE/plugins/fastclick/fastclick.min.js" %}' rel="stylesheet"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'AdminLTE/dist/js/adminlte.min.js' %}" type="text/javascript" rel="stylesheet"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'AdminLTE/dist/js/demo.js' %}" type="text/javascript" rel="stylesheet"></script>
+<!-- HightCharts -->
+<script src="{% static 'highcharts/highcharts.js' %}" type="text/javascript" rel="stylesheet"></script>
+<!-- Ckeditor -->
+<!--script src="/zakzak_admin/static/ckeditor/ckeditor.js" type="text/javascript"></script-->
+<!-- daterangepicker -->
+<script src="{% static 'js/daterangepicker.js' %}" type="text/javascript" rel="stylesheet"></script>
+{#<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>#}
+<script src="{% static 'js/select2.js' %}" type="text/javascript" rel="stylesheet"></script>
+<!--  User authentication  -->
+<script type="text/javascript">
+
+</script>
+
+{% block extrajs %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,1159 @@
+140109416494848 2020-11-02 03:53:27,572 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:27] 获取region list失败, error: [Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1845, in add_fields
+    join_info = self.setup_joins(name.split(LOOKUP_SEP), opts, alias, allow_many=allow_m2m)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1551, in setup_joins
+    names[:pivot], opts, allow_many, fail_on_missing=True,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1467, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'end_point' into field. Choices are: create_time, description, enable, endpoint, id, region_name, update_time
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 23, in get
+    region_list = Region.objects.values('region_name', 'end_point', 'enable', 'description').all()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 809, in values
+    clone = self._values(*fields, **expressions)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 804, in _values
+    clone.query.set_values(fields)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 2107, in set_values
+    self.add_fields(field_names, True)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1868, in add_fields
+    "Choices are: %s" % (name, ", ".join(names)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'end_point' into field. Choices are: create_time, description, enable, endpoint, id, region_name, update_time
+]
+140361287644928 2020-11-02 03:53:53,798 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:27] 获取region list失败, error: [Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1845, in add_fields
+    join_info = self.setup_joins(name.split(LOOKUP_SEP), opts, alias, allow_many=allow_m2m)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1551, in setup_joins
+    names[:pivot], opts, allow_many, fail_on_missing=True,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1467, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'end_point' into field. Choices are: create_time, description, enable, endpoint, id, region_name, update_time
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 23, in get
+    region_list = Region.objects.values('region_name', 'end_point', 'enable', 'description').all()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 809, in values
+    clone = self._values(*fields, **expressions)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 804, in _values
+    clone.query.set_values(fields)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 2107, in set_values
+    self.add_fields(field_names, True)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1868, in add_fields
+    "Choices are: %s" % (name, ", ".join(names)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'end_point' into field. Choices are: create_time, description, enable, endpoint, id, region_name, update_time
+]
+139730485208832 2020-11-02 05:54:32,209 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:40] 更新region 信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 37, in post
+    op.update_region(params, filters)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 17, in update_region
+    Region.objects.update(**params).filter(**filters)
+AttributeError: 'int' object has no attribute 'filter'
+]
+140411853813504 2020-11-02 07:25:41,793 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:65] 获取user list失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 62, in get
+    raise
+RuntimeError: No active exception to reraise
+]
+140584209536768 2020-11-02 07:25:58,353 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:65] 获取user list失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 61, in get
+    raise
+RuntimeError: No active exception to reraise
+]
+140399381640960 2020-11-02 07:26:21,549 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:78] 更新region 信息失败, error: [Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/options.py", line 581, in get_field
+    return self.fields_map[field_name]
+KeyError: 'enable'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 75, in post
+    op.update_user_info(params, filters)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 35, in update_user_info
+    result = User.objects.filter(**filters).update(**params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 748, in update
+    query.add_update_values(kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/subqueries.py", line 117, in add_update_values
+    field = self.get_meta().get_field(name)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/options.py", line 583, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: User has no field named 'enable'
+]
+140281204172544 2020-11-02 07:27:04,464 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:78] 更新region 信息失败, error: [Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/options.py", line 581, in get_field
+    return self.fields_map[field_name]
+KeyError: 'enable'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 75, in post
+    op.update_user_info(params, filters)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 35, in update_user_info
+    result = User.objects.filter(**filters).update(**params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 748, in update
+    query.add_update_values(kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/subqueries.py", line 117, in add_update_values
+    field = self.get_meta().get_field(name)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/options.py", line 583, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: User has no field named 'enable'
+]
+139841347061504 2020-11-02 09:33:53,889 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:84] 更新region 信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 75, in post
+    filters = data['filters']
+KeyError: 'filters'
+]
+140039139583744 2020-11-02 09:37:42,866 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:84] 更新user 信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 79, in post
+    op.insert_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 42, in insert_user
+    user_info = User.objects.filter(params['login_name']).first()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 904, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 923, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1337, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1365, in _add_q
+    split_subq=split_subq, simple_col=simple_col,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1236, in build_filter
+    arg, value = filter_expr
+ValueError: too many values to unpack (expected 2)
+]
+140039139583744 2020-11-02 09:38:16,074 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:84] 更新user 信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 79, in post
+    op.insert_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 42, in insert_user
+    user_info = User.objects.filter(params['login_name']).first()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 904, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 923, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1337, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1365, in _add_q
+    split_subq=split_subq, simple_col=simple_col,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1236, in build_filter
+    arg, value = filter_expr
+ValueError: too many values to unpack (expected 2)
+]
+139899792533248 2020-11-02 09:41:05,719 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:84] 更新user 信息失败, error: [Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/mysql/base.py", line 74, in execute
+    return self.cursor.execute(query, args)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/cursors.py", line 163, in execute
+    result = self._query(query)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/cursors.py", line 321, in _query
+    conn.query(q)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 505, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 724, in _read_query_result
+    result.read()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 1069, in read
+    first_packet = self.connection._read_packet()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 676, in _read_packet
+    packet.raise_for_error()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/protocol.py", line 223, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'user.update_time' in 'field list'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 79, in post
+    op.insert_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 42, in insert_user
+    user_info = User.objects.filter(login_name=params['login_name']).first()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 664, in first
+    for obj in (self if self.ordered else self.order_by('pk'))[:1]:
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 276, in __iter__
+    self._fetch_all()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 1261, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 57, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/compiler.py", line 1137, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/mysql/base.py", line 74, in execute
+    return self.cursor.execute(query, args)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/cursors.py", line 163, in execute
+    result = self._query(query)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/cursors.py", line 321, in _query
+    conn.query(q)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 505, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 724, in _read_query_result
+    result.read()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 1069, in read
+    first_packet = self.connection._read_packet()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 676, in _read_packet
+    packet.raise_for_error()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/protocol.py", line 223, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+django.db.utils.OperationalError: (1054, "Unknown column 'user.update_time' in 'field list'")
+]
+139899792533248 2020-11-02 09:41:36,638 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:84] 更新user 信息失败, error: [Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/mysql/base.py", line 74, in execute
+    return self.cursor.execute(query, args)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/cursors.py", line 163, in execute
+    result = self._query(query)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/cursors.py", line 321, in _query
+    conn.query(q)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 505, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 724, in _read_query_result
+    result.read()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 1069, in read
+    first_packet = self.connection._read_packet()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 676, in _read_packet
+    packet.raise_for_error()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/protocol.py", line 223, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'user.update_time' in 'field list'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 79, in post
+    op.insert_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 42, in insert_user
+    user_info = User.objects.filter(login_name=params['login_name']).first()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 664, in first
+    for obj in (self if self.ordered else self.order_by('pk'))[:1]:
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 276, in __iter__
+    self._fetch_all()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 1261, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 57, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/compiler.py", line 1137, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/mysql/base.py", line 74, in execute
+    return self.cursor.execute(query, args)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/cursors.py", line 163, in execute
+    result = self._query(query)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/cursors.py", line 321, in _query
+    conn.query(q)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 505, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 724, in _read_query_result
+    result.read()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 1069, in read
+    first_packet = self.connection._read_packet()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 676, in _read_packet
+    packet.raise_for_error()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/protocol.py", line 223, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+django.db.utils.OperationalError: (1054, "Unknown column 'user.update_time' in 'field list'")
+]
+140288959198976 2020-11-02 09:43:39,231 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:84] 更新user 信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 79, in post
+    op.insert_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 44, in insert_user
+    raise IntegrityError()
+pymysql.err.IntegrityError
+]
+140359093462784 2020-11-02 09:47:33,134 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:84] 更新user 信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 79, in post
+    op.insert_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 44, in insert_user
+    raise IntegrityError
+pymysql.err.IntegrityError
+]
+140648047445760 2020-11-02 09:51:18,428 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:85] 更新user 信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 79, in post
+    op.insert_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 44, in insert_user
+    raise IntegrityError
+pymysql.err.IntegrityError
+]
+140647965128448 2020-11-02 09:51:18,429 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:85] 更新user 信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 79, in post
+    op.insert_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 44, in insert_user
+    raise IntegrityError
+pymysql.err.IntegrityError
+]
+139901456213760 2020-11-03 06:20:53,985 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 124, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 87, in get_ec2_list
+    self.get_feedback_final(instance_id)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 94, in get_feedback_final
+    recent_time=F(Max('update_time', output_field=DateTimeField())) - datetime.utcnow())
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 1071, in annotate
+    clone.query.add_annotation(annotation, alias, is_summary=False)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1015, in add_annotation
+    summarize=is_summary)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/expressions.py", line 468, in resolve_expression
+    c.lhs = c.lhs.resolve_expression(query, allow_joins, reuse, summarize, for_save)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/expressions.py", line 531, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize, simple_col)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1663, in resolve_ref
+    field_list = name.split(LOOKUP_SEP)
+AttributeError: 'Max' object has no attribute 'split'
+]
+140142999672576 2020-11-03 06:28:19,643 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 124, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 87, in get_ec2_list
+    self.get_feedback_final(instance_id)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 94, in get_feedback_final
+    diff_time=ExpressionWrapper(F(Max('update_time', output_field=DateTimeField())) - datetime.utcnow(), output_field=IntegerField())
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 1071, in annotate
+    clone.query.add_annotation(annotation, alias, is_summary=False)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1015, in add_annotation
+    summarize=is_summary)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/expressions.py", line 248, in resolve_expression
+    for expr in c.get_source_expressions()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/expressions.py", line 248, in <listcomp>
+    for expr in c.get_source_expressions()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/expressions.py", line 468, in resolve_expression
+    c.lhs = c.lhs.resolve_expression(query, allow_joins, reuse, summarize, for_save)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/expressions.py", line 531, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize, simple_col)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1663, in resolve_ref
+    field_list = name.split(LOOKUP_SEP)
+AttributeError: 'Max' object has no attribute 'split'
+]
+140608070137600 2020-11-03 06:32:10,566 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/mysql/base.py", line 74, in execute
+    return self.cursor.execute(query, args)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/cursors.py", line 163, in execute
+    result = self._query(query)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/cursors.py", line 321, in _query
+    conn.query(q)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 505, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 724, in _read_query_result
+    result.read()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 1069, in read
+    first_packet = self.connection._read_packet()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 676, in _read_packet
+    packet.raise_for_error()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/protocol.py", line 223, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1146, "Table 'lbe_manager.feedback＿final' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 124, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 87, in get_ec2_list
+    self.get_feedback_final(instance_id)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 97, in get_feedback_final
+    for item in feedback_infos:
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 276, in __iter__
+    self._fetch_all()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 1261, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 115, in __iter__
+    for row in compiler.results_iter(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size):
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/compiler.py", line 1089, in results_iter
+    results = self.execute_sql(MULTI, chunked_fetch=chunked_fetch, chunk_size=chunk_size)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/compiler.py", line 1137, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/mysql/base.py", line 74, in execute
+    return self.cursor.execute(query, args)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/cursors.py", line 163, in execute
+    result = self._query(query)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/cursors.py", line 321, in _query
+    conn.query(q)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 505, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 724, in _read_query_result
+    result.read()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 1069, in read
+    first_packet = self.connection._read_packet()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/connections.py", line 676, in _read_packet
+    packet.raise_for_error()
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/protocol.py", line 223, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/usr/local/lib/python3.6/dist-packages/pymysql/err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+django.db.utils.ProgrammingError: (1146, "Table 'lbe_manager.feedback＿final' doesn't exist")
+]
+140439031670528 2020-11-03 06:32:38,902 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 124, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 87, in get_ec2_list
+    self.get_feedback_final(instance_id)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 97, in get_feedback_final
+    for item in feedback_infos:
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 276, in __iter__
+    self._fetch_all()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 1261, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 115, in __iter__
+    for row in compiler.results_iter(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size):
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/compiler.py", line 1081, in apply_converters
+    value = converter(value, expression, connection)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/backends/mysql/operations.py", line 265, in convert_datetimefield_value
+    value = timezone.make_aware(value, self.connection.timezone)
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/timezone.py", line 270, in make_aware
+    return timezone.localize(value, is_dst=is_dst)
+  File "/usr/lib/python3/dist-packages/pytz/__init__.py", line 225, in localize
+    if dt.tzinfo is not None:
+AttributeError: 'float' object has no attribute 'tzinfo'
+]
+139674752382720 2020-11-03 06:35:40,978 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 124, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 87, in get_ec2_list
+    self.get_feedback_final(instance_id)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 94, in get_feedback_final
+    diff_time=ExpressionWrapper(F(Max('update_time', output_field=DateTimeField())) - datetime.utcnow(), output_field=IntegerField())
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 1071, in annotate
+    clone.query.add_annotation(annotation, alias, is_summary=False)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1015, in add_annotation
+    summarize=is_summary)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/expressions.py", line 248, in resolve_expression
+    for expr in c.get_source_expressions()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/expressions.py", line 248, in <listcomp>
+    for expr in c.get_source_expressions()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/expressions.py", line 468, in resolve_expression
+    c.lhs = c.lhs.resolve_expression(query, allow_joins, reuse, summarize, for_save)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/expressions.py", line 531, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize, simple_col)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1663, in resolve_ref
+    field_list = name.split(LOOKUP_SEP)
+AttributeError: 'Max' object has no attribute 'split'
+]
+140003883767552 2020-11-03 06:38:45,222 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 124, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 87, in get_ec2_list
+    self.get_feedback_final(instance_id)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 99, in get_feedback_final
+    print(datetime.utcnow() - item['diff_time'])
+TypeError: can't subtract offset-naive and offset-aware datetimes
+]
+140095551047424 2020-11-03 06:39:34,945 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 124, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 87, in get_ec2_list
+    self.get_feedback_final(instance_id)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 100, in get_feedback_final
+    print(datetime.utcnow() - item['diff_time'])
+TypeError: can't subtract offset-naive and offset-aware datetimes
+]
+139692856784640 2020-11-03 06:39:53,875 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 124, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 87, in get_ec2_list
+    self.get_feedback_final(instance_id)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 101, in get_feedback_final
+    print(datetime.utcnow() - item['diff_time'])
+TypeError: can't subtract offset-naive and offset-aware datetimes
+]
+139711183185664 2020-11-03 06:57:55,491 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 124, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 87, in get_ec2_list
+    self.get_feedback_final(instance_id)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 101, in get_feedback_final
+    print(datetime.utcnow() - item['diff_time'])
+TypeError: can't subtract offset-naive and offset-aware datetimes
+]
+139697612478208 2020-11-03 06:58:53,387 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 124, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 87, in get_ec2_list
+    self.get_feedback_final(instance_id)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 102, in get_feedback_final
+    data[item['instance_id']] = 0 if datetime.utcnow() - item['diff_time'] <= 600 else 1
+TypeError: can't subtract offset-naive and offset-aware datetimes
+]
+139863999117056 2020-11-03 07:12:00,691 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 124, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 92, in get_ec2_list
+    item['status'] = instance_status['instance_id']
+KeyError: 'instance_id'
+]
+140293487838976 2020-11-03 09:11:12,382 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 122, in get
+    ec2_list = op.get_ec2_and_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 127, in get_ec2_and_user
+    item.update(data[item['instance_id']])
+KeyError: 'i-0003a3039760fd70a'
+]
+139782344980224 2020-11-03 09:12:44,469 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 122, in get
+    ec2_list = op.get_ec2_and_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 128, in get_ec2_and_user
+    item.update(data[item['instance_id']])
+KeyError: 'i-0003a3039760fd70a'
+]
+140250917582592 2020-11-03 09:25:28,417 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1845, in add_fields
+    join_info = self.setup_joins(name.split(LOOKUP_SEP), opts, alias, allow_many=allow_m2m)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1551, in setup_joins
+    names[:pivot], opts, allow_many, fail_on_missing=True,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1467, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'enable' into field. Choices are: id, instance_id, is_enable, login_name, sudo_permission
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 122, in get
+    ec2_list = op.get_ec2_and_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 109, in get_ec2_and_user
+    query_set = Ec2MapUser.objects.values('instance_id', 'sudo_permission', 'login_name', 'enable').filter(
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 809, in values
+    clone = self._values(*fields, **expressions)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 804, in _values
+    clone.query.set_values(fields)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 2107, in set_values
+    self.add_fields(field_names, True)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1868, in add_fields
+    "Choices are: %s" % (name, ", ".join(names)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'enable' into field. Choices are: id, instance_id, is_enable, login_name, sudo_permission
+]
+140046602598144 2020-11-03 09:31:15,430 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 122, in get
+    ec2_list = op.get_ec2_and_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 127, in get_ec2_and_user
+    item.update(data[item['instance_id']])
+KeyError: 'i-02528bc72f4c0774d'
+]
+140046602598144 2020-11-03 09:38:38,719 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 122, in get
+    ec2_list = op.get_ec2_and_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 127, in get_ec2_and_user
+    item.update(data[item['instance_id']])
+KeyError: 'i-02528bc72f4c0774d'
+]
+139721450555136 2020-11-03 09:43:03,152 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 122, in get
+    ec2_list = op.get_ec2_and_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 126, in get_ec2_and_user
+    item.update(query_set[item['instance_id']])
+KeyError: 'i-003796675eea88aa9'
+]
+140380921919232 2020-11-03 09:44:35,263 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 122, in get
+    ec2_list = op.get_ec2_and_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 127, in get_ec2_and_user
+    item.update(query_set[item['instance_id']])
+KeyError: 'i-003796675eea88aa9'
+]
+140636788389632 2020-11-03 09:59:16,720 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:127] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 122, in get
+    ec2_list = op.get_ec2_and_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 134, in get_ec2_and_user
+    item['status'] = instance_status[item['instance_id']]
+KeyError: 'i-003796675eea88aa9'
+]
+139935394817792 2020-11-05 04:05:50,402 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:154] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 151, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 77, in get_ec2_list
+    ec2_list = Ec2.objects.values().filter(**params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 904, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 923, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1337, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1365, in _add_q
+    split_subq=split_subq, simple_col=simple_col,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1239, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1077, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1467, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'region' into field. Choices are: autoscaling, az, enable, id, instance_id, instance_state, instance_type, name, private_ip, public_ipv4, region_name, update_time
+]
+139935394817792 2020-11-05 04:05:56,030 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:154] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 151, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 77, in get_ec2_list
+    ec2_list = Ec2.objects.values().filter(**params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 904, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 923, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1337, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1365, in _add_q
+    split_subq=split_subq, simple_col=simple_col,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1239, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1077, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1467, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'region' into field. Choices are: autoscaling, az, enable, id, instance_id, instance_state, instance_type, name, private_ip, public_ipv4, region_name, update_time
+]
+139935394817792 2020-11-05 04:05:58,614 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:154] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 151, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 77, in get_ec2_list
+    ec2_list = Ec2.objects.values().filter(**params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 904, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 923, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1337, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1365, in _add_q
+    split_subq=split_subq, simple_col=simple_col,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1239, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1077, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1467, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'region' into field. Choices are: autoscaling, az, enable, id, instance_id, instance_state, instance_type, name, private_ip, public_ipv4, region_name, update_time
+]
+139935394817792 2020-11-05 04:06:03,022 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:154] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 151, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 77, in get_ec2_list
+    ec2_list = Ec2.objects.values().filter(**params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 904, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 923, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1337, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1365, in _add_q
+    split_subq=split_subq, simple_col=simple_col,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1239, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1077, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1467, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'region' into field. Choices are: autoscaling, az, enable, id, instance_id, instance_state, instance_type, name, private_ip, public_ipv4, region_name, update_time
+]
+139935394817792 2020-11-05 04:06:05,790 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:154] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 151, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 77, in get_ec2_list
+    ec2_list = Ec2.objects.values().filter(**params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 904, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 923, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1337, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1365, in _add_q
+    split_subq=split_subq, simple_col=simple_col,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1239, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1077, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1467, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'region' into field. Choices are: autoscaling, az, enable, id, instance_id, instance_state, instance_type, name, private_ip, public_ipv4, region_name, update_time
+]
+140245259085568 2020-11-05 04:08:26,766 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:154] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 151, in get
+    ec2_list = op.get_ec2_list(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 77, in get_ec2_list
+    ec2_list = Ec2.objects.values().filter(**params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 904, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 923, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1337, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1365, in _add_q
+    split_subq=split_subq, simple_col=simple_col,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1239, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1077, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1467, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'region' into field. Choices are: autoscaling, az, enable, id, instance_id, instance_state, instance_type, name, private_ip, public_ipv4, region_name, update_time
+]
+139906528732928 2020-11-05 06:02:06,167 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:155] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 150, in get
+    ec2_list = op.get_ec2_and_user(copy.copy(params))
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 124, in get_ec2_and_user
+    ec2_list = Ec2.objects.values().filter(Q(instance_id__in=instance_ids) | Q(autoscaling__in=autoscaling_group_name), **params).all()
+UnboundLocalError: local variable 'autoscaling_group_name' referenced before assignment
+]
+139906528732928 2020-11-05 06:02:13,713 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:155] 获取ec2 list信息失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 150, in get
+    ec2_list = op.get_ec2_and_user(copy.copy(params))
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 124, in get_ec2_and_user
+    ec2_list = Ec2.objects.values().filter(Q(instance_id__in=instance_ids) | Q(autoscaling__in=autoscaling_group_name), **params).all()
+UnboundLocalError: local variable 'autoscaling_group_name' referenced before assignment
+]
+140385214027520 2020-11-05 08:54:53,217 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:228] 脚本部署失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 225, in post
+    main.install_lbe_manager_agent(data['public_ipv4'], data['login_name'], data['file_path'])
+  File "/data/lbe-manager/software_2.0/website/instance_manager/install/main.py", line 56, in install_lbe_manager_agent
+    c.run("sudo apt-get update")
+  File "<decorator-gen-3>", line 2, in run
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 29, in opens
+    self.open()
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 634, in open
+    self.client.connect(**kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/client.py", line 446, in connect
+    passphrase,
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/client.py", line 677, in _auth
+    key_filename, pkey_class, passphrase
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/client.py", line 586, in _key_from_filepath
+    key = klass.from_private_key_file(key_path, password)
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/pkey.py", line 235, in from_private_key_file
+    key = cls(filename=filename, password=password)
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/rsakey.py", line 55, in __init__
+    self._from_private_key_file(filename, password)
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/rsakey.py", line 175, in _from_private_key_file
+    data = self._read_private_key_file("RSA", filename, password)
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/pkey.py", line 307, in _read_private_key_file
+    with open(filename, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'ubuntu/67bde63f9a31949dec2d4c68fa49a256/vshow_frankfurt_20190120_1.pem'
+]
+140430075713280 2020-11-05 08:56:30,692 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:229] 脚本部署失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 226, in post
+    main.install_lbe_manager_agent(data['public_ipv4'], data['login_name'], file_path)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/install/main.py", line 56, in install_lbe_manager_agent
+    c.run("sudo apt-get update")
+  File "<decorator-gen-3>", line 2, in run
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 30, in opens
+    return method(self, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 721, in run
+    return self._run(self._remote_runner(), command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/context.py", line 101, in _run
+    return runner.run(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 363, in run
+    return self._run_body(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 422, in _run_body
+    return self.make_promise() if self._asynchronous else self._finish()
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 489, in _finish
+    raise UnexpectedExit(result)
+invoke.exceptions.UnexpectedExit: Encountered a bad command exit code!
+
+Command: 'sudo apt-get update'
+
+Exit code: 100
+
+Stdout: already printed
+
+Stderr: already printed
+
+
+]
+139827272242944 2020-11-06 02:08:05,632 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:229] 脚本部署失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 226, in post
+    main.install_lbe_manager_agent(data['public_ipv4'], data['login_name'], file_path)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/install/main.py", line 56, in install_lbe_manager_agent
+    c.run("sudo apt-get update")
+  File "<decorator-gen-3>", line 2, in run
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 30, in opens
+    return method(self, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 721, in run
+    return self._run(self._remote_runner(), command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/context.py", line 101, in _run
+    return runner.run(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 363, in run
+    return self._run_body(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 422, in _run_body
+    return self.make_promise() if self._asynchronous else self._finish()
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 489, in _finish
+    raise UnexpectedExit(result)
+invoke.exceptions.UnexpectedExit: Encountered a bad command exit code!
+
+Command: 'sudo apt-get update'
+
+Exit code: 100
+
+Stdout: already printed
+
+Stderr: already printed
+
+
+]
+
+
+
+
+
+
+
+
+
+
+139827272242944 2020-11-06 02:31:32,702 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:229] 脚本部署失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 226, in post
+    main.install_lbe_manager_agent(data['public_ipv4'], data['login_name'], file_path)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/install/main.py", line 64, in install_lbe_manager_agent
+    c.run('sudo ./install_lbe_manager_agent.sh')
+  File "<decorator-gen-3>", line 2, in run
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 30, in opens
+    return method(self, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 721, in run
+    return self._run(self._remote_runner(), command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/context.py", line 101, in _run
+    return runner.run(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 363, in run
+    return self._run_body(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 422, in _run_body
+    return self.make_promise() if self._asynchronous else self._finish()
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 489, in _finish
+    raise UnexpectedExit(result)
+invoke.exceptions.UnexpectedExit: Encountered a bad command exit code!
+
+Command: 'cd /tmp/lbe_manager_agent && sudo ./install_lbe_manager_agent.sh'
+
+Exit code: 255
+
+Stdout: already printed
+
+Stderr: already printed
+
+
+]
+139827272242944 2020-11-06 02:36:25,676 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:229] 脚本部署失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 226, in post
+    main.install_lbe_manager_agent(data['public_ipv4'], data['login_name'], file_path)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/install/main.py", line 64, in install_lbe_manager_agent
+    c.run('sudo ./install_lbe_manager_agent.sh')
+  File "<decorator-gen-3>", line 2, in run
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 30, in opens
+    return method(self, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 721, in run
+    return self._run(self._remote_runner(), command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/context.py", line 101, in _run
+    return runner.run(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 363, in run
+    return self._run_body(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 422, in _run_body
+    return self.make_promise() if self._asynchronous else self._finish()
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 489, in _finish
+    raise UnexpectedExit(result)
+invoke.exceptions.UnexpectedExit: Encountered a bad command exit code!
+
+Command: 'cd /tmp/lbe_manager_agent && sudo ./install_lbe_manager_agent.sh'
+
+Exit code: 255
+
+Stdout: already printed
+
+Stderr: already printed
+
+
+]
+139923317540608 2020-11-06 04:17:24,650 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:232] 脚本部署失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 228, in post
+    main.install_lbe_manager_agent(data['public_ipv4'], data['login_name'], file_path)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/install/main.py", line 65, in install_lbe_manager_agent
+    c.run('sudo ./install_lbe_manager_agent.sh')
+  File "<decorator-gen-3>", line 2, in run
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 30, in opens
+    return method(self, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 721, in run
+    return self._run(self._remote_runner(), command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/context.py", line 101, in _run
+    return runner.run(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 363, in run
+    return self._run_body(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 422, in _run_body
+    return self.make_promise() if self._asynchronous else self._finish()
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 489, in _finish
+    raise UnexpectedExit(result)
+invoke.exceptions.UnexpectedExit: Encountered a bad command exit code!
+
+Command: 'cd /tmp/lbe_manager_agent && sudo ./install_lbe_manager_agent.sh'
+
+Exit code: 255
+
+Stdout: already printed
+
+Stderr: already printed
+
+
+]
+139923317540608 2020-11-06 04:21:33,290 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:232] 脚本部署失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 228, in post
+    main.install_lbe_manager_agent(data['public_ipv4'], data['login_name'], file_path)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/install/main.py", line 57, in install_lbe_manager_agent
+    c.run("sudo apt-get update")
+  File "<decorator-gen-3>", line 2, in run
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 30, in opens
+    return method(self, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 721, in run
+    return self._run(self._remote_runner(), command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/context.py", line 101, in _run
+    return runner.run(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 363, in run
+    return self._run_body(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 422, in _run_body
+    return self.make_promise() if self._asynchronous else self._finish()
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 489, in _finish
+    raise UnexpectedExit(result)
+invoke.exceptions.UnexpectedExit: Encountered a bad command exit code!
+
+Command: 'sudo apt-get update'
+
+Exit code: 100
+
+Stdout: already printed
+
+Stderr: already printed
+
+
+]
+139923317540608 2020-11-06 04:22:13,062 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:232] 脚本部署失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 228, in post
+    main.install_lbe_manager_agent(data['public_ipv4'], data['login_name'], file_path)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/install/main.py", line 57, in install_lbe_manager_agent
+    c.run("sudo apt-get update")
+  File "<decorator-gen-3>", line 2, in run
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 30, in opens
+    return method(self, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 721, in run
+    return self._run(self._remote_runner(), command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/context.py", line 101, in _run
+    return runner.run(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 363, in run
+    return self._run_body(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 422, in _run_body
+    return self.make_promise() if self._asynchronous else self._finish()
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 489, in _finish
+    raise UnexpectedExit(result)
+invoke.exceptions.UnexpectedExit: Encountered a bad command exit code!
+
+Command: 'sudo apt-get update'
+
+Exit code: 100
+
+Stdout: already printed
+
+Stderr: already printed
+
+
+]
+140367604385536 2020-11-06 05:54:25,515 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:232] 脚本部署失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 228, in post
+    main.install_lbe_manager_agent(data['public_ipv4'], data['login_name'], file_path)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/install/main.py", line 65, in install_lbe_manager_agent
+    c.run('sudo ./install_lbe_manager_agent.sh')
+  File "<decorator-gen-3>", line 2, in run
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 30, in opens
+    return method(self, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 721, in run
+    return self._run(self._remote_runner(), command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/context.py", line 101, in _run
+    return runner.run(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 363, in run
+    return self._run_body(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 422, in _run_body
+    return self.make_promise() if self._asynchronous else self._finish()
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 489, in _finish
+    raise UnexpectedExit(result)
+invoke.exceptions.UnexpectedExit: Encountered a bad command exit code!
+
+Command: 'cd /tmp/lbe_manager_agent && sudo ./install_lbe_manager_agent.sh'
+
+Exit code: 255
+
+Stdout: already printed
+
+Stderr: already printed
+
+
+]
+140345666897664 2020-11-06 05:59:26,398 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:232] 脚本部署失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 225, in post
+    file_path = os.path.join(FileView.BASE_PATH, data['file_path'])
+KeyError: 'file_path'
+]
+140345666897664 2020-11-06 05:59:29,579 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:232] 脚本部署失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 225, in post
+    file_path = os.path.join(FileView.BASE_PATH, data['file_path'])
+KeyError: 'file_path'
+]
+140345666897664 2020-11-06 06:00:27,430 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:232] 脚本部署失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 228, in post
+    main.install_lbe_manager_agent(data['public_ipv4'], data['login_name'], file_path)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/install/main.py", line 65, in install_lbe_manager_agent
+    c.run('sudo ./install_lbe_manager_agent.sh')
+  File "<decorator-gen-3>", line 2, in run
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 30, in opens
+    return method(self, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/fabric/connection.py", line 721, in run
+    return self._run(self._remote_runner(), command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/context.py", line 101, in _run
+    return runner.run(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 363, in run
+    return self._run_body(command, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 422, in _run_body
+    return self.make_promise() if self._asynchronous else self._finish()
+  File "/usr/local/lib/python3.6/dist-packages/invoke/runners.py", line 489, in _finish
+    raise UnexpectedExit(result)
+invoke.exceptions.UnexpectedExit: Encountered a bad command exit code!
+
+Command: 'cd /tmp/lbe_manager_agent && sudo ./install_lbe_manager_agent.sh'
+
+Exit code: 255
+
+Stdout: already printed
+
+Stderr: already printed
+
+
+]
+140419281094400 2020-11-10 03:48:19,570 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py get  [line:251] 获取autoscaling 未分配用户失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 244, in get
+    login_names = op.get_login_name(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 179, in get_login_name
+    login_names = AutoScalingMapUser.objects.values('login_name').filter(**params).distinct()
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 904, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 923, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1337, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1365, in _add_q
+    split_subq=split_subq, simple_col=simple_col,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1239, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1077, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1467, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'autoscaling' into field. Choices are: autoscaling_group_name, id, is_enable, login_name, sudo_permission
+]
+140551831664384 2020-11-10 04:15:26,113 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:110] 更新　ec2 and user出错, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 107, in post
+    op.insert_ec2_and_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 158, in insert_ec2_and_user
+    info = Ec2MapUser.objects.filter(instance_id=params['instance_id'], login_name=params['login_name']).first()
+KeyError: 'instance_id'
+]
+140551831664384 2020-11-10 04:15:35,544 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:110] 更新　ec2 and user出错, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 107, in post
+    op.insert_ec2_and_user(params)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 158, in insert_ec2_and_user
+    info = Ec2MapUser.objects.filter(instance_id=params['instance_id'], login_name=params['login_name']).first()
+KeyError: 'instance_id'
+]
+140243072173824 2020-11-10 04:23:31,720 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:262] autoscaling权限配置失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 259, in post
+    op.insert_autoscaling_map_user(data)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 198, in insert_autoscaling_map_user
+    autoscaling = AutoScalingMapUser.objects.filter(login_name=params['login_name'],
+KeyError: 'login_name'
+]
+140116909029120 2020-11-10 07:53:27,958 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:269] autoscaling权限配置失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 266, in post
+    op.update_autoscaling_map_user(params, filters)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 209, in update_autoscaling_map_user
+    AutoScalingMapUser.objects.filter(**filters).update(**params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 904, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 923, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1337, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1365, in _add_q
+    split_subq=split_subq, simple_col=simple_col,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1239, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1077, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1467, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'autoscaling' into field. Choices are: autoscaling_group_name, id, is_enable, login_name, sudo_permission
+]
+140116909029120 2020-11-10 07:53:37,826 ERROR    /data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py post  [line:269] autoscaling权限配置失败, error: [Traceback (most recent call last):
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/views.py", line 266, in post
+    op.update_autoscaling_map_user(params, filters)
+  File "/data/lbe-manager/software_2.0/website/instance_manager/region_ec2_manager/db_operator.py", line 209, in update_autoscaling_map_user
+    AutoScalingMapUser.objects.filter(**filters).update(**params)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 904, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/query.py", line 923, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1337, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1365, in _add_q
+    split_subq=split_subq, simple_col=simple_col,
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1239, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1077, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/usr/local/lib/python3.6/dist-packages/django/db/models/sql/query.py", line 1467, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'autoscaling' into field. Choices are: autoscaling_group_name, id, is_enable, login_name, sudo_permission
+]

@@ -1,0 +1,315 @@
+{% extends 'base/base.html' %}
+{% load i18n%}
+{% load static %}
+{% block title %}User List{% endblock %}
+{% block extracss %}
+
+  <link rel="stylesheet" href="{% static 'vue/css/index.css' %}">
+  <script src="{% static 'vue/js/vue.js' %}"></script>
+  <!-- import JavaScript -->
+  <script src="{% static 'vue/elementui/index.js' %}"></script>
+  <script src="{% static 'vue/js/axios.min.js' %}"></script>
+  <script src="{% static 'vue/js/moment.js' %}"></script>
+  <script src="{% static 'js/md5.js' %}"></script>
+  <style>
+    .input-block {
+      margin-bottom: 20px;
+    }
+
+    .item {
+      margin-top: 10px;
+      margin-right: 40px;
+    }
+
+    .el-row {
+        margin-bottom: 20px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .el-col {
+        border-radius: 4px;
+    }
+
+    .bg-purple-dark {
+        background: #99a9bf;
+    }
+
+    .bg-purple {
+        background: #d3dce6;
+    }
+
+    .bg-purple-light {
+        background: #e5e9f2;
+    }
+
+    .grid-content {
+        border-radius: 4px;
+        min-height: 36px;
+    }
+
+    .row-bg {
+        padding: 10px 0;
+        background-color: #f9fafc;
+    }
+    .input-color{
+        color: blue;
+    }
+    .prompt-color{
+        color: red;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- Main content -->
+    <section class="content">
+      <div id="app">
+          <div>
+              <div style="float: right; margin-right: 20px">
+                  <el-button @click="show_add_user_click" type="primary">添加用户</el-button>
+              </div>
+          </div>
+          <el-table
+                  :data="user_list.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                  style="width: 100%" element-loading-spinner="el-icon-loading"
+                  :cell-style="{'white-space':'norwap', 'text-overflow':'ellipsis', 'overfllow':'hidden'}"
+                  max-height="800"
+                  row-key="id"
+                  border
+                  :tree-props="{children: 'child_list'}">
+              <el-table-column
+                      prop="login_name"
+                      label="{% trans 'Login Name' %}"
+                      width="200"
+                      sortable>
+              </el-table-column>
+              <el-table-column
+                      prop="username"
+                      label="{% trans 'UserName' %}">
+                  <template slot-scope="scope">
+                      <span style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"
+                            v-text="scope.row.username"></span>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      prop="is_enable"
+                      label="{% trans 'IsEnable' %}"
+                    sortable>
+                  <template slot-scope="scope">
+                      <el-switch
+                              v-model="scope.row.is_enable"
+                              active-color="#13ce66"
+                              inactive-color="#ff4949"
+                              :active-value="1"
+                              :inactive-value="0"
+                              @change="update_user_status(scope.row.login_name, scope.row.is_enable)">
+                      </el-switch>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      label="{% trans 'Ec2 List' %}"
+                      width="180" >
+                  <template slot-scope="scope">
+                      <el-button @click="get_ec2_list(scope.row.login_name)" v-if="scope.row.is_enable" type="primary">Ec2 List</el-button>
+                  </template>
+              </el-table-column>
+          </el-table>
+          <div tyle="text-align: center;margin-top: 30px;">
+              <el-pagination
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange"
+                  :current-page="currentPage"
+                  :page-sizes="[10, 50, 100, 500]"
+                  :page-size="pagesize"
+                  layout="total, sizes, prev, pager, next, jumper"
+                  :total="user_list.length"
+                  >
+            </el-pagination>
+          </div>
+          <el-dialog
+                  title="添加用户"
+                  :visible.sync="add_user_dialog"
+                  width="30%"
+                  center
+                  :modal="false"
+                  :show-close="false">
+              <div>
+                <el-row :gutter="20">
+                    <el-col :span="4">
+                        <el-tag>Login Name</el-tag>
+                    </el-col>
+                    <el-col :span="10" :offset="2">
+                        <el-input v-model="user_info.login_name" clearable placeholder="请输入Login Name"></el-input>
+                    </el-col>
+                </el-row>
+                <el-row :gutter="20">
+                    <el-col :span="4">
+                        <el-tag>User Name</el-tag>
+                    </el-col>
+                    <el-col :span="10" :offset="2">
+                        <el-input v-model="user_info.username" clearable placeholder="请输入User Name"></el-input>
+                    </el-col>
+                </el-row>
+                <el-row :gutter="20">
+                    <el-col :span="4">
+                        <el-tag>is_enable</el-tag>
+                    </el-col>
+                    <el-col :span="10" :offset="2">
+                        <el-switch
+                              v-model="user_info.is_enable"
+                              active-color="#13ce66"
+                              inactive-color="#ff4949"
+                              :active-value="1"
+                              :inactive-value="0"
+                              >
+                      </el-switch>
+                    </el-col>
+                </el-row>
+              </div>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="add_user_dialog = false">取 消</el-button>
+                <el-button type="primary" @click="add_user_click">确 定</el-button>
+              </span>
+          </el-dialog>
+
+      </div>
+    </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+{% endblock %}
+{% block extrajs %}
+  <script>
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+            account: {},
+            user_list: [],
+            currentPage: 1,
+            pagesize: 10,
+            add_user_dialog: false,
+            user_info: {}
+        }
+      },
+
+      methods: {
+        show_add_user_click: function(){
+            this.add_user_dialog = true;
+            this.user_info = {};
+        },
+        add_user_click: function(){
+            if(!this.user_info.login_name || !this.user_info.username){
+                this.$message({
+                    type: 'warning',
+                    message: '信息填写不完整'
+                });
+                return null
+            }
+            var user_info = this.user_info;
+            var vm = this;
+            var url = '{% url "user_list" %}';
+            var params = {
+                'params': user_info
+            };
+            var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+            axios.post(url, params, {headers: {'x-requested-with': 'XMLHttpRequest', 'x-csrftoken': csrftoken}}).then(function (response) {
+                var data = response.data;
+                if(data.status === 2){
+                    if(data.index){
+                        window.location.href =data.index;
+                    } else {
+                        vm.$message({
+                            type: 'warning',
+                            message: 'Login Name 已经存在'
+                        });
+                    }
+
+                }else if(data.status === 1){
+                    vm.$message({
+                        type: 'error',
+                        message: '添加用户失败'
+                    });
+                }else{
+                    vm.user_list.push(user_info)
+                    vm.add_user_dialog = false;
+                }
+
+            }).catch(function (error) {
+                vm.$message({
+                    type: 'error',
+                    message: '添加用户失败'
+                });
+            })
+        },
+        get_ec2_list(login_name){
+            var url =  '{% url "ec2_list" %}';
+            url += '?login_name=' + login_name;
+            window.open(url);
+        },
+
+        update_user_status(login_name, status){
+            var params = {
+                'params': {
+                    'is_enable': status,
+                },
+                'filters': {
+                    'login_name': login_name
+                }
+            };
+            var vm = this;
+            var url = '{% url "user_list" %}';
+            var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+            axios.post(url, params, {headers: {'x-requested-with': 'XMLHttpRequest', 'x-csrftoken': csrftoken}}).then(function (response) {
+                var data = response.data;
+                if(data.status === 0){
+
+                }else if(data.status === 2){
+                    window.location.href = data.index;
+                }
+                else{
+                    vm.$message({
+                        type: 'error',
+                        message: 'User 停用失败'
+                    });
+                }
+
+            }).catch(function (error) {
+                vm.$message({
+                    type: 'error',
+                    message: 'User 停用失败'
+                })
+            })
+
+        },
+        handleSizeChange: function (size) {
+          this.pagesize = size
+        },
+        handleCurrentChange: function (currentPage) {
+          let vm = this;
+          vm.currentPage = currentPage
+        },
+        set_init_value() {
+            this.user_list =  {{ user_list | safe }};
+            this.status = {{ status | safe }};
+            if(this.status === 1){
+                this.$message({
+                    type: 'error',
+                    message: '数据获取失败'
+                })
+            }
+        },
+        changeSort(columnData) {
+          this.sortParam = columnData.prop;
+          this.order = columnData.order
+        },
+      },
+      created: function created() {
+        //this.init_video_token();
+        this.set_init_value();
+      },
+
+    })
+  </script>
+{% endblock %}

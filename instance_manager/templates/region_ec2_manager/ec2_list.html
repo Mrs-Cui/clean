@@ -1,0 +1,746 @@
+{% extends 'base/base.html' %}
+{% load i18n%}
+{% load static %}
+{% block title %}Ec2 List{% endblock %}
+{% block extracss %}
+
+  <link rel="stylesheet" href="{% static 'vue/css/index.css' %}">
+  <script src="{% static 'vue/js/vue.js' %}"></script>
+  <!-- import JavaScript -->
+  <script src="{% static 'vue/elementui/index.js' %}"></script>
+  <script src="{% static 'vue/js/axios.min.js' %}"></script>
+  <script src="{% static 'vue/js/moment.js' %}"></script>
+  <script src="{% static 'js/md5.js' %}"></script>
+  <style>
+    .input-block {
+      margin-bottom: 20px;
+    }
+
+    .item {
+      margin-top: 10px;
+      margin-right: 40px;
+    }
+
+    .el-row {
+        margin-bottom: 20px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .el-col {
+        border-radius: 4px;
+    }
+
+    .bg-purple-dark {
+        background: #99a9bf;
+    }
+
+    .bg-purple {
+        background: #d3dce6;
+    }
+
+    .bg-purple-light {
+        background: #e5e9f2;
+    }
+
+    .grid-content {
+        border-radius: 4px;
+        min-height: 36px;
+    }
+
+    .row-bg {
+        padding: 10px 0;
+        background-color: #f9fafc;
+    }
+    .input-color{
+        color: blue;
+    }
+    .prompt-color{
+        color: red;
+    }
+    input[type='file']{
+        display: none;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- Main content -->
+    <section class="content">
+      <div id="app">
+          <div>
+              <div>
+                  <el-input v-model="public_ipv4" placeholder="请输入Public Ipv4" clearable style="width:180px"></el-input>
+                  <el-select v-model="region_name" placeholder="请选择可用区"　clearable>
+                      <el-option
+                              v-for="item in region_names"
+                              :key="item"
+                              :label="item"
+                              :value="item">
+                      </el-option>
+                  </el-select>
+                  <el-select v-model="login_name" placeholder="请选择用户" clearable>
+                      <el-option
+                              v-for="item in login_names"
+                              :key="item"
+                              :label="item"
+                              :value="item">
+                      </el-option>
+                  </el-select>
+                  <el-select v-model="autoscaling" placeholder="请选择autoscaling" clearable>
+                      <el-option
+                              v-for="item in autoscalings"
+                              :key="item"
+                              :label="item"
+                              :value="item">
+                      </el-option>
+                  </el-select>
+                  <el-button @click="get_ec2_list">搜索</el-button>
+              </div>
+          </div>
+          <el-table
+                  :data="ec2_list.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                  style="width: 100%" element-loading-spinner="el-icon-loading"
+                  :cell-style="{'white-space':'norwap', 'text-overflow':'ellipsis', 'overfllow':'hidden'}"
+                  max-height="800"
+                  row-key="id"
+                  border
+                  :tree-props="{children: 'child_list'}">
+              <el-table-column
+                      prop="instance_id"
+                      label="{% trans 'Instance Id' %}"
+                      width="180"
+                      sortable>
+              </el-table-column>
+              <el-table-column
+                      prop="name"
+                      label="{% trans 'Instance Name' %}"
+                      width="180">
+                  <template slot-scope="scope">
+                      <span style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"
+                            v-text="scope.row.name"></span>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      prop="instance_type"
+                      label="{% trans 'Instance Type' %}"
+                      sortable
+                      width="150">
+                  <template slot-scope="scope">
+                      <span style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"
+                            v-text="scope.row.instance_type"></span>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      prop="az"
+                      label="{% trans 'Az' %}"
+                      sortable
+                      width="100">
+                  <template slot-scope="scope">
+                      <span style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"
+                            v-text="scope.row.az"></span>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      prop="instance_state"
+                      label="{% trans 'Instance State' %}"
+                      sortable
+                      width="150">
+                  <template slot-scope="scope">
+                      <span style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"
+                            v-text="scope.row.instance_state"></span>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      prop="public_ipv4"
+                      label="{% trans 'Public Ip4' %}"
+                      sortable
+                      width="150">
+                  <template slot-scope="scope">
+                      <span style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"
+                            v-text="scope.row.public_ipv4"></span>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      prop="private_ip"
+                      label="{% trans 'Private Ip' %}"
+                      sortable
+                      width="150">
+                  <template slot-scope="scope">
+                      <span style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"
+                            v-text="scope.row.private_ip"></span>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      prop="autoscaling"
+                      label="{% trans 'AutoScaling' %}"
+                      sortable
+                      width="150">
+                  <template slot-scope="scope">
+                      <span style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"
+                            v-text="scope.row.autoscaling"></span>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      prop="region_name"
+                      label="{% trans 'Region Name' %}"
+                      sortable
+                      width="150">
+                  <template slot-scope="scope">
+                      <span style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"
+                            v-text="scope.row.region_name"></span>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      prop="enable"
+                      label="{% trans 'Enable(实例开关)' %}"
+                      sortable
+                      width="100">
+                  <template slot-scope="scope">
+                      <el-switch
+                              v-model="scope.row.enable"
+                              active-color="#13ce66"
+                              inactive-color="#ff4949"
+                              :active-value="1"
+                              :inactive-value="0"
+                              @change="update_ec2_status(scope.row.instance_id, scope.row.enable)">
+                      </el-switch>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      label="{% trans '详情' %}"
+                      width="100" >
+                  <template slot-scope="scope">
+                      <el-button @click="" >详情</el-button>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      label="{% trans '分配权限' %}"
+                      width="140" >
+                  <template slot-scope="scope">
+                      <el-button @click="permission_config_info_click(scope.row.name, scope.row.instance_id)" v-if="scope.row.enable　&& scope.row.public_ipv4">分配权限</el-button>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      label="{% trans '监管状态' %}"
+                      width="100" >
+                  <template slot-scope="scope">
+                      <el-button  type="success" v-if="scope.row.status === 0" @click="deploy_info_dialog_show(scope.row.public_ipv4)">安装</el-button>
+                      <el-button  type="warning" v-if="scope.row.status === 1" @click="deploy_info_dialog_show(scope.row.public_ipv4)">安装</el-button>
+                      <el-button  type="danger" v-if="scope.row.status === 2" @click="deploy_info_dialog_show(scope.row.public_ipv4)">安装</el-button>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      prop="login_name"
+                      label="{% trans 'Login Name' %}"
+                      sortable
+                      width="150" v-if="login_name">
+                  <template slot-scope="scope">
+                      <span style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"
+                            v-text="scope.row.login_name"></span>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      label="{% trans 'Is Super' %}"
+                      width="180" v-if="login_name">
+                  <template slot-scope="scope">
+                      <el-switch
+                              v-model="scope.row.sudo_permission"
+                              active-color="#13ce66"
+                              inactive-color="#ff4949"
+                              :active-value="1"
+                              :inactive-value="0"
+                              @change="update_user_permission(scope.row.instance_id, scope.row.login_name, scope.row.sudo_permission)">
+                      </el-switch>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      label="{% trans 'Is Enable(用户权限开关)' %}"
+                      width="180" v-if="login_name">
+                  <template slot-scope="scope">
+                      <el-switch
+                              v-model="scope.row.is_enable"
+                              active-color="#13ce66"
+                              inactive-color="#ff4949"
+                              :active-value="1"
+                              :inactive-value="0"
+                              @change="update_user_status(scope.row.instance_id, scope.row.login_name, scope.row.is_enable)">
+                      </el-switch>
+                  </template>
+              </el-table-column>
+
+          </el-table>
+          <div tyle="text-align: center;margin-top: 30px;">
+              <el-pagination
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange"
+                  :current-page="currentPage"
+                  :page-sizes="[10, 50, 100, 500]"
+                  :page-size="pagesize"
+                  layout="total, sizes, prev, pager, next, jumper"
+                  :total="ec2_list.length"
+                  >
+            </el-pagination>
+          </div>
+          <el-dialog
+                  title="部署信息"
+                  :visible.sync="deploy_script_file"
+                  width="30%"
+                  center
+                  :modal="false"
+                  :show-close="false">
+              <div>
+                <el-row :gutter="20">
+                    <el-col :span="4">
+                        <el-tag>Login Name</el-tag>
+                    </el-col>
+                    <el-col :span="10" :offset="2">
+                        <el-input v-model="deploy_info.login_name" clearable placeholder="请输入Login Name"></el-input>
+                    </el-col>
+                </el-row>
+                <el-row :gutter="20">
+                    <el-col :span="4">
+                        <el-tag>Public Ip</el-tag>
+                    </el-col>
+                    <el-col :span="10" :offset="2">
+                        <el-input v-model="deploy_info.public_ipv4" clearable placeholder="请输入User Name" disabled></el-input>
+                    </el-col>
+                </el-row>
+                <el-row :gutter="20">
+                    <el-col :span="4">
+                        <el-tag>Key</el-tag>
+                    </el-col>
+                    <el-col :span="10" :offset="2">
+                        <el-upload
+                                class="upload-demo"
+                                ref="upload"
+                                action="{% url 'file' %}"
+                                :file-list="fileList"
+                                :auto-upload="false"
+                                :data="deploy_info"
+                                :on-success="file_upload_success"
+                                :on-error="file_upload_fail">
+                            <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+                            <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">
+                                上传到服务器
+                            </el-button>
+                            <div slot="tip" class="el-upload__tip">上传.pem秘钥文件, 文件读写权限设置成644, 否则会上传失败.</div>
+                        </el-upload>
+                    </el-col>
+                </el-row>
+              </div>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="deploy_script_file = false">取 消</el-button>
+                <el-button type="primary" @click="start_deploy">部署</el-button>
+              </span>
+          </el-dialog>
+          <el-dialog
+                  title="权限配置"
+                  :visible.sync="permission_config_info_show"
+                  width="30%"
+                  center
+                  :modal="false"
+                  :show-close="false">
+              <div>
+                  <el-row :gutter="20">
+                      <el-col :span="4">
+                          <el-tag>Instance Name</el-tag>
+                      </el-col>
+                      <el-col :span="10" :offset="2">
+                          <el-input v-model="permission_config_info.instance_id" clearable placeholder="请输入Instance Name"
+                                    disabled></el-input>
+                      </el-col>
+                  </el-row>
+                  <el-row :gutter="20">
+                      <el-col :span="4">
+                          <el-tag>Login Name</el-tag>
+                      </el-col>
+                      <el-col :span="10" :offset="2">
+                          <el-select v-model="permission_config_info.login_name" placeholder="请选择用户" clearable>
+                              <el-option
+                                      v-for="item in user_list"
+                                      :key="item"
+                                      :label="item"
+                                      :value="item">
+                              </el-option>
+                          </el-select>
+                      </el-col>
+                  </el-row>
+                  <el-row :gutter="20">
+                      <el-col :span="4">
+                          <el-tag>Is Enable</el-tag>
+                      </el-col>
+                      <el-col :span="10" :offset="2">
+                          <el-switch
+                              v-model="permission_config_info.is_enable"
+                              active-color="#13ce66"
+                              inactive-color="#ff4949"
+                              :active-value="1"
+                              :inactive-value="0">
+                        </el-switch>
+                      </el-col>
+                  </el-row>
+                  <el-row :gutter="20">
+                      <el-col :span="4">
+                          <el-tag>Sudo Permission</el-tag>
+                      </el-col>
+                      <el-col :span="10" :offset="2">
+                          <el-switch
+                              v-model="permission_config_info.sudo_permission"
+                              active-color="#13ce66"
+                              inactive-color="#ff4949"
+                              :active-value="1"
+                              :inactive-value="0">
+                        </el-switch>
+                      </el-col>
+                  </el-row>
+              </div>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="permission_config_info_show = false">取 消</el-button>
+                <el-button type="primary" @click="instance_permission_config">确定</el-button>
+              </span>
+          </el-dialog>
+      </div>
+    </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+{% endblock %}
+{% block extrajs %}
+  <script>
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+            account: {},
+            ec2_list: [],
+            currentPage: 1,
+            pagesize: 10,
+            region_name: '',
+            autoscaling: '',
+            login_name: '',
+            region_names: [],
+            autoscalings: [],
+            login_names: [],
+            public_ipv4: '',
+            deploy_script_file: false,
+            deploy_info: {},
+            fileList: [],
+            permission_config_info: {},
+            permission_config_info_show: false,
+            user_list: []
+        }
+      },
+
+      methods: {
+        instance_permission_config: function(){
+            var url = '{% url "ec2_map_user_list" %}';
+            var vm = this;
+            var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+            axios.post(url, {'params': this.permission_config_info}, {headers: {'x-requested-with': 'XMLHttpRequest', 'x-csrftoken': csrftoken}}).then(function (response) {
+                var data = response.data;
+                if(data.status === 0){
+                    vm.$message({
+                        type: 'success',
+                        message: '权限配置成功'
+                    });
+                    vm.permission_config_info_show = false;
+                }else if(data.status === 2){
+                    window.location.href = data.index;
+                }
+                else{
+                    vm.$message({
+                        type: 'error',
+                        message: '权限配置失败'
+                    });
+                }
+            }).catch(function (error) {
+                vm.$message({
+                    type: 'error',
+                    message: '权限配置失败'
+                });
+            })
+        },
+        get_ec2_map_user_list: function(instance_id){
+            this.user_list = [];
+            var vm = this;
+            var params = {
+                'instance_id': instance_id
+            };
+            var url = '{% url "ec2_map_user_list" %}';
+            axios.get(url, {'params': params, 'headers': {'x-requested-with': 'XMLHttpRequest'}}).then(function (response) {
+                var data = response.data;
+                if(data.status === 0){
+                    var tmp = data.user_list;
+                    for(var i=0; i< vm.login_names.length; i++){
+                        if(tmp.indexOf(vm.login_names[i]) === -1){
+                            vm.user_list.push(vm.login_names[i])
+                        }
+                    }
+                    vm.$forceUpdate();
+                }else if(data.status === 2){
+                    window.location.href = data.index;
+                }
+                else{
+                    vm.$message({
+                        type: 'error',
+                        message: '获取可分配用户失败'
+                    })
+                }
+
+            }).catch(function (error) {
+                vm.$message({
+                    type: 'error',
+                    message: '获取可分配用户失败'
+                })
+            })
+
+        },
+      　permission_config_info_click: function(name, instance_id){
+            this.permission_config_info_show = true;
+            this.permission_config_info = {
+                'instance_id': instance_id
+            };
+            this.get_ec2_map_user_list(instance_id)
+       },
+        start_deploy: function(){
+            var vm = this;
+            var url = '{% url "deploy_script" %}';
+            const loading = this.$loading({
+                lock: true,
+                text: '正在部署中,请稍等...',
+                spinner: 'el-icon-loading',
+                background: 'rgba(10, 0, 0, 0.7)'
+            });
+            var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+            axios.post(url, this.deploy_info, {headers: {'x-requested-with': 'XMLHttpRequest', 'x-csrftoken': csrftoken}}).then(function (response) {
+                var data = response.data;
+                if(data.status === 0){
+                    loading.close();
+                    vm.$message({
+                        type: 'success',
+                        message: '脚本及工具部署成功'
+                    });
+                }else if(data.status === 2){
+                    window.location.href = data.index;
+                }
+                else{
+                    loading.close();
+                    vm.$message({
+                        type: 'error',
+                        message: '脚本及工具部署失败'
+                    });
+                }
+
+            }).catch(function (error) {
+                loading.close();
+                vm.$message({
+                    type: 'error',
+                    message: '脚本及工具部署失败'
+                })
+            });
+            setTimeout(() => {
+                loading.close();
+            }, 20000)
+        },
+        submitUpload() {
+              if(!this.deploy_info.login_name){
+                  this.$message({
+                      type: 'warning',
+                      message: '请填写login name'
+                  });
+                  return null;
+              }
+              this.$refs.upload.submit();
+        },
+        file_upload_fail: function(error, file, fileList){
+            this.$message({
+                type: 'error',
+                message: '秘钥文件上传失败'
+            })
+        },
+        file_upload_success: function(response, file, fileList){
+            if(response.status === 1){
+                this.$message({
+                    type: 'error',
+                    message: '秘钥文件上传失败'
+                });
+                this.fileList = [];
+            }else{
+                this.$message({
+                    type: 'success',
+                    message: '秘钥文件上传成功!'
+                });
+                this.deploy_info['file_path'] = response.file_path;
+            }
+        },
+        deploy_info_dialog_show: function(public_ipv4){
+            this.deploy_script_file = true;
+            this.deploy_info = {
+                'type': 'pem',
+                'public_ipv4': public_ipv4
+            };
+            this.fileList = [];
+        },
+        get_ec2_list(){
+            var url = '{% url 'ec2_list' %}';
+            var vm = this;
+            var params = {};
+            var flag = false;
+            if(this.public_ipv4){
+                params['public_ipv4'] = this.public_ipv4;
+                flag = true;
+            }
+            if(this.login_name){
+                params['login_name'] = this.login_name;
+                flag = true;
+            }
+            if(this.region_name){
+                params['region_name'] = this.region_name;
+                flag = true;
+            }
+            if(this.autoscaling){
+                params['autoscaling'] = this.autoscaling;
+                flag = true;
+            }
+            if(!flag){
+                vm.$message({
+                    type: 'warning',
+                    message: '请选择搜索条件'
+                });
+                return null;
+            }
+            axios.get(url, {'params': params, 'headers': {'x-requested-with': 'XMLHttpRequest'}}).then(function (response) {
+                var data = response.data;
+                if(data.status === 0){
+                    vm.ec2_list = data.ec2_list;
+                }else if(data.status === 2){
+                    window.location.href = data.index;
+                }
+                else{
+                    vm.$message({
+                        type: 'error',
+                        message: '获取数据失败'
+                    })
+                }
+
+            }).catch(function (error) {
+                vm.$message({
+                    type: 'error',
+                    message: '获取数据失败'
+                })
+
+            })
+        },
+        update_user_status: function(instance_id, login_name, is_enable){
+            var params = {
+                'params': {
+                    'is_enable': is_enable
+                },
+                'filters': {
+                    'instance_id': instance_id,
+                    'login_name': login_name
+                }
+            };
+            this.update_ec2_map_user(params)
+        },
+        update_user_permission: function(instance_id, login_name, sudo_permission){
+            var params = {
+                'params': {
+                    'sudo_permission': sudo_permission
+                },
+                'filters': {
+                    'instance_id': instance_id,
+                    'login_name': login_name
+                }
+            };
+            this.update_ec2_map_user(params)
+        },
+        update_ec2_map_user(params){
+            var vm = this;
+            var url = '{% url "ec2_map_user_list" %}';
+            var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+            axios.post(url, params, {'headers': {'x-requested-with': 'XMLHttpRequest', 'x-csrftoken': csrftoken}}).then(function (response) {
+                var data = response.data;
+                if(data.status === 1){
+                    vm.$message({
+                        type: 'error',
+                        message: '操作失败'
+                    })
+                }else if(data.status === 2){
+                    window.location.href = data.index;
+                }
+            }).catch(function (error) {
+                vm.$message({
+                    type: 'error',
+                    message: '操作失败'
+                })
+            })
+        },
+        update_ec2_status(instance_id, status){
+            var params = {
+                'params': {
+                    'enable': status,
+                },
+                'filters': {
+                    'instance_id': instance_id
+                }
+            };
+            var vm = this;
+            var url = '{% url "ec2_list" %}';
+            var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+            axios.post(url, params, {'headers': {'x-requested-with': 'XMLHttpRequest', 'x-csrftoken': csrftoken}}).then(function (response) {
+                var data = response.data;
+                if(data.status === 0){
+
+                }else if(data.status === 2){
+                    window.location.href = data.index;
+                }
+                else{
+                    vm.$message({
+                        type: 'error',
+                        message: 'Ec2 停用失败'
+                    });
+                }
+
+            }).catch(function (error) {
+                vm.$message({
+                    type: 'error',
+                    message: 'Ec2 停用失败'
+                })
+            })
+
+        },
+        handleSizeChange: function (size) {
+          this.pagesize = size
+        },
+        handleCurrentChange: function (currentPage) {
+          let vm = this;
+          vm.currentPage = currentPage
+        },
+        set_init_value() {
+            this.ec2_list = JSON.parse('{{ ec2_list | safe }}');
+            this.region_names = {{ region_names | safe }};
+            this.login_names = {{ login_names | safe }};
+            this.autoscalings = {{ autoscalings | safe }};
+            var params = JSON.parse('{{ params | safe }}');
+            if(params){
+                for(var key in params){
+                    this[key] = params[key];
+                }
+            }
+
+        },
+        changeSort(columnData) {
+          this.sortParam = columnData.prop
+          this.order = columnData.order
+        },
+      },
+      created: function created() {
+        //this.init_video_token();
+        this.set_init_value();
+      },
+
+    })
+  </script>
+{% endblock %}

@@ -1,0 +1,441 @@
+{% extends 'base/base.html' %}
+{% load i18n%}
+{% load static %}
+{% block title %}AutoScaling List{% endblock %}
+{% block extracss %}
+
+  <link rel="stylesheet" href="{% static 'vue/css/index.css' %}">
+  <script src="{% static 'vue/js/vue.js' %}"></script>
+  <!-- import JavaScript -->
+  <script src="{% static 'vue/elementui/index.js' %}"></script>
+  <script src="{% static 'vue/js/axios.min.js' %}"></script>
+  <script src="{% static 'vue/js/moment.js' %}"></script>
+  <script src="{% static 'js/md5.js' %}"></script>
+  <style>
+    .input-block {
+      margin-bottom: 20px;
+    }
+
+    .item {
+      margin-top: 10px;
+      margin-right: 40px;
+    }
+
+    .el-row {
+        margin-bottom: 20px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .el-col {
+        border-radius: 4px;
+    }
+
+    .bg-purple-dark {
+        background: #99a9bf;
+    }
+
+    .bg-purple {
+        background: #d3dce6;
+    }
+
+    .bg-purple-light {
+        background: #e5e9f2;
+    }
+
+    .grid-content {
+        border-radius: 4px;
+        min-height: 36px;
+    }
+
+    .row-bg {
+        padding: 10px 0;
+        background-color: #f9fafc;
+    }
+    .input-color{
+        color: blue;
+    }
+    .prompt-color{
+        color: red;
+    }
+    input[type='file']{
+        display: none;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- Main content -->
+    <section class="content">
+      <div id="app">
+          <div>
+              <div>
+                  <el-select v-model="select_login_name" placeholder="请选择用户" clearable>
+                      <el-option
+                              v-for="item in login_names"
+                              :key="item"
+                              :label="item"
+                              :value="item">
+                      </el-option>
+                  </el-select>
+                  <el-button @click="get_autoscaling_list">搜索</el-button>
+              </div>
+          </div>
+          <el-table
+                  :data="autoscaling_list.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                  style="width: 100%" element-loading-spinner="el-icon-loading"
+                  :cell-style="{'white-space':'norwap', 'text-overflow':'ellipsis', 'overfllow':'hidden'}"
+                  max-height="800"
+                  row-key="id"
+                  border
+                  :tree-props="{children: 'child_list'}">
+              <el-table-column
+                      prop="autoscaling"
+                      label="{% trans 'AutoScaling' %}"
+
+                      sortable>
+              </el-table-column>
+              <el-table-column
+                      prop="region_name"
+                      label="{% trans 'Region Name' %}"
+                     >
+                  <template slot-scope="scope">
+                      <span style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"
+                            v-text="scope.row.region_name"></span>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      label="{% trans '分配权限' %}"
+                       >
+                  <template slot-scope="scope">
+                      <el-button @click="permission_config_info_click(scope.row.autoscaling)" >分配权限</el-button>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      label="{% trans 'Ec2 List' %}"
+                     >
+                  <template slot-scope="scope">
+                      <el-button @click="get_ec2_list(scope.row.autoscaling)"  type="primary">Ec2 List</el-button>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      prop="login_name"
+                      label="{% trans 'Login Name' %}"
+                      sortable
+                       v-if="select_login_name">
+                  <template slot-scope="scope">
+                      <span style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"
+                            v-text="scope.row.login_name"></span>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      label="{% trans 'Is Super' %}"
+                       v-if="select_login_name">
+                  <template slot-scope="scope">
+                      <el-switch
+                              v-model="scope.row.sudo_permission"
+                              active-color="#13ce66"
+                              inactive-color="#ff4949"
+                              :active-value="1"
+                              :inactive-value="0"
+                              @change="update_autoscaling_permission(scope.row.autoscaling, scope.row.login_name, scope.row.sudo_permission)">
+                      </el-switch>
+                  </template>
+              </el-table-column>
+              <el-table-column
+                      label="{% trans 'Is Enable(用户权限开关)' %}"
+                       v-if="select_login_name">
+                  <template slot-scope="scope">
+                      <el-switch
+                              v-model="scope.row.is_enable"
+                              active-color="#13ce66"
+                              inactive-color="#ff4949"
+                              :active-value="1"
+                              :inactive-value="0"
+                              @change="update_autoscaling_status(scope.row.autoscaling, scope.row.login_name, scope.row.is_enable)">
+                      </el-switch>
+                  </template>
+              </el-table-column>
+
+          </el-table>
+          <div tyle="text-align: center;margin-top: 30px;">
+              <el-pagination
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange"
+                  :current-page="currentPage"
+                  :page-sizes="[10, 50, 100, 500]"
+                  :page-size="pagesize"
+                  layout="total, sizes, prev, pager, next, jumper"
+                  :total="autoscaling_list.length"
+                  >
+            </el-pagination>
+          </div>
+          <el-dialog
+                  title="权限配置"
+                  :visible.sync="permission_config_info_show"
+                  width="30%"
+                  center
+                  :modal="false"
+                  :show-close="false">
+              <div>
+                  <el-row :gutter="20">
+                      <el-col :span="4">
+                          <el-tag>AutoScaling</el-tag>
+                      </el-col>
+                      <el-col :span="10" :offset="2">
+                          <el-input v-model="permission_config_info.autoscaling_group_name" clearable placeholder="请输入AutoScaling"
+                                    disabled></el-input>
+                      </el-col>
+                  </el-row>
+                  <el-row :gutter="20">
+                      <el-col :span="4">
+                          <el-tag>Login Name</el-tag>
+                      </el-col>
+                      <el-col :span="10" :offset="2">
+                          <el-select v-model="permission_config_info.login_name" placeholder="请选择用户" clearable>
+                              <el-option
+                                      v-for="item in user_list"
+                                      :key="item"
+                                      :label="item"
+                                      :value="item">
+                              </el-option>
+                          </el-select>
+                      </el-col>
+                  </el-row>
+                  <el-row :gutter="20">
+                      <el-col :span="4">
+                          <el-tag>Is Enable</el-tag>
+                      </el-col>
+                      <el-col :span="10" :offset="2">
+                          <el-switch
+                              v-model="permission_config_info.is_enable"
+                              active-color="#13ce66"
+                              inactive-color="#ff4949"
+                              :active-value="1"
+                              :inactive-value="0">
+                        </el-switch>
+                      </el-col>
+                  </el-row>
+                  <el-row :gutter="20">
+                      <el-col :span="4">
+                          <el-tag>Sudo Permission</el-tag>
+                      </el-col>
+                      <el-col :span="10" :offset="2">
+                          <el-switch
+                              v-model="permission_config_info.sudo_permission"
+                              active-color="#13ce66"
+                              inactive-color="#ff4949"
+                              :active-value="1"
+                              :inactive-value="0">
+                        </el-switch>
+                      </el-col>
+                  </el-row>
+              </div>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="permission_config_info_show = false">取 消</el-button>
+                <el-button type="primary" @click="autoscaling_permission_config">确定</el-button>
+              </span>
+          </el-dialog>
+      </div>
+    </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+{% endblock %}
+{% block extrajs %}
+  <script>
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+            account: {},
+            autoscaling_list: [],
+            currentPage: 1,
+            pagesize: 10,
+            select_login_name: '',
+            login_names: [],
+            permission_config_info: {},
+            permission_config_info_show: false,
+            user_list: []
+        }
+      },
+
+      methods: {
+        get_ec2_list(autoscaling){
+            var url =  '{% url "ec2_list" %}';
+            url += '?autoscaling=' + autoscaling;
+            window.open(url);
+        },
+        autoscaling_permission_config: function(){
+            var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+            var url = '{% url "autoscaling_map_user_list" %}';
+            var vm = this;
+            axios.post(url, {'params': this.permission_config_info}, {headers: {'x-requested-with': 'XMLHttpRequest', 'x-csrftoken': csrftoken}}).then(function (response) {
+                var data = response.data;
+                if(data.status === 0){
+                    vm.$message({
+                        type: 'success',
+                        message: '权限配置成功'
+                    });
+                    vm.permission_config_info_show = false;
+                    vm.login_names = data.login_names;
+                }else if(data.status === 2){
+                    window.location.href = data.index;
+                }
+                else{
+                    vm.$message({
+                        type: 'error',
+                        message: '权限配置失败'
+                    });
+                }
+            }).catch(function (error) {
+                vm.$message({
+                    type: 'error',
+                    message: '权限配置失败'
+                });
+            })
+        },
+        get_autoscaling_map_user_list: function(autoscaling){
+            this.user_list = [];
+            var vm = this;
+            var params = {
+                'autoscaling_group_name': autoscaling
+            };
+            var url = '{% url "autoscaling_map_user_list" %}';
+            axios.get(url, {'params': params, 'headers': {'x-requested-with': 'XMLHttpRequest'}}).then(function (response) {
+                var data = response.data;
+                if(data.status === 0){
+                    vm.user_list = data.user_list;
+                    vm.$forceUpdate();
+                }else if(data.status === 2){
+                    window.location.href = data.index;
+                }
+                else{
+                    vm.$message({
+                        type: 'error',
+                        message: '获取可分配用户失败'
+                    })
+                }
+
+            }).catch(function (error) {
+                vm.$message({
+                    type: 'error',
+                    message: '获取可分配用户失败'
+                })
+            })
+
+        },
+      　permission_config_info_click: function(autoscaling){
+            this.permission_config_info_show = true;
+            this.permission_config_info = {
+                'autoscaling_group_name': autoscaling
+            };
+            this.get_autoscaling_map_user_list(autoscaling)
+       },
+        get_autoscaling_list(){
+            var url = '{% url 'autoscaling_list' %}';
+            var vm = this;
+            var params = {};
+            var flag = false;
+
+            if(this.select_login_name){
+                params['login_name'] = this.select_login_name;
+                flag = true;
+            }
+            if(!flag){
+                vm.$message({
+                    type: 'warning',
+                    message: '请选择搜索条件'
+                });
+                return null;
+            }
+            axios.get(url, {'params': params, 'headers': {'x-requested-with': 'XMLHttpRequest'}}).then(function (response) {
+                var data = response.data;
+                if(data.status === 0){
+                    vm.autoscaling_list = data.autoscaling_list;
+                }else if(data.status === 2){
+                    window.location.href = data.index;
+                } else{
+                    vm.$message({
+                        type: 'error',
+                        message: '获取数据失败'
+                    })
+                }
+
+            }).catch(function (error) {
+                vm.$message({
+                    type: 'error',
+                    message: '获取数据失败'
+                })
+
+            })
+        },
+        update_autoscaling_status: function(autoscaling, login_name, is_enable){
+            var params = {
+                'params': {
+                    'is_enable': is_enable
+                },
+                'filters': {
+                    'autoscaling_group_name': autoscaling,
+                    'login_name': login_name
+                }
+            };
+            this.update_autoscaling_map_user(params)
+        },
+        update_autoscaling_permission: function(autoscaling, login_name, sudo_permission){
+            var params = {
+                'params': {
+                    'sudo_permission': sudo_permission
+                },
+                'filters': {
+                    'autoscaling_group_name': autoscaling,
+                    'login_name': login_name
+                }
+            };
+            this.update_autoscaling_map_user(params)
+        },
+        update_autoscaling_map_user(params){
+            var vm = this;
+            var url = '{% url "autoscaling_map_user_list" %}';
+            var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+            axios.post(url, params, {headers: {'x-requested-with': 'XMLHttpRequest', 'x-csrftoken': csrftoken}}).then(function (response) {
+                var data = response.data;
+                if(data.status === 1){
+                    vm.$message({
+                        type: 'error',
+                        message: '操作失败'
+                    })
+                }else if(data.status === 2){
+                    window.location.href = data.index;
+                }
+            }).catch(function (error) {
+                vm.$message({
+                    type: 'error',
+                    message: '操作失败'
+                })
+            })
+        },
+        handleSizeChange: function (size) {
+          this.pagesize = size
+        },
+        handleCurrentChange: function (currentPage) {
+          let vm = this;
+          vm.currentPage = currentPage
+        },
+        set_init_value() {
+            this.login_names = {{ login_names | safe }};
+            this.autoscaling_list = {{ autoscaling_list | safe }};
+        },
+        changeSort(columnData) {
+          this.sortParam = columnData.prop
+          this.order = columnData.order
+        },
+      },
+      created: function created() {
+        //this.init_video_token();
+        this.set_init_value();
+      },
+
+    })
+  </script>
+{% endblock %}

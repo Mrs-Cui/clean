@@ -1,0 +1,49 @@
+<header class="main-header">
+    <a href="#" class="logo"><b>Ec2秘钥</b>管理后台</a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only"></span>
+        </a>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {% if account %}
+{#                            <img src="{{ account.icon }}" class="user-image" alt="User Image" style="width:25px;height:25px;"/>#}
+                            <span class="hidden-xs">{{ account.username }}</span>
+                        {% endif %}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                            {% if account %}
+{#                                <img src="{{ account.icon }}" class="img-circle" alt="User Image" />#}
+                                <p>
+                                    {{ account.username }}
+                                    <small>{{ account.description }}</small>
+                                </p>
+                            {% endif %}
+                        </li>
+                        <!-- Menu Body -->
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+{#                      <a href="/zakzak_admin/admin/change/" class="btn btn-default btn-flat">修改密码</a>#}
+                    </div>
+                    <div class="pull-right">
+                      <a href="{% url 'login' %}" class="btn btn-default btn-flat">登出</a>
+                    </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                  </li>
+            </ul>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,84 @@
+/*
+    author:zwzheng
+    date:2018/05/03
+*/
+
+/*  权限验证样式控制  */
+.auth-hidden{
+    display:none;
+}
+
+.auth-disable{
+    text-decoration:none;
+    outline:0 none;
+    pointer-events:none;
+    color:#afafaf;
+    cursor:default;
+}
+/*  清除浮动 */
+.clearfloat{clear:both}
+
+/* 主播审核单选按钮 */
+.fa-dot-circle-o {
+    color: grey;
+}
+
+.fa-check-circle-o {
+  color: green;
+
+}
+
+.fa-times-circle-o {
+  color: red;
+}
+
+.line-md{
+    line-height: 34px;
+}
+
+/* anchor_new_verify样式控制 */
+section.content{
+    overflow: hidden;
+}
+div.form-line{
+    padding-top:15px;
+    border-top: 2px solid #e2e2e2;
+    z-index: 0;
+    overflow: hidden;
+}
+div.form-line:last-child{
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e2e2e2;
+}
+/* anchor照片样式 */
+#photo_albums .img-box{
+    float:left;
+    margin-right: 5px;
+    width:143px;
+    height:260px;
+    padding: 0;
+    position: relative;
+}
+#photo_albums .img-box .lbe_albums_pic{
+    width:100%;
+    height: 220px;
+}
+#photo_albums .img-box .set-first{
+    position: absolute;
+    width:100%;
+    height: 220px;
+    line-height: 220px;
+    text-align: center;
+    color: #00BFFF;
+    background-color: rgba(255,255,255,0.6);
+    font-size: 1.5em;
+    top:0;
+    left: 0;
+    text-decoration: none;
+    cursor: pointer;
+    visibility: hidden;
+}
+.form-group #photo_albums .img-box:hover a.set-first{
+    visibility: visible;
+    color: #01FF70;
+}

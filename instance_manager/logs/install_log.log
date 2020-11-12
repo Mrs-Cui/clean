@@ -1,0 +1,107 @@
+####### Start installing lbe_manager_agent ########
+35.157.148.99 ubuntu /opt/www/static/ubuntu/1a36b43b633b8a0e730b2f4c507aa71c/meet_fr_for_scripts.pem
+Hit:1 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial InRelease
+Get:2 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial-updates InRelease [109 kB]
+Get:3 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial-backports InRelease [107 kB]
+Get:4 http://dl.google.com/linux/chrome/deb stable InRelease [1,811 B]
+Get:5 http://security.ubuntu.com/ubuntu xenial-security InRelease [109 kB]
+Ign:4 http://dl.google.com/linux/chrome/deb stable InRelease
+Fetched 327 kB in 0s (589 kB/s)
+Reading package lists...
+install lbe_manager_agent failure
+####### Start installing lbe_manager_agent ########
+52.29.57.106 ubuntu /opt/www/static/ubuntu/67bde63f9a31949dec2d4c68fa49a256/vshow_frankfurt_20190120_1.pem
+Hit:1 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial InRelease
+Get:2 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial-updates InRelease [109 kB]
+Get:3 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial-backports InRelease [107 kB]
+Ign:4 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial InRelease
+Hit:5 http://ppa.launchpad.net/webupd8team/java/ubuntu xenial InRelease
+Ign:6 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial Release
+Ign:7 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main amd64 Packages
+Get:8 https://packages.cloud.google.com/apt cloud-sdk InRelease [6,349 B]
+Ign:9 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main all Packages
+Get:10 http://security.ubuntu.com/ubuntu xenial-security InRelease [109 kB]
+Ign:11 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en_US
+Ign:12 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en
+Ign:7 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main amd64 Packages
+Ign:9 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main all Packages
+Ign:11 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en_US
+Ign:12 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en
+Ign:7 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main amd64 Packages
+Ign:9 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main all Packages
+Ign:11 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en_US
+Ign:12 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en
+Ign:7 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main amd64 Packages
+Ign:9 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main all Packages
+Ign:11 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en_US
+Ign:12 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en
+Ign:7 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main amd64 Packages
+Ign:9 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main all Packages
+Ign:11 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en_US
+Ign:12 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en
+Err:7 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main amd64 Packages
+  403  Forbidden [IP: 91.189.95.83 80]
+Ign:9 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main all Packages
+Ign:11 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en_US
+Ign:12 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en
+Fetched 332 kB in 0s (423 kB/s)
+Reading package lists...
+####### Start installing lbe_manager_agent ########
+52.29.57.106 ubuntu /opt/www/static/ubuntu/67bde63f9a31949dec2d4c68fa49a256/vshow_frankfurt_20190120_1.pem
+Hit:1 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial InRelease
+Hit:2 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial-updates InRelease
+Hit:3 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial-backports InRelease
+Ign:4 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial InRelease
+Get:5 http://security.ubuntu.com/ubuntu xenial-security InRelease [109 kB]
+Hit:6 http://ppa.launchpad.net/webupd8team/java/ubuntu xenial InRelease
+Ign:7 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial Release
+Hit:8 https://packages.cloud.google.com/apt cloud-sdk InRelease
+Ign:9 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main amd64 Packages
+Ign:10 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main all Packages
+Ign:11 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en_US
+Ign:12 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en
+Ign:9 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main amd64 Packages
+Ign:10 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main all Packages
+Ign:11 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en_US
+Ign:12 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en
+Ign:9 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main amd64 Packages
+Ign:10 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main all Packages
+Ign:11 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en_US
+Ign:12 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en
+Ign:9 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main amd64 Packages
+Ign:10 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main all Packages
+Ign:11 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en_US
+Ign:12 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en
+Ign:9 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main amd64 Packages
+Ign:10 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main all Packages
+Ign:11 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en_US
+Ign:12 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en
+Err:9 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main amd64 Packages
+  403  Forbidden [IP: 91.189.95.83 80]
+Ign:10 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main all Packages
+Ign:11 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en_US
+Ign:12 http://ppa.launchpad.net/jonathonf/python-3.6/ubuntu xenial/main Translation-en
+Fetched 109 kB in 0s (140 kB/s)
+Reading package lists...
+####### Start installing lbe_manager_agent ########
+35.157.148.99 ubuntu /opt/www/static/ubuntu/1a36b43b633b8a0e730b2f4c507aa71c/meet_fr_for_scripts.pem
+Hit:1 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial InRelease
+Get:2 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial-updates InRelease [109 kB]
+Get:3 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial-backports InRelease [107 kB]
+Get:4 http://dl.google.com/linux/chrome/deb stable InRelease [1,811 B]
+Get:5 http://security.ubuntu.com/ubuntu xenial-security InRelease [109 kB]
+Ign:4 http://dl.google.com/linux/chrome/deb stable InRelease
+Fetched 327 kB in 0s (643 kB/s)
+Reading package lists...
+install lbe_manager_agent failure
+####### Start installing lbe_manager_agent ########
+35.157.148.99 ubuntu /opt/www/static/ubuntu/1a36b43b633b8a0e730b2f4c507aa71c/meet_fr_for_scripts.pem
+Hit:1 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial InRelease
+Hit:2 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial-updates InRelease
+Hit:3 http://eu-central-1.ec2.archive.ubuntu.com/ubuntu xenial-backports InRelease
+Get:4 http://dl.google.com/linux/chrome/deb stable InRelease [1,811 B]
+Hit:5 http://security.ubuntu.com/ubuntu xenial-security InRelease
+Ign:4 http://dl.google.com/linux/chrome/deb stable InRelease
+Fetched 1,811 B in 0s (3,071 B/s)
+Reading package lists...
+install lbe_manager_agent failure
