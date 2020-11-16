@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-11-16T06:03:36.899Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36" etag="TgMNUE6qAUADNhMO5f4F" version="13.9.7" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-16T07:42:29.693Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36" etag="NYlag6m430zrybeumDL4" version="13.9.7" type="github">
   <diagram id="-sR0gB6bKqQNanRGk82T" name="Page-1">
     <mxGraphModel dx="1355" dy="806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -23,9 +23,6 @@
           <mxGeometry x="250" y="240" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="ExpLFmh0LT6W7DNrrZbd-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.611;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="ExpLFmh0LT6W7DNrrZbd-7" target="ExpLFmh0LT6W7DNrrZbd-12">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="ExpLFmh0LT6W7DNrrZbd-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ExpLFmh0LT6W7DNrrZbd-7" target="ExpLFmh0LT6W7DNrrZbd-25">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ExpLFmh0LT6W7DNrrZbd-7" value="向user_info表中插入数据，生成新主播JID" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
@@ -57,9 +54,6 @@
         </mxCell>
         <mxCell id="ExpLFmh0LT6W7DNrrZbd-21" value="将新主播插入vline_superior_anchor" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
           <mxGeometry x="115" y="670" width="150" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="ExpLFmh0LT6W7DNrrZbd-25" value="给新主播生成密码并存入user_token_info表中" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="354" y="435" width="156" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ExpLFmh0LT6W7DNrrZbd-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ExpLFmh0LT6W7DNrrZbd-27" target="ExpLFmh0LT6W7DNrrZbd-34">
           <mxGeometry relative="1" as="geometry" />
@@ -115,8 +109,13 @@
         <mxCell id="ExpLFmh0LT6W7DNrrZbd-47" value="在页面对主播资料进行审核" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
           <mxGeometry x="871.25" y="510" width="117.5" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="ExpLFmh0LT6W7DNrrZbd-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="ExpLFmh0LT6W7DNrrZbd-49" target="ExpLFmh0LT6W7DNrrZbd-52">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="ExpLFmh0LT6W7DNrrZbd-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ExpLFmh0LT6W7DNrrZbd-49" target="ExpLFmh0LT6W7DNrrZbd-67">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="625" />
+              <mxPoint x="680" y="640" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="ExpLFmh0LT6W7DNrrZbd-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ExpLFmh0LT6W7DNrrZbd-49" target="ExpLFmh0LT6W7DNrrZbd-53">
           <mxGeometry relative="1" as="geometry" />
@@ -127,13 +126,13 @@
         <mxCell id="ExpLFmh0LT6W7DNrrZbd-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ExpLFmh0LT6W7DNrrZbd-52" target="ExpLFmh0LT6W7DNrrZbd-58">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ExpLFmh0LT6W7DNrrZbd-52" value="&lt;p style=&quot;line-height: 120% ; font-size: 13px&quot;&gt;更新&lt;span style=&quot;font-family: &amp;#34;dejavu sans mono&amp;#34; ; background-color: rgb(255 , 255 , 255)&quot;&gt;&lt;font style=&quot;font-size: 13px&quot;&gt;vline_superior_anchor表, 更新redis vshow:anchor-status:主播状态, 更新vcard信息,并删除verifving_vcard主播资料,发送主播下线消息&lt;/font&gt;&lt;/span&gt;&lt;/p&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="670" y="670" width="210" height="100" as="geometry" />
+        <mxCell id="ExpLFmh0LT6W7DNrrZbd-52" value="&lt;p style=&quot;line-height: 120% ; font-size: 13px&quot;&gt;通过redis vshow:anchor-status:{jid}判断主播在线状态;&lt;/p&gt;&lt;p style=&quot;line-height: 120% ; font-size: 13px&quot;&gt;&lt;span&gt;更新&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;dejavu sans mono&amp;#34; ; background-color: rgb(255 , 255 , 255)&quot;&gt;vline_superior_anchor表review_status, audit_user字段, 更新vcard信息,并删除verifving_vcard主播资料,发送主播下线消息&lt;/span&gt;&lt;/p&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="770" width="360" height="100" as="geometry" />
         </mxCell>
         <mxCell id="ExpLFmh0LT6W7DNrrZbd-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ExpLFmh0LT6W7DNrrZbd-53" target="ExpLFmh0LT6W7DNrrZbd-58">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ExpLFmh0LT6W7DNrrZbd-53" value="更新vline_superior_anchor, verifving_vcard资料审核状态, 记录审核拒绝原因" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+        <mxCell id="ExpLFmh0LT6W7DNrrZbd-53" value="更新vline_superior_anchor表review_status;verifving_vcard资料审核状态, 记录审核拒绝原因" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
           <mxGeometry x="980" y="670" width="180" height="100" as="geometry" />
         </mxCell>
         <mxCell id="ExpLFmh0LT6W7DNrrZbd-56" value="通过" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
@@ -143,7 +142,36 @@
           <mxGeometry x="1005" y="610" width="50" height="20" as="geometry" />
         </mxCell>
         <mxCell id="ExpLFmh0LT6W7DNrrZbd-58" value="完成" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="860" y="820" width="120" height="50" as="geometry" />
+          <mxGeometry x="860" y="890" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ExpLFmh0LT6W7DNrrZbd-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ExpLFmh0LT6W7DNrrZbd-62" target="ExpLFmh0LT6W7DNrrZbd-63">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ExpLFmh0LT6W7DNrrZbd-62" value="普通主播复审审核" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ExpLFmh0LT6W7DNrrZbd-63" value="显示关联的高级主播的资料, 如果高级主播资料有修改，支持跳转到高级主播审核页面" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="1385" y="190" width="150" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ExpLFmh0LT6W7DNrrZbd-69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ExpLFmh0LT6W7DNrrZbd-67" target="ExpLFmh0LT6W7DNrrZbd-68">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ExpLFmh0LT6W7DNrrZbd-70" value="新主播" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ExpLFmh0LT6W7DNrrZbd-69">
+          <mxGeometry x="-0.488" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ExpLFmh0LT6W7DNrrZbd-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.65;entryY=0.02;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="ExpLFmh0LT6W7DNrrZbd-67" target="ExpLFmh0LT6W7DNrrZbd-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ExpLFmh0LT6W7DNrrZbd-67" value="判断新旧主播" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="650" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ExpLFmh0LT6W7DNrrZbd-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.167;entryY=0.02;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="ExpLFmh0LT6W7DNrrZbd-68" target="ExpLFmh0LT6W7DNrrZbd-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ExpLFmh0LT6W7DNrrZbd-68" value="更新first_audit" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="705" width="100" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
