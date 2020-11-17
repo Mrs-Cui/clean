@@ -102,6 +102,32 @@ def maxLength(array_str):
         start += 1
     return max_length
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
     print(maxLength('abccccbbcddfggg'))
 
