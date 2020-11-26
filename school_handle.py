@@ -6,13 +6,13 @@
 """
 import csv
 import requests
+import pymongo
 from gevent.pool import Pool
 import json
 import re
 from copy import deepcopy
 from lxml import etree
 import sys
-reload(sys)
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.90 Safari/537.36',
@@ -20,19 +20,27 @@ HEADERS = {
     'Host': 'map.beijing.gov.cn'
 }
 
+connect = pymongo.MongoClient('127.0.0.1', 27017)
+
 def run(start_url):
+    task_pool = Pool(20)
+
     headers = deepcopy(HEADERS)
     headers['X-Requested-With'] = 'XMLHttpRequest'
     response = requests.get(url=start_url, headers=HEADERS)
     content = response.content
-    region_info = json.loads(content)
+    region_info = json.loads(str(content, encoding='utf-8'))
     base_url = 'https://map.beijing.gov.cn/api/place_list_for_category.json?categoryId=zx&regionId={0}'
     for region in region_info:
         url = base_url.format(region['regionId'])
-        print(region)
-        response = requests.get(url=url, headers=headers)
-        data = json.loads(response.content)
-        school_handle(data)
+        task_pool.apply_async(region_handle, args=(url, headers))
+    task_pool.join()
+
+
+def region_handle(url, headers):
+    response = requests.get(url=url, headers=headers)
+    data = json.loads(str(response.content, encoding='utf-8'))
+    school_handle(data)
 
 
 def school_handle(schools):
@@ -42,8 +50,8 @@ def school_handle(schools):
     task_pool.join()
 
 def school_detail_handle(school):
+    print(school)
     base_url = 'https://map.beijing.gov.cn/place?placeId={0}&categoryId=zx'
-
     url = base_url.format(school['placeId'])
     response = requests.get(url, headers=HEADERS)
     content = response.content
@@ -52,23 +60,20 @@ def school_detail_handle(school):
     text = tr[0].xpath('./td/text()')
     if text:
         content = text[0]
-        pattern = re.search(u'\u5b66\u6821\u89c4\u6a21(.*?)\(', content)
-        if pattern:
-            content = pattern.group(1)
-        else:
-            content = ''
-    print(school['placeName'].encode('utf-8'))
-    print(content.encode('utf-8'))
-    write_to_csv((school['placeName'].encode('utf-8'), content.encode('utf-8').strip('：').strip('"')))
-
-def write_to_csv(results):
-    with open('/data/school.csv', 'a+') as file:
-        writer = csv.writer(file)
-        writer.writerow(results)
+        nature = re.search(r'性质：(.*?)(?=\()', content)
+        school_section = re.search(r'学段：(.*?)(?=\()', content)
+        school_size = re.search(r'学校规模：(.*?)(?=\()', content)
+        if nature:
+            school['nature'] = nature.group()
+        if school_section:
+            school['school_section'] = school_section.group()
+        if school_size:
+            school['school_size'] = school_size.group()
+    connect['Data']['School'].insert(school)
 
 
 
 
 if __name__ == '__main__':
     run("https://map.beijing.gov.cn/api/district_list_for_category.json?categoryId=zx")
-    # 
+    # school_detail_handle({'placeId': '5ba765b97e4e7316d93853ae'})
